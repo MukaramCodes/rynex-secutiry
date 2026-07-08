@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import WhoWeAreVisual from "@/components/WhoWeAreVisual";
+import NetworkBackground from "@/components/NetworkBackground";
 import styles from "./home.module.css";
 
 const coreExpertise = [
@@ -42,6 +43,7 @@ export default function Home() {
   return (
     <>
       <section className={styles.hero}>
+        <NetworkBackground />
         <div className={styles.heroInner}>
           <p className={styles.eyebrow}>Rynex Security</p>
           <h1 className={styles.heroTitle}>Detect. Exploit. Secure.</h1>
@@ -119,6 +121,7 @@ export default function Home() {
       </section>
 
       <section className={styles.ctaSection}>
+        <NetworkBackground />
         <div className={styles.sectionInner}>
           <h2 className={styles.ctaTitle}>Secure your digital future</h2>
           <p className={styles.ctaText}>

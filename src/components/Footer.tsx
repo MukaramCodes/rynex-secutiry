@@ -2,10 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Footer.module.css";
 import { contactInfo } from "@/lib/site-data";
+import NetworkBackground from "./NetworkBackground";
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
+      <NetworkBackground />
       <div className={styles.grid}>
         <div>
           <div className={styles.brand}>
@@ -58,7 +60,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-      <div className={styles.bottom}>
+      <div className={`${styles.bottom} ${styles.aboveCanvas}`}>
         <p className={styles.copyright}>
           &copy; 2026 Rynex Security. All Rights Reserved. | Designed for Excellence.
         </p>

@@ -1,5 +1,5 @@
-import Image from "next/image";
 import type { Metadata } from "next";
+import AnimatedLogo from "@/components/AnimatedLogo";
 import styles from "./about.module.css";
 
 export const metadata: Metadata = {
@@ -40,13 +40,7 @@ export default function AboutPage() {
                 methodologies.
               </p>
             </div>
-            <Image
-              src="https://ik.imagekit.io/t4itchmhb/legacy.png"
-              alt="Rynex Security Research Lab"
-              width={640}
-              height={480}
-              className={styles.image}
-            />
+            <AnimatedLogo />
           </div>
         </div>
       </section>

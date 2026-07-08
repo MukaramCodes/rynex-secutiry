@@ -1,10 +1,14 @@
 .footer {
+  position: relative;
+  overflow: hidden;
   background: var(--gray-100);
   color: var(--gray-30);
   margin-top: auto;
 }
 
 .grid {
+  position: relative;
+  z-index: 1;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: var(--sp-10) var(--sp-06) var(--sp-07);
@@ -98,6 +102,11 @@
 
 .bottom {
   border-top: 1px solid var(--gray-80);
+}
+
+.aboveCanvas {
+  position: relative;
+  z-index: 1;
 }
 
 .copyright {

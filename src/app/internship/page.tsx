@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Countdown from "./Countdown";
 import ApplyButton from "./ApplyButton";
 import FaqAccordion from "./FaqAccordion";
+import NetworkBackground from "@/components/NetworkBackground";
 import {
   detailCards,
   vaptWeeks,
@@ -57,6 +58,7 @@ export default function InternshipPage() {
   return (
     <>
       <section className={styles.hero}>
+        <NetworkBackground />
         <div className={styles.heroInner}>
           <h1 className={styles.heroTitle}>Cybersecurity Internship Program 2026</h1>
           <Countdown target="2026-07-11T00:00:00" label="Program starts in" />
