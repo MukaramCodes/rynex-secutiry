@@ -1,0 +1,27 @@
+---
+title: "Alert Fatigue Is a SOC's Silent Failure Mode"
+date: "2026-06-01"
+excerpt: "A Security Operations Center that generates 10,000 alerts a day and investigates 40 of them isn't monitoring — it's guessing."
+tags: ["SOC", "Threat Detection"]
+---
+
+Most breaches that make headlines weren't invisible. Somewhere in a SIEM, an alert fired. The
+problem is rarely a missing detection — it's a Tier-1 analyst buried under thousands of
+low-fidelity alerts, unable to tell the one that matters from the background noise.
+
+## Why alert volume alone is a vanity metric
+
+A SOC that proudly reports "50,000 events monitored this month" is telling you nothing about
+outcomes. The number that matters is mean time to detect a genuine incident, and how much of an
+analyst's day is spent triaging noise versus investigating real signal.
+
+## What actually reduces fatigue
+
+1. **Correlation over volume** — rules that combine weak signals (unusual login time + new
+   device + impossible travel) into one high-confidence alert, instead of three separate tickets.
+2. **Tuning as a continuous process**, not a one-time setup step after the SIEM goes live.
+3. **Clear escalation playbooks** so Tier-1 analysts know exactly when to hand off, instead of
+   sitting on an ambiguous alert until it ages out.
+
+A SOC's value isn't how much it watches. It's how fast it turns a genuine signal into a
+contained incident — and how little of an analyst's attention gets wasted getting there.

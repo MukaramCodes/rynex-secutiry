@@ -1,0 +1,83 @@
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-05);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.28;
+  min-height: 48px;
+  padding: 14px 16px 14px 16px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color var(--motion), color var(--motion), border-color var(--motion);
+  white-space: nowrap;
+}
+
+.btn svg,
+.btn i {
+  flex-shrink: 0;
+  transition: transform var(--motion);
+}
+
+.btn:hover i,
+.btn:hover svg {
+  transform: translateX(3px);
+}
+
+.primary {
+  background: var(--ibm-blue-60);
+  color: var(--gray-100);
+}
+.primary:hover {
+  background: var(--ibm-blue-70);
+  color: var(--gray-100);
+}
+.primary:active {
+  background: var(--ibm-blue-80);
+  color: var(--white);
+}
+
+.secondary {
+  background: transparent;
+  color: var(--gray-100);
+  border-color: var(--gray-100);
+}
+.secondary:hover {
+  background: var(--gray-100);
+  color: var(--white);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--cyan-text);
+  min-height: auto;
+  padding: 4px 0;
+}
+.ghost:hover {
+  color: var(--ibm-blue-80);
+}
+
+.onDark {
+  background: transparent;
+  color: var(--white);
+  border-color: var(--white);
+}
+.onDark:hover {
+  background: var(--white);
+  color: var(--gray-100);
+}
+
+.disabled,
+.disabled:hover {
+  background: var(--gray-20);
+  color: var(--gray-60);
+  cursor: not-allowed;
+}
+.disabled:hover i,
+.disabled:hover svg {
+  transform: none;
+}

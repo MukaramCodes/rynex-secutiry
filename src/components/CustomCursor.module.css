@@ -1,0 +1,28 @@
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid rgba(0, 212, 255, 0.85);
+  border-radius: 50%;
+  background: rgba(0, 212, 255, 0.08);
+  pointer-events: none;
+  z-index: 99999;
+  opacity: 0;
+  transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+  transition:
+    transform 80ms linear,
+    width 150ms ease-out,
+    height 150ms ease-out,
+    background-color 150ms ease-out,
+    border-color 150ms ease-out,
+    opacity 150ms ease-out;
+}
+
+.hover {
+  width: 52px;
+  height: 52px;
+  background: rgba(0, 212, 255, 0.15);
+  border-color: rgba(0, 212, 255, 1);
+}

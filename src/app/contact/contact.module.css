@@ -1,0 +1,139 @@
+.page {
+  padding: var(--sp-10) 0;
+}
+
+.inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 var(--sp-06);
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: var(--sp-08);
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 300;
+  color: var(--gray-100);
+  margin-bottom: var(--sp-04);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--gray-70);
+}
+
+.formCard {
+  background: var(--gray-10);
+  padding: var(--sp-08);
+}
+
+@media (max-width: 672px) {
+  .formCard {
+    padding: var(--sp-06);
+  }
+}
+
+.fieldRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-05);
+}
+
+@media (max-width: 672px) {
+  .fieldRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fieldGroup {
+  margin-bottom: var(--sp-05);
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gray-100);
+  margin-bottom: var(--sp-02);
+}
+
+.input,
+.select,
+.textarea {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: var(--sp-04);
+  border: none;
+  border-bottom: 1px solid var(--gray-60);
+  background: var(--white);
+  color: var(--gray-100);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: 2px solid var(--gray-100);
+  outline-offset: -2px;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.status {
+  margin-top: var(--sp-04);
+  font-size: 0.9rem;
+  min-height: 20px;
+}
+
+.statusSuccess {
+  color: var(--support-success);
+}
+
+.statusError {
+  color: var(--support-error);
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-06);
+  margin-top: var(--sp-09);
+}
+
+.bottomLink {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-03);
+  font-size: 0.95rem;
+  color: var(--gray-100);
+}
+.bottomLink:hover {
+  color: var(--cyan-text);
+}
+
+.bottomSocial {
+  display: flex;
+  gap: var(--sp-04);
+}
+.bottomSocial a {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--gray-30);
+  color: var(--gray-100);
+}
+.bottomSocial a:hover {
+  background: var(--ibm-blue-60);
+  border-color: var(--ibm-blue-60);
+  color: var(--gray-100);
+}

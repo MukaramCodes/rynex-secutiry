@@ -1,0 +1,145 @@
+.pageHeader {
+  background: var(--gray-100);
+  color: var(--white);
+  padding: var(--sp-09) 0;
+}
+
+.pageHeaderInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-06);
+}
+
+.pageTitle {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+}
+
+.section {
+  padding: var(--sp-10) 0;
+}
+
+.sectionInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-06);
+}
+
+.sectionHead {
+  margin-bottom: var(--sp-08);
+  max-width: 60ch;
+}
+
+.sectionEyebrow {
+  color: var(--cyan-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--sp-03);
+}
+
+.sectionTitle {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 400;
+  color: var(--gray-100);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--gray-20);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 672px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  position: relative;
+  background: var(--white);
+  padding: var(--sp-07);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background-color var(--motion);
+}
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: var(--ibm-blue-60);
+  transition: width 150ms ease-out;
+}
+.card:hover {
+  background: var(--gray-10);
+}
+.card:hover::before {
+  width: 100%;
+}
+
+.icon {
+  font-size: 1.75rem;
+  color: var(--cyan-text);
+  margin-bottom: var(--sp-05);
+  transition: transform var(--motion), color var(--motion);
+}
+.card:hover .icon {
+  transform: translateY(-2px);
+  color: var(--ibm-blue-70);
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: var(--sp-03);
+  color: var(--gray-100);
+}
+
+.text {
+  font-size: 0.9rem;
+  color: var(--gray-70);
+  line-height: 1.6;
+  margin-bottom: var(--sp-05);
+  flex: 1;
+}
+
+.learnMore {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--cyan-text);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-03);
+}
+.card:hover .learnMore i {
+  transform: translateX(3px);
+}
+.learnMore i {
+  transition: transform var(--motion);
+}
+
+.modalIcon {
+  font-size: 2rem;
+  color: var(--cyan-text);
+  margin-bottom: var(--sp-05);
+}
+
+.modalText {
+  font-size: 1rem;
+  color: var(--gray-70);
+  line-height: 1.65;
+}

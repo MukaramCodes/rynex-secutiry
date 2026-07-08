@@ -1,0 +1,174 @@
+.pageHeader {
+  background: var(--gray-100);
+  color: var(--white);
+  padding: var(--sp-09) 0;
+}
+
+.pageHeaderInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-06);
+}
+
+.pageTitle {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  margin-bottom: var(--sp-04);
+}
+
+.pageSubtitle {
+  font-size: 1.1rem;
+  color: var(--gray-30);
+  max-width: 56ch;
+}
+
+.section {
+  padding: var(--sp-10) 0;
+}
+
+.sectionInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-06);
+}
+
+.legacyFlex {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-09);
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .legacyFlex {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sectionEyebrow {
+  color: var(--cyan-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--sp-03);
+}
+
+.sectionTitle {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 400;
+  color: var(--gray-100);
+  margin-bottom: var(--sp-05);
+}
+
+.bodyText {
+  font-size: 1rem;
+  color: var(--gray-70);
+  line-height: 1.65;
+  margin-bottom: var(--sp-05);
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.mvGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--gray-20);
+}
+
+@media (max-width: 672px) {
+  .mvGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mvCard {
+  position: relative;
+  background: var(--white);
+  padding: var(--sp-08);
+  overflow: hidden;
+  transition: background-color var(--motion);
+}
+
+.mvCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: var(--ibm-blue-60);
+  transition: width 150ms ease-out;
+}
+
+.mvCard:hover {
+  background: var(--gray-10);
+}
+
+.mvCard:hover::before {
+  width: 100%;
+}
+
+.mvIcon {
+  font-size: 1.75rem;
+  color: var(--cyan-text);
+  margin-bottom: var(--sp-05);
+  transition: transform var(--motion), color var(--motion);
+}
+
+.mvCard:hover .mvIcon {
+  transform: translateY(-2px);
+  color: var(--ibm-blue-70);
+}
+
+.mvTitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: var(--sp-03);
+}
+
+.mvText {
+  font-size: 0.95rem;
+  color: var(--gray-70);
+  line-height: 1.6;
+}
+
+.founderCard {
+  background: var(--gray-10);
+  padding: var(--sp-09);
+  max-width: 840px;
+  margin: 0 auto;
+  position: relative;
+  border-left: 4px solid var(--ibm-blue-60);
+}
+
+.quoteIcon {
+  font-size: 1.5rem;
+  color: var(--gray-30);
+  margin-bottom: var(--sp-05);
+  display: block;
+}
+
+.quote {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--gray-100);
+  margin-bottom: var(--sp-06);
+}
+
+.founderName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--gray-100);
+}
+
+.founderRole {
+  font-size: 0.875rem;
+  color: var(--gray-70);
+}
