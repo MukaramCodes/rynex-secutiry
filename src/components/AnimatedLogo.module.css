@@ -2,96 +2,23 @@
   position: relative;
   aspect-ratio: 4 / 3;
   width: 100%;
-  background: linear-gradient(160deg, #0a0f1c 0%, #050810 70%);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  perspective: 800px;
 }
 
-.ring {
+.glow {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  border: 1px solid rgba(0, 212, 255, 0.5);
-  border-radius: 50%;
-  animation: ringPulse 3s ease-out infinite;
-}
-.ring2 {
-  animation-delay: 1s;
-}
-.ring3 {
-  animation-delay: 2s;
-}
-
-@keyframes ringPulse {
-  0% {
-    width: 60px;
-    height: 60px;
-    opacity: 0.8;
-    transform: translate(-50%, -50%);
-  }
-  100% {
-    width: 340px;
-    height: 340px;
-    opacity: 0;
-    transform: translate(-50%, -50%);
-  }
-}
-
-.orbit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 220px;
-  height: 220px;
-  animation: orbitSpin 6s linear infinite;
-}
-.orbitReverse {
-  width: 270px;
-  height: 270px;
-  animation: orbitSpinReverse 9s linear infinite;
-}
-
-.orbitDot {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 6px;
-  height: 6px;
-  margin-left: -3px;
-  background: #00d4ff;
-  border-radius: 50%;
-  box-shadow: 0 0 8px rgba(0, 212, 255, 0.9);
-}
-
-@keyframes orbitSpin {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-@keyframes orbitSpinReverse {
-  from {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(circle at center, rgba(0, 212, 255, 0.22) 0%, rgba(0, 212, 255, 0.1) 35%, transparent 70%);
+  pointer-events: none;
 }
 
 .floatWrap {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   animation: floatBob 4s ease-in-out infinite;
-}
-
-.spinInner {
-  transform-style: preserve-3d;
-  animation: spin3d 8s linear infinite;
 }
 
 @keyframes floatBob {
@@ -104,52 +31,12 @@
   }
 }
 
-@keyframes spin3d {
-  from {
-    transform: rotateY(0deg);
-  }
-  to {
-    transform: rotateY(360deg);
-  }
-}
-
 .logoImg {
-  filter: drop-shadow(0 0 24px rgba(0, 212, 255, 0.7));
-}
-
-.scanLine {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #00d4ff, transparent);
-  animation: scan 3.5s linear infinite;
-}
-
-@keyframes scan {
-  0% {
-    top: 0%;
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    top: 100%;
-    opacity: 0;
-  }
+  filter: drop-shadow(0 0 24px rgba(0, 212, 255, 0.6));
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ring,
-  .orbit,
-  .orbitReverse,
-  .floatWrap,
-  .spinInner,
-  .scanLine {
+  .floatWrap {
     animation: none;
   }
 }

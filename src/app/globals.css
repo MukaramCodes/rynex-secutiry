@@ -137,16 +137,6 @@ body {
   animation: logoPulse 3s ease-in-out infinite;
 }
 
-/* Custom cursor: hide the native pointer everywhere except text-editing fields */
-.cursor-none {
-  cursor: none;
-}
-.cursor-none input,
-.cursor-none textarea,
-.cursor-none select {
-  cursor: auto;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .logoAnimated {
     animation: none;

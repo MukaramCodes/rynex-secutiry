@@ -1,14 +1,20 @@
 .panel {
   --mx: 50%;
   --my: 50%;
-  --tx: 0px;
-  --ty: 0px;
   position: relative;
-  background: linear-gradient(160deg, #0a0f1c 0%, #050810 70%);
+  background: var(--gray-100);
   overflow: hidden;
   padding: var(--sp-08);
   color: #ffffff;
   isolation: isolate;
+}
+
+.dotGrid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(0, 212, 255, 0.18) 1px, transparent 1px);
+  background-size: 28px 28px;
+  z-index: 0;
 }
 
 .glow {
@@ -16,36 +22,6 @@
   inset: 0;
   background: radial-gradient(500px circle at var(--mx) var(--my), rgba(0, 212, 255, 0.25), transparent 60%);
   transition: background 60ms linear;
-  z-index: 0;
-}
-
-.floatIcons {
-  position: absolute;
-  inset: 0;
-  transform: translate(var(--tx), var(--ty));
-  transition: transform 150ms ease-out;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.floatIcon {
-  position: absolute;
-  color: rgba(0, 212, 255, 0.35);
-  font-size: 1.5rem;
-}
-.floatIcon.i1 { top: 8%; right: 12%; font-size: 1.75rem; }
-.floatIcon.i2 { top: 42%; right: 4%; font-size: 1.25rem; }
-.floatIcon.i3 { bottom: 14%; right: 22%; font-size: 1.5rem; }
-.floatIcon.i4 { top: 20%; right: 32%; font-size: 1.1rem; }
-
-.globeMark {
-  position: absolute;
-  right: 6%;
-  top: 50%;
-  transform: translate(var(--tx), calc(-50% + var(--ty)));
-  transition: transform 150ms ease-out;
-  font-size: 11rem;
-  color: rgba(0, 212, 255, 0.12);
   z-index: 0;
 }
 

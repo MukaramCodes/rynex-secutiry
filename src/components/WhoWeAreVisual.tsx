@@ -19,12 +19,8 @@ export default function WhoWeAreVisual() {
     const rect = panel.getBoundingClientRect();
     const xPct = ((e.clientX - rect.left) / rect.width) * 100;
     const yPct = ((e.clientY - rect.top) / rect.height) * 100;
-    const xOffset = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 10;
-    const yOffset = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * 10;
     panel.style.setProperty("--mx", `${xPct}%`);
     panel.style.setProperty("--my", `${yPct}%`);
-    panel.style.setProperty("--tx", `${xOffset}px`);
-    panel.style.setProperty("--ty", `${yOffset}px`);
   }
 
   function handleMouseLeave() {
@@ -32,8 +28,6 @@ export default function WhoWeAreVisual() {
     if (!panel) return;
     panel.style.setProperty("--mx", "50%");
     panel.style.setProperty("--my", "50%");
-    panel.style.setProperty("--tx", "0px");
-    panel.style.setProperty("--ty", "0px");
   }
 
   return (
@@ -43,14 +37,8 @@ export default function WhoWeAreVisual() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
+      <div className={styles.dotGrid} aria-hidden="true" />
       <div className={styles.glow} aria-hidden="true" />
-      <div className={styles.floatIcons} aria-hidden="true">
-        <i className={`fas fa-shield-halved ${styles.floatIcon} ${styles.i1}`} />
-        <i className={`fas fa-lock ${styles.floatIcon} ${styles.i2}`} />
-        <i className={`fas fa-users ${styles.floatIcon} ${styles.i3}`} />
-        <i className={`fas fa-server ${styles.floatIcon} ${styles.i4}`} />
-      </div>
-      <i className={`fas fa-globe ${styles.globeMark}`} aria-hidden="true" />
 
       <div className={styles.content}>
         <h3 className={styles.heading}>
