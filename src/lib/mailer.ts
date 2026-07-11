@@ -1,3 +1,4 @@
+import "server-only";
 import { MailtrapClient } from "mailtrap";
 
 const NOTIFY_TO = process.env.CONTACT_NOTIFY_EMAIL ?? "info@rynexsecurity.com";
