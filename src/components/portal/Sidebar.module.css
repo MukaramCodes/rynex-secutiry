@@ -6,6 +6,8 @@
   flex-direction: column;
   height: 100%;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+  transition: transform var(--motion);
 }
 
 .brand {
@@ -14,6 +16,7 @@
   align-items: center;
   gap: var(--sp-03);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
 }
 
 .logoCircle {
@@ -41,6 +44,17 @@
   font-size: 11px;
   color: rgba(255, 255, 255, 0.5);
   font-family: var(--font-sans);
+}
+
+.mobileCloseBtn {
+  display: none;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  position: absolute;
+  right: var(--sp-05);
+  cursor: pointer;
 }
 
 .userCard {
@@ -125,7 +139,29 @@
   padding: var(--sp-05) var(--sp-03);
   display: flex;
   flex-direction: column;
+  gap: var(--sp-05);
+  overflow-y: auto;
+}
+
+.navSection {
+  display: flex;
+  flex-direction: column;
   gap: var(--sp-02);
+}
+
+.sectionLabel {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.35);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding-left: var(--sp-04);
+}
+
+.sectionItems {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .navLink {
@@ -137,6 +173,7 @@
   color: rgba(255, 255, 255, 0.7);
   border-radius: 4px;
   transition: all var(--motion);
+  position: relative;
 }
 
 .navLink:hover {
@@ -157,9 +194,20 @@
 .icon {
   width: 18px;
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
   color: rgba(255, 255, 255, 0.4);
   transition: color var(--motion);
+}
+
+.badge {
+  background-color: var(--support-error);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 10px;
+  position: absolute;
+  right: var(--sp-04);
 }
 
 .footer {
@@ -172,28 +220,21 @@
 
 @media (max-width: 768px) {
   .sidebar {
-    width: 100%;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    z-index: 2000;
+    transform: translateX(-100%);
+    box-shadow: 4px 0 15px rgba(0,0,0,0.25);
   }
   
-  .brand {
-    padding: var(--sp-04) var(--sp-05);
+  .mobileOpen {
+    transform: translateX(0);
   }
   
-  .userCard {
-    display: none;
-  }
-  
-  .nav {
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding: var(--sp-02) var(--sp-04);
-  }
-  
-  .navLink {
-    padding: var(--sp-02) var(--sp-03);
-    font-size: 13px;
+  .mobileCloseBtn {
+    display: block;
   }
 }

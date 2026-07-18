@@ -4,7 +4,8 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 enum Role {
@@ -24,7 +25,7 @@ enum ProjectStatus {
   DELIVERED
 }
 
-enum ProjectMemberRole {
+enum MemberRole {
   LEAD
   WORKER
 }
@@ -77,7 +78,7 @@ model User {
   
   // Relations
   managedTeams       Team[]          @relation("TeamHead")
-  projectMemberships ProjectMember[]
+  projectMembers     ProjectMember[]
   clientProjects     Project[]       @relation("ClientProjects")
   reports            Report[]        @relation("ReportAuthor")
   reviewedReports    Report[]        @relation("ReportReviewer")
@@ -121,12 +122,12 @@ model Project {
 }
 
 model ProjectMember {
-  id        String            @id @default(uuid())
-  projectId String
-  project   Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  userId    String
-  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
-  role      ProjectMemberRole @default(WORKER)
+  id         String     @id @default(uuid())
+  projectId  String
+  project    Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  memberRole MemberRole @default(WORKER)
 
   @@unique([projectId, userId])
 }
