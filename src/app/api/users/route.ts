@@ -50,6 +50,10 @@ export async function GET() {
           isActive: true,
           lastLogin: true,
           createdAt: true,
+          originalEmail: true,
+          joiningDate: true,
+          probationStart: true,
+          probationEnd: true,
         },
         orderBy: { createdAt: 'desc' },
       });
@@ -69,6 +73,10 @@ export async function GET() {
             isActive: true,
             lastLogin: true,
             createdAt: true,
+            originalEmail: true,
+            joiningDate: true,
+            probationStart: true,
+            probationEnd: true,
           },
           orderBy: { name: 'asc' },
         });
@@ -101,7 +109,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
-    const { name, email, role: targetRole, password, teamId } = await request.json();
+    const { name, email, role: targetRole, password, teamId, originalEmail, joiningDate, probationStart, probationEnd } = await request.json();
 
     if (!name || !email || !targetRole || !password) {
       return NextResponse.json(
@@ -151,6 +159,10 @@ export async function POST(request: Request) {
         createdById: creatorId,
         mustChangePassword: true,
         isActive: true,
+        originalEmail: originalEmail || null,
+        joiningDate: joiningDate ? new Date(joiningDate) : null,
+        probationStart: probationStart ? new Date(probationStart) : null,
+        probationEnd: probationEnd ? new Date(probationEnd) : null,
       },
     });
 
@@ -168,7 +180,7 @@ export async function POST(request: Request) {
     // Send email with credentials using existing Mailtrap config
     const emailTemplate = buildPortalCredentialsEmail(name, emailLower, password);
     try {
-      await sendConfirmationEmail(emailLower, emailTemplate.subject, emailTemplate.html);
+      await sendConfirmationEmail(originalEmail || emailLower, emailTemplate.subject, emailTemplate.html);
       
       // Update notification log
       await db.notification.create({

@@ -114,36 +114,11 @@ function buildNavGroups(role: Role): NavGroup[] {
 }
 
 export default function PortalShell({
-  userName,
-  userRole,
-  pageTitle,
-  pageSubtitle,
-  notificationCount,
   children,
 }: PortalShellProps) {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const navGroups = buildNavGroups(userRole);
-
   return (
-    <div className="portal-root">
-      <Sidebar
-        userName={userName}
-        userRole={userRole}
-        navGroups={navGroups}
-        isMobileOpen={mobileOpen}
-        onMobileClose={() => setMobileOpen(false)}
-      />
-
-      <div className="portal-main">
-        <PortalHeader
-          title={pageTitle}
-          subtitle={pageSubtitle}
-          onMenuToggle={() => setMobileOpen((o) => !o)}
-          notificationCount={notificationCount}
-        />
-
-        <main className="portal-content">{children}</main>
-      </div>
+    <div className="portal-page-wrapper">
+      {children}
     </div>
   );
 }

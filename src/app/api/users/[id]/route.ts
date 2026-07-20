@@ -27,7 +27,7 @@ export async function PUT(
     }
 
     const body = await request.json();
-    const { name, role, teamId, isActive, resetPassword } = body;
+    const { name, role, teamId, isActive, resetPassword, originalEmail, joiningDate, probationStart, probationEnd } = body;
 
     // Retrieve target user
     const targetUser = await db.user.findUnique({ where: { id: targetUserId } });
@@ -67,6 +67,26 @@ export async function PUT(
       auditDetails.push(`Active: ${targetUser.isActive} -> ${isActive}`);
     }
 
+    if (originalEmail !== undefined) {
+      updateData.originalEmail = originalEmail || null;
+      auditDetails.push(`OriginalEmail: ${targetUser.originalEmail} -> ${originalEmail}`);
+    }
+
+    if (joiningDate !== undefined) {
+      updateData.joiningDate = joiningDate ? new Date(joiningDate) : null;
+      auditDetails.push(`JoiningDate: ${targetUser.joiningDate} -> ${joiningDate}`);
+    }
+
+    if (probationStart !== undefined) {
+      updateData.probationStart = probationStart ? new Date(probationStart) : null;
+      auditDetails.push(`ProbationStart: ${targetUser.probationStart} -> ${probationStart}`);
+    }
+
+    if (probationEnd !== undefined) {
+      updateData.probationEnd = probationEnd ? new Date(probationEnd) : null;
+      auditDetails.push(`ProbationEnd: ${targetUser.probationEnd} -> ${probationEnd}`);
+    }
+
     // Handle Password Reset
     if (resetPassword) {
       const hashed = await hashPassword(resetPassword);
@@ -81,7 +101,8 @@ export async function PUT(
         resetPassword
       );
       try {
-        await sendConfirmationEmail(targetUser.email, 'Your Rynex Password has been Reset', emailTemplate.html);
+        const sendToEmail = originalEmail || targetUser.originalEmail || targetUser.email;
+        await sendConfirmationEmail(sendToEmail, 'Your Rynex Password has been Reset', emailTemplate.html);
       } catch (emailErr) {
         console.error('Failed to send password reset email:', emailErr);
       }

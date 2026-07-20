@@ -76,6 +76,11 @@ model User {
   creator            User?           @relation("UserCreator", fields: [createdById], references: [id])
   createdUsers       User[]          @relation("UserCreator")
   
+  originalEmail      String?
+  joiningDate        DateTime?
+  probationStart     DateTime?
+  probationEnd       DateTime?
+  
   // Relations
   managedTeams       Team[]          @relation("TeamHead")
   projectMembers     ProjectMember[]

@@ -4,6 +4,7 @@ import { getSessionUser } from '@/lib/auth';
 import Sidebar from '@/components/portal/Sidebar';
 import Header from '@/components/portal/Header';
 import styles from './portal.module.css';
+import './portal.css';
 
 export default async function PortalLayout({
   children,

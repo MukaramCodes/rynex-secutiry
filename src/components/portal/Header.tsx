@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './Header.module.css';
+import SecurityAudioControl from './SecurityAudioControl';
 
 interface HeaderProps {
   user: {
@@ -39,6 +40,7 @@ export default function Header({ user }: HeaderProps) {
   return (
     <header className={styles.header}>
       <div className={styles.left}>
+        <SecurityAudioControl />
         <h2 className={styles.portalTitle}>Security Operations Hub</h2>
       </div>
 

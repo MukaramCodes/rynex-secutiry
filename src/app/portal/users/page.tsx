@@ -12,6 +12,10 @@ interface UserData {
   isActive: boolean;
   lastLogin: string | null;
   createdAt: string;
+  originalEmail?: string | null;
+  joiningDate?: string | null;
+  probationStart?: string | null;
+  probationEnd?: string | null;
 }
 
 interface TeamData {
@@ -40,11 +44,25 @@ export default function UsersPage() {
   const [submitError, setSubmitError] = useState('');
   const [submitLoading, setSubmitLoading] = useState(false);
 
+  // Current session & custom inputs
+  const [currentUserRole, setCurrentUserRole] = useState<string | null>(null);
+  const [originalEmail, setOriginalEmail] = useState('');
+  const [joiningDate, setJoiningDate] = useState('');
+  const [probationStart, setProbationStart] = useState('');
+  const [probationEnd, setProbationEnd] = useState('');
+
   // Fetch initial data
   const fetchData = async () => {
     setLoading(true);
     setError('');
     try {
+      // Fetch current session role
+      const meRes = await fetch('/api/portal/auth/me');
+      if (meRes.ok) {
+        const meData = await meRes.json();
+        setCurrentUserRole(meData.user.role);
+      }
+
       // Fetch users
       const usersRes = await fetch('/api/users');
       const usersData = await usersRes.json();
@@ -84,6 +102,10 @@ export default function UsersPage() {
           role,
           password,
           teamId: teamId || null,
+          originalEmail: originalEmail || null,
+          joiningDate: joiningDate || null,
+          probationStart: probationStart || null,
+          probationEnd: probationEnd || null,
         }),
       });
 
@@ -98,6 +120,10 @@ export default function UsersPage() {
       setPassword('');
       setRole('INTERN');
       setTeamId('');
+      setOriginalEmail('');
+      setJoiningDate('');
+      setProbationStart('');
+      setProbationEnd('');
     } catch (err: any) {
       setSubmitError(err.message || 'An error occurred.');
     } finally {
@@ -187,6 +213,13 @@ export default function UsersPage() {
                 <th>Team</th>
                 <th>Status</th>
                 <th>Last Login</th>
+                {(currentUserRole === 'CEO' || currentUserRole === 'ADMIN') && (
+                  <>
+                    <th>Original Email</th>
+                    <th>Joining Date</th>
+                    <th>Probation Start</th>
+                  </>
+                )}
                 <th>Actions</th>
               </tr>
             </thead>
@@ -215,6 +248,13 @@ export default function UsersPage() {
                   <td className={styles.dateCell}>
                     {user.lastLogin ? new Date(user.lastLogin).toLocaleString() : 'Never'}
                   </td>
+                  {(currentUserRole === 'CEO' || currentUserRole === 'ADMIN') && (
+                    <>
+                      <td className={styles.monoCell}>{user.originalEmail || <span className={styles.none}>None</span>}</td>
+                      <td className={styles.dateCell}>{user.joiningDate ? new Date(user.joiningDate).toLocaleDateString() : '—'}</td>
+                      <td className={styles.dateCell}>{user.probationStart ? new Date(user.probationStart).toLocaleDateString() : '—'}</td>
+                    </>
+                  )}
                   <td>
                     <div className={styles.actions}>
                       <button
@@ -233,7 +273,7 @@ export default function UsersPage() {
               ))}
               {users.length === 0 && (
                 <tr>
-                  <td colSpan={7} className={styles.empty}>No users found.</td>
+                  <td colSpan={(currentUserRole === 'CEO' || currentUserRole === 'ADMIN') ? 10 : 7} className={styles.empty}>No users found.</td>
                 </tr>
               )}
             </tbody>
@@ -321,6 +361,51 @@ export default function UsersPage() {
                 />
                 <span className={styles.helperText}>User will be forced to change this password on first login.</span>
               </div>
+
+              {(currentUserRole === 'CEO' || currentUserRole === 'ADMIN') && (
+                <>
+                  <div className={styles.formGroup}>
+                    <label className={styles.modalLabel}>Original Email (where credentials are sent)</label>
+                    <input
+                      type="email"
+                      value={originalEmail}
+                      onChange={(e) => setOriginalEmail(e.target.value)}
+                      className={styles.modalInput}
+                      placeholder="e.g. user.personal@gmail.com"
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label className={styles.modalLabel}>Joining Date</label>
+                    <input
+                      type="date"
+                      value={joiningDate}
+                      onChange={(e) => setJoiningDate(e.target.value)}
+                      className={styles.modalInput}
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label className={styles.modalLabel}>Probation Start Date</label>
+                    <input
+                      type="date"
+                      value={probationStart}
+                      onChange={(e) => setProbationStart(e.target.value)}
+                      className={styles.modalInput}
+                    />
+                  </div>
+
+                  <div className={styles.formGroup}>
+                    <label className={styles.modalLabel}>Probation End Date</label>
+                    <input
+                      type="date"
+                      value={probationEnd}
+                      onChange={(e) => setProbationEnd(e.target.value)}
+                      className={styles.modalInput}
+                    />
+                  </div>
+                </>
+              )}
 
               <div className={styles.modalActions}>
                 <button

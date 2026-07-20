@@ -1,10 +1,15 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./Footer.module.css";
 import { contactInfo } from "@/lib/site-data";
-// import NetworkBackground from "./NetworkBackground";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname.startsWith('/portal')) return null;
+
   return (
     <footer className={styles.footer}>
       {/* <NetworkBackground /> */}

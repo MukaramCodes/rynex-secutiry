@@ -26,6 +26,10 @@ export async function GET(
         lastLogin: true,
         createdAt: true,
         mustChangePassword: true,
+        originalEmail: true,
+        joiningDate: true,
+        probationStart: true,
+        probationEnd: true,
         team: { select: { id: true, name: true } },
         projectMembers: {
           select: {
@@ -63,7 +67,7 @@ export async function PATCH(
     }
 
     const body = await req.json();
-    const { name, email, teamId, isActive, role, resetPassword } = body;
+    const { name, email, teamId, isActive, role, resetPassword, originalEmail, joiningDate, probationStart, probationEnd } = body;
 
     const updateData: Record<string, unknown> = {};
     if (name !== undefined) updateData.name = name.trim();
@@ -74,6 +78,22 @@ export async function PATCH(
     // Only CEO/Admin/Developer can change roles
     if (role !== undefined && ["CEO", "ADMIN", "DEVELOPER"].includes(actorRole)) {
       updateData.role = role;
+    }
+
+    if (originalEmail !== undefined) {
+      updateData.originalEmail = originalEmail || null;
+    }
+
+    if (joiningDate !== undefined) {
+      updateData.joiningDate = joiningDate ? new Date(joiningDate) : null;
+    }
+
+    if (probationStart !== undefined) {
+      updateData.probationStart = probationStart ? new Date(probationStart) : null;
+    }
+
+    if (probationEnd !== undefined) {
+      updateData.probationEnd = probationEnd ? new Date(probationEnd) : null;
     }
 
     let tempPassword: string | undefined;

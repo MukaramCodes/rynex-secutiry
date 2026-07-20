@@ -48,38 +48,92 @@ export default function Sidebar({
   const role = userRole || user?.role || 'INTERN';
   const email = user?.email || '';
 
-  // Helper to build default nav items if not passed in navGroups
-  const buildDefaultNavGroups = (currentRole: string): NavGroup[] => {
-    const isRole = (roles: string[]) => roles.includes(currentRole);
-    return [
-      {
-        label: 'Overview',
-        items: [
-          { href: '/portal/dashboard', icon: 'fas fa-chart-line', label: 'Dashboard' },
-        ],
-      },
-      {
-        label: 'Work',
-        items: [
-          { href: '/portal/projects', icon: 'fas fa-project-diagram', label: 'Projects' },
-          { href: '/portal/reports', icon: 'fas fa-file-shield', label: 'Reports', visible: isRole(['CEO', 'ADMIN', 'DEVELOPER', 'HEAD', 'INTERN']) },
-          { href: '/portal/tasks', icon: 'fas fa-list-check', label: 'Tasks', visible: isRole(['CEO', 'ADMIN', 'DEVELOPER', 'HEAD', 'INTERN']) },
-        ].filter(i => i.visible !== false) as NavItem[],
-      },
-      {
-        label: 'Management',
-        items: [
-          { href: '/portal/users', icon: 'fas fa-users-cog', label: 'Users', visible: isRole(['CEO', 'ADMIN', 'DEVELOPER', 'HEAD']) },
-          { href: '/portal/teams', icon: 'fas fa-sitemap', label: 'Teams', visible: isRole(['CEO', 'ADMIN', 'DEVELOPER', 'HEAD']) },
-        ].filter(i => i.visible !== false) as NavItem[],
-      },
-      {
+  // Helper to build default nav groups if not passed in navGroups
+  const buildDefaultNavGroups = (role: string): NavGroup[] => {
+    const groups: NavGroup[] = [];
+
+    // Dashboard — everyone
+    groups.push({
+      label: 'Overview',
+      items: [
+        { href: '/portal/dashboard', icon: 'fas fa-chart-pie', label: 'Dashboard' },
+      ],
+    });
+
+    // Projects & Work
+    const projectItems: NavItem[] = [];
+
+    if (['CEO', 'ADMIN', 'DEVELOPER'].includes(role)) {
+      projectItems.push({ href: '/portal/projects', icon: 'fas fa-folder-open', label: 'All Projects' });
+    } else if (['HEAD', 'INTERN'].includes(role)) {
+      projectItems.push({ href: '/portal/projects', icon: 'fas fa-folder-open', label: 'My Projects' });
+    } else if (role === 'CLIENT') {
+      projectItems.push({ href: '/portal/projects', icon: 'fas fa-folder-open', label: 'My Project' });
+    }
+
+    // Reports
+    if (['CEO', 'ADMIN', 'DEVELOPER'].includes(role)) {
+      projectItems.push({ href: '/portal/reports', icon: 'fas fa-file-lines', label: 'All Reports' });
+    } else if (['HEAD', 'INTERN'].includes(role)) {
+      projectItems.push({ href: '/portal/reports', icon: 'fas fa-file-lines', label: 'Reports' });
+    } else if (role === 'CLIENT') {
+      projectItems.push({ href: '/portal/reports', icon: 'fas fa-file-download', label: 'Deliverables' });
+    }
+
+    // Tasks
+    if (['CEO', 'ADMIN', 'DEVELOPER', 'HEAD', 'INTERN'].includes(role)) {
+      projectItems.push({ href: '/portal/tasks', icon: 'fas fa-list-check', label: 'Tasks' });
+    }
+
+    if (projectItems.length > 0) {
+      groups.push({ label: 'Work', items: projectItems });
+    }
+
+    // Messaging
+    const msgItems: NavItem[] = [];
+    if (['CEO', 'DEVELOPER', 'HEAD', 'CLIENT'].includes(role)) {
+      if (role === 'CEO') {
+        msgItems.push({ href: '/portal/messages', icon: 'fas fa-inbox', label: 'Client Inbox' });
+      } else {
+        msgItems.push({ href: '/portal/messages', icon: 'fas fa-comments', label: 'Messages' });
+      }
+    }
+    if (msgItems.length > 0) {
+      groups.push({ label: 'Communication', items: msgItems });
+    }
+
+    // Management
+    const mgmtItems: NavItem[] = [];
+
+    if (['CEO', 'ADMIN', 'DEVELOPER'].includes(role)) {
+      mgmtItems.push({ href: '/portal/users', icon: 'fas fa-users', label: 'Users' });
+    } else if (role === 'HEAD') {
+      mgmtItems.push({ href: '/portal/users', icon: 'fas fa-users', label: 'My Team' });
+    }
+
+    if (['CEO', 'ADMIN', 'DEVELOPER', 'HEAD'].includes(role)) {
+      mgmtItems.push({ href: '/portal/teams', icon: 'fas fa-people-group', label: 'Teams' });
+    }
+
+    if (['CEO', 'ADMIN', 'DEVELOPER'].includes(role)) {
+      mgmtItems.push({ href: '/portal/audit-log', icon: 'fas fa-scroll', label: 'Audit Log' });
+    }
+
+    if (mgmtItems.length > 0) {
+      groups.push({ label: 'Management', items: mgmtItems });
+    }
+
+    // System Settings (CEO + ADMIN only)
+    if (['CEO', 'ADMIN'].includes(role)) {
+      groups.push({
         label: 'System',
         items: [
-          { href: '/portal/settings', icon: 'fas fa-cog', label: 'Settings' },
+          { href: '/portal/settings', icon: 'fas fa-gear', label: 'Settings' },
         ],
-      },
-    ];
+      });
+    }
+
+    return groups;
   };
 
   const activeNavGroups = navGroups || buildDefaultNavGroups(role);

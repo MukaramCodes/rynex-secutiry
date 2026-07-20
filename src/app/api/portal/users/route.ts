@@ -28,6 +28,10 @@ export async function GET() {
           createdAt: true,
           mustChangePassword: true,
           team: { select: { id: true, name: true } },
+          originalEmail: true,
+          joiningDate: true,
+          probationStart: true,
+          probationEnd: true,
         },
         orderBy: { createdAt: "desc" },
       });
@@ -51,6 +55,10 @@ export async function GET() {
           createdAt: true,
           mustChangePassword: true,
           team: { select: { id: true, name: true } },
+          originalEmail: true,
+          joiningDate: true,
+          probationStart: true,
+          probationEnd: true,
         },
         orderBy: { createdAt: "desc" },
       });
@@ -76,7 +84,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    const { name, email, role, teamId, tempPassword } = await req.json();
+    const { name, email, role, teamId, tempPassword, originalEmail, joiningDate, probationStart, probationEnd } = await req.json();
 
     if (!name || !email || !role) {
       return NextResponse.json(
@@ -121,6 +129,10 @@ export async function POST(req: NextRequest) {
         isActive: true,
         mustChangePassword: true,
         createdById: session.userId,
+        originalEmail: originalEmail || null,
+        joiningDate: joiningDate ? new Date(joiningDate) : null,
+        probationStart: probationStart ? new Date(probationStart) : null,
+        probationEnd: probationEnd ? new Date(probationEnd) : null,
       },
       select: {
         id: true,
@@ -148,7 +160,7 @@ export async function POST(req: NextRequest) {
     const portalUrl = process.env.PORTAL_URL ?? `${process.env.SITE_URL}/portal/login`;
     try {
       await sendWelcomeEmail({
-        to: user.email,
+        to: originalEmail || user.email,
         name: user.name,
         role: user.role,
         email: user.email,
