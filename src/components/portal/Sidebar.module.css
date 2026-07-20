@@ -19,12 +19,11 @@
   position: relative;
 }
 
-.logoCircle {
-  width: 14px;
-  height: 14px;
-  background-color: var(--ibm-blue-60);
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--ibm-blue-60);
+.logoImg {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.6));
 }
 
 .brandText {

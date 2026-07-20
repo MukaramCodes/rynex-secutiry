@@ -27,17 +27,6 @@ export default function ContactPage() {
           <a href={`tel:+92${contactInfo.phone}`} className={styles.bottomLink}>
             <i className="fas fa-phone" aria-hidden="true" /> {contactInfo.phoneDisplay}
           </a>
-          <div className={styles.bottomSocial}>
-            <a href={contactInfo.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
-              <i className="fab fa-linkedin-in" aria-hidden="true" />
-            </a>
-            <a href={contactInfo.discord} target="_blank" rel="noreferrer" aria-label="Discord">
-              <i className="fab fa-discord" aria-hidden="true" />
-            </a>
-            <a href={contactInfo.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
-              <i className="fab fa-instagram" aria-hidden="true" />
-            </a>
-          </div>
         </div>
       </div>
     </div>

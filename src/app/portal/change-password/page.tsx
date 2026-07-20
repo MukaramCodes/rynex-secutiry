@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from '../login/login.module.css'; // Reusing Card layout
 
@@ -55,7 +56,13 @@ export default function ChangePasswordPage() {
     <div className={styles.container}>
       <div className={styles.loginCard}>
         <div className={styles.logoArea}>
-          <span className={styles.glowLogo}></span>
+          <Image
+            src="/images/logo-transparent.png"
+            alt="Rynex Security"
+            width={32}
+            height={32}
+            className={styles.logoImg}
+          />
           <span className={styles.logoText}>Rynex Security</span>
         </div>
 

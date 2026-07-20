@@ -168,21 +168,6 @@ export default function CareersPage() {
 
       {/* ── Next Steps ────────────────────────────────── */}
       <NextSteps />
-
-      {/* ── CTA Banner ────────────────────────────────── */}
-      <section className={styles.ctaBanner}>
-        <div className={styles.sectionInner}>
-          <h2 className={styles.ctaTitle}>Ready to make an impact?</h2>
-          <p className={styles.ctaText}>
-            We are always looking for talented security professionals. Browse our open
-            positions or reach out directly — great talent is always welcome.
-          </p>
-          <div className={styles.ctaActions}>
-            <Button href="/careers/jobs" variant="primary">Browse All Positions</Button>
-            <Button href="/contact" variant="secondary">Contact Us</Button>
-          </div>
-        </div>
-      </section>
     </>
   );
 }

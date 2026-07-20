@@ -4,7 +4,7 @@ const LOGO_URL = "https://ik.imagekit.io/t4itchmhb/logo.png";
 
 const WEBSITE_URL =
   process.env.SITE_URL ??
-  "https://rynexsecurity-redesign.vercel.app";
+  "https://rynexsecurity.com";
 
 const INTERNSHIP_URL = `${WEBSITE_URL}/internship`;
 const CONTACT_EMAIL = "info@rynexsecurity.com";

@@ -26,20 +26,22 @@ export function generateStaticParams() {
  * Do not put JSX, overview rendering, or highlights rendering
  * inside this function.
  */
+function resolveService(slug: string) {
+  const targetSlug = (slug === 'grc' || slug === 'security-audits') ? 'grc-security' : slug;
+  return services.find((item) => item.slug === targetSlug || item.slug === slug);
+}
+
 export async function generateMetadata({
   params,
 }: ServicePageProps): Promise<Metadata> {
   const { slug } = await params;
-
-  const service = services.find(
-    (item) => item.slug === slug,
-  );
+  const service = resolveService(slug);
 
   if (!service) {
     return {
       title: "Service Not Found | Rynex Security",
       description:
-        "The requested Rynex Security service could not be found.",
+        "The requested service could not be found.",
     };
   }
 
@@ -56,10 +58,7 @@ export default async function ServiceDetailPage({
   params,
 }: ServicePageProps) {
   const { slug } = await params;
-
-  const service = services.find(
-    (item) => item.slug === slug,
-  );
+  const service = resolveService(slug);
 
   if (!service) {
     notFound();
@@ -92,12 +91,11 @@ export default async function ServiceDetailPage({
             All services
           </Link>
 
-          <i
-            className={`fas ${service.icon} ${styles.detailIcon}`}
-            aria-hidden="true"
-          />
-
           <h1 className={styles.detailTitle}>
+            <i
+              className={`fas ${service.icon} ${styles.detailIcon}`}
+              aria-hidden="true"
+            />
             {service.title}
           </h1>
 
@@ -109,9 +107,6 @@ export default async function ServiceDetailPage({
 
       <section className={styles.detailSection}>
         <div className={styles.detailContent}>
-          <p className={styles.sectionEyebrow}>
-            Rynex Security Service
-          </p>
 
           <h2 className={styles.detailSectionTitle}>
             {service.title}

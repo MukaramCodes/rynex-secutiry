@@ -90,8 +90,10 @@ export default function Home() {
           <div className={styles.cardGrid}>
             {coreExpertise.map((item) => (
               <div key={item.title} className={styles.card}>
-                <i className={`fas ${item.icon} ${styles.cardIcon}`} aria-hidden="true" />
-                <h3 className={styles.cardTitle}>{item.title}</h3>
+                <div className={styles.cardTitleRow}>
+                  <i className={`fas ${item.icon} ${styles.cardIcon}`} aria-hidden="true" />
+                  <h3 className={styles.cardTitle}>{item.title}</h3>
+                </div>
                 <p className={styles.cardText}>{item.text}</p>
               </div>
             ))}
@@ -111,8 +113,10 @@ export default function Home() {
           <div className={styles.cardGrid}>
             {whyUs.map((item) => (
               <div key={item.title} className={styles.card}>
-                <i className={`fas ${item.icon} ${styles.cardIcon}`} aria-hidden="true" />
-                <h3 className={styles.cardTitle}>{item.title}</h3>
+                <div className={styles.cardTitleRow}>
+                  <i className={`fas ${item.icon} ${styles.cardIcon}`} aria-hidden="true" />
+                  <h3 className={styles.cardTitle}>{item.title}</h3>
+                </div>
                 <p className={styles.cardText}>{item.text}</p>
               </div>
             ))}

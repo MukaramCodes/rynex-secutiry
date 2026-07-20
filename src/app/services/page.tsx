@@ -6,7 +6,7 @@ import styles from "./services.module.css";
 export const metadata: Metadata = {
   title: "Our Services | Rynex Security",
   description:
-    "Explore Rynex Security's professional services, including VAPT, SOC monitoring, GRC compliance, threat hunting, malware analysis, and comprehensive security audits.",
+    "Explore Rynex Security's professional services, including VAPT, SOC monitoring, GRC & security compliance, threat hunting, malware analysis, and cloud security.",
 };
 
 export default function ServicesPage() {
@@ -15,7 +15,7 @@ export default function ServicesPage() {
       <section className={styles.pageHeader}>
         <div className={styles.pageHeaderInner}>
           <p className={styles.pageEyebrow}>
-            Rynex Security
+            Cybersecurity Services
           </p>
 
           <h1 className={styles.pageTitle}>

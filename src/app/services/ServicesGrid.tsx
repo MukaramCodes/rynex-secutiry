@@ -13,14 +13,15 @@ export default function ServicesGrid() {
           className={styles.card}
           aria-label={`View ${service.title} service`}
         >
-          <i
-            className={`fas ${service.icon} ${styles.icon}`}
-            aria-hidden="true"
-          />
-
-          <h3 className={styles.title}>
-            {service.title}
-          </h3>
+          <div className={styles.titleRow}>
+            <i
+              className={`fas ${service.icon} ${styles.icon}`}
+              aria-hidden="true"
+            />
+            <h3 className={styles.title}>
+              {service.title}
+            </h3>
+          </div>
 
           <p className={styles.text}>
             {service.description}

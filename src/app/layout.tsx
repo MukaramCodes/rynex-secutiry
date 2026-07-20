@@ -20,6 +20,13 @@ export const metadata: Metadata = {
   title: "Rynex Security | Detect . Exploit . Secure",
   description:
     "Rynex Security offers VAPT, SOC, GRC, threat hunting, and malware analysis services. Practical cybersecurity expertise protecting businesses from real-world cyber threats.",
+  icons: {
+    icon: [
+      { url: "/images/logo-transparent.png", type: "image/png" },
+    ],
+    shortcut: "/images/logo-transparent.png",
+    apple: "/images/logo-transparent.png",
+  },
 };
 
 export default function RootLayout({

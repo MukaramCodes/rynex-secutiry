@@ -112,10 +112,18 @@
   outline-offset: -3px;
 }
 
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-04);
+  margin-bottom: var(--sp-04);
+}
+
 .icon {
-  margin-bottom: var(--sp-05);
+  margin-bottom: 0;
   color: var(--cyan-text);
-  font-size: 1.75rem;
+  font-size: 1.5rem;
+  flex-shrink: 0;
   transition:
     transform var(--motion),
     color var(--motion);
@@ -123,11 +131,11 @@
 
 .card:hover .icon {
   color: var(--ibm-blue-70);
-  transform: translateY(-2px);
+  transform: translateX(2px);
 }
 
 .title {
-  margin-bottom: var(--sp-03);
+  margin-bottom: 0;
   color: var(--gray-100);
   font-size: 1.25rem;
   font-weight: 500;
@@ -187,19 +195,23 @@
   color: var(--white);
 }
 
-.detailIcon {
-  display: block;
-  margin-bottom: var(--sp-05);
-  color: var(--cyan-text);
-  font-size: 2.5rem;
-}
-
 .detailTitle {
-  max-width: 20ch;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-04);
+  max-width: 24ch;
   margin-bottom: var(--sp-05);
   font-size: clamp(2.25rem, 5vw, 4rem);
   font-weight: 300;
   line-height: 1.08;
+}
+
+.detailIcon {
+  display: inline-block;
+  margin-bottom: 0;
+  color: var(--cyan-text);
+  font-size: 0.85em;
+  flex-shrink: 0;
 }
 
 .detailLead {

@@ -25,13 +25,11 @@
   margin-bottom: var(--sp-06);
 }
 
-.glowLogo {
-  width: 16px;
-  height: 16px;
-  background-color: var(--ibm-blue-60);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--ibm-blue-60);
-  display: inline-block;
+.logoImg {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.5));
 }
 
 .logoText {

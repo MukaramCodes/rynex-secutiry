@@ -118,22 +118,3 @@
 .bottomLink:hover {
   color: var(--cyan-text);
 }
-
-.bottomSocial {
-  display: flex;
-  gap: var(--sp-04);
-}
-.bottomSocial a {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--gray-30);
-  color: var(--gray-100);
-}
-.bottomSocial a:hover {
-  background: var(--ibm-blue-60);
-  border-color: var(--ibm-blue-60);
-  color: var(--gray-100);
-}

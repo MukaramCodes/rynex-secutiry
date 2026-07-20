@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './Sidebar.module.css';
 
@@ -141,7 +142,13 @@ export default function Sidebar({
   return (
     <aside className={`${styles.sidebar} ${isMobileOpen ? styles.mobileOpen : ''}`}>
       <div className={styles.brand}>
-        <div className={styles.logoCircle}></div>
+        <Image
+          src="/images/logo-transparent.png"
+          alt="Rynex Security"
+          width={24}
+          height={24}
+          className={styles.logoImg}
+        />
         <div className={styles.brandText}>
           <span className={styles.companyName}>Rynex Security</span>
           <span className={styles.subtext}>Security Hub</span>

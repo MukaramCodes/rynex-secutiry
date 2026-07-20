@@ -76,15 +76,15 @@ export const hiringSteps: HiringStep[] = [
 
 export const stories: Story[] = [
   {
-    name: "Asfand Yar khan ",
-    role: "MAnaging Director — Red Team",
+    name: "Agha Asfand Yar khan ",
+    role: "Director — Offensive Security",
     initial: "A",
     quote:
       "Joining Rynex was the best move I made. I went from textbook theory to running live engagements within my first month. The team trusts you to deliver, which pushes you to grow fast.",
   },
   {
-    name: "Omar F.",
-    role: "SOC Analyst — Blue Team",
+    name: "Muhammad Talha",
+    role: "Director — Defensive Security",
     initial: "O",
     quote:
       "What sets Rynex apart is the pace. Every week brings a new incident, a new tool, a new challenge. I have learned more here in six months than in two years elsewhere.",

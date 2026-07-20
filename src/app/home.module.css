@@ -139,22 +139,30 @@
   width: 100%;
 }
 
+.cardTitleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-04);
+  margin-bottom: var(--sp-04);
+}
+
 .cardIcon {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   color: var(--cyan-text);
-  margin-bottom: var(--sp-05);
+  margin-bottom: 0;
+  flex-shrink: 0;
   transition: transform var(--motion), color var(--motion);
 }
 
 .card:hover .cardIcon {
-  transform: translateY(-2px);
+  transform: translateX(2px);
   color: var(--ibm-blue-70);
 }
 
 .cardTitle {
   font-size: 1.25rem;
   font-weight: 500;
-  margin-bottom: var(--sp-03);
+  margin-bottom: 0;
   color: var(--gray-100);
 }
 

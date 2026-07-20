@@ -99,35 +99,35 @@ export const services: Service[] = [
   },
 
   {
-    slug: "grc",
+    slug: "grc-security",
     icon: "fa-file-contract",
-    title: "GRC",
+    title: "GRC & Security",
     shortDescription:
-      "Governance, Risk & Compliance",
+      "Governance, Risk, Compliance & Security Audits",
     description:
-      "Governance, Risk & Compliance. We align your security posture with global standards and regulatory requirements, ensuring robust risk management and compliance.",
+      "Governance, Risk & Compliance combined with comprehensive Security Audits. We align your organization with global standards, manage security risks, and evaluate technical controls to build robust security maturity.",
 
     overview:
-      "Our GRC service helps organizations establish effective governance, manage cybersecurity and operational risk, and demonstrate compliance with relevant standards and regulations.",
+      "Our GRC & Security service provides an end-to-end approach to cybersecurity governance, risk management, regulatory compliance, and comprehensive technical security audits across your organization.",
 
     highlights: [
       {
         icon: "fa-scale-balanced",
-        title: "Compliance Assessment",
+        title: "Compliance & Control Assessment",
         description:
-          "Evaluate your controls against applicable regulations, contractual obligations, and security frameworks.",
+          "Evaluate your technical and administrative controls against global regulations, contractual obligations, and security frameworks.",
       },
       {
         icon: "fa-chart-line",
-        title: "Risk Management",
+        title: "Risk & Gap Management",
         description:
-          "Identify, assess, prioritize, track, and communicate security and operational risks across the organization.",
+          "Identify, assess, prioritize, and remediate security risks, missing controls, and implementation gaps across your infrastructure.",
       },
       {
         icon: "fa-clipboard-check",
-        title: "Policy Development",
+        title: "Policy Development & Roadmap",
         description:
-          "Develop security policies, procedures, control matrices, risk registers, and compliance improvement plans.",
+          "Develop robust security policies, control matrices, risk registers, and actionable roadmaps for continuous security improvement.",
       },
     ],
   },
@@ -196,40 +196,6 @@ export const services: Service[] = [
         title: "Indicators and Defenses",
         description:
           "Receive indicators of compromise, technical findings, detection recommendations, and containment guidance.",
-      },
-    ],
-  },
-
-  {
-    slug: "security-audits",
-    icon: "fa-clipboard-check",
-    title: "Security Audits",
-    shortDescription:
-      "Comprehensive security maturity review",
-    description:
-      "Comprehensive technical and policy audits to evaluate your organization's security maturity and provide a roadmap for continuous improvement.",
-
-    overview:
-      "Our security-audit service evaluates your technical controls, security processes, policies, governance practices, and operational readiness against established security expectations.",
-
-    highlights: [
-      {
-        icon: "fa-list-check",
-        title: "Control Assessment",
-        description:
-          "Review technical, administrative, and operational controls to identify weaknesses and implementation gaps.",
-      },
-      {
-        icon: "fa-triangle-exclamation",
-        title: "Gap Identification",
-        description:
-          "Highlight missing controls, ineffective processes, outdated policies, and areas of unacceptable security risk.",
-      },
-      {
-        icon: "fa-road",
-        title: "Improvement Roadmap",
-        description:
-          "Receive a prioritized roadmap covering immediate corrective actions and longer-term security improvements.",
       },
     ],
   },
