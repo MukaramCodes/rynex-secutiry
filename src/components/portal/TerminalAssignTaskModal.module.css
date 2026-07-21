@@ -4,80 +4,65 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(5, 7, 15, 0.85);
-  backdrop-filter: blur(6px);
+  background: rgba(10, 22, 40, 0.6);
+  backdrop-filter: blur(8px);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  font-family: var(--font-mono, 'IBM Plex Mono', monospace);
+  font-family: var(--portal-font, sans-serif);
+}
+
+[data-theme="dark"] .overlay {
+  background-color: rgba(5, 7, 15, 0.85);
+  backdrop-filter: blur(6px);
 }
 
 .modal {
-  background-color: #0A0D1E;
-  border: 1px solid rgba(0, 255, 153, 0.3);
-  border-radius: 8px;
+  background-color: var(--portal-card);
+  border: 1px solid var(--portal-border);
+  border-radius: var(--portal-radius-lg);
   width: 100%;
-  max-width: 640px;
-  box-shadow: 0 0 45px rgba(0, 0, 0, 0.85), 0 0 25px rgba(0, 255, 153, 0.2);
+  max-width: 520px;
+  box-shadow: 0 20px 60px rgba(10,22,40,0.15), 0 4px 16px rgba(0,0,0,0.06);
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
+[data-theme="dark"] .modal {
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.8);
+}
+
 .header {
-  background: #0D1120;
-  padding: 0.75rem 1.25rem;
+  padding: 1rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(0, 255, 153, 0.2);
+  border-bottom: 1px solid var(--portal-border);
 }
-
-.dots {
-  display: flex;
-  gap: 8px;
-}
-
-.dotRed,
-.dotYellow,
-.dotGreen {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: transform 0.15s ease, opacity 0.15s ease;
-}
-
-.dotRed { background: #FF5F56; }
-.dotYellow { background: #FFBD2E; }
-.dotGreen { background: #27C93F; }
-
-.dotRed:hover { opacity: 0.85; transform: scale(1.15); box-shadow: 0 0 8px rgba(255, 95, 86, 0.7); }
-.dotYellow:hover { opacity: 0.85; transform: scale(1.15); box-shadow: 0 0 8px rgba(255, 189, 46, 0.7); }
-.dotGreen:hover { opacity: 0.85; transform: scale(1.15); box-shadow: 0 0 8px rgba(39, 201, 63, 0.7); }
 
 .headerTitle {
-  font-size: 12px;
-  color: #00FF99;
-  letter-spacing: 0.5px;
+  font-size: 16px;
+  color: var(--portal-text-primary);
   font-weight: 700;
 }
 
 .closeBtn {
   background: none;
   border: none;
-  color: #94A3B8;
-  font-size: 16px;
+  color: var(--portal-text-muted);
+  font-size: 18px;
   cursor: pointer;
   transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .closeBtn:hover {
-  color: #FF0055;
+  color: var(--status-danger);
 }
 
 .body {
@@ -85,16 +70,17 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  background: #080A15;
+  background: var(--portal-card);
 }
 
 .promptBanner {
-  background: rgba(0, 255, 153, 0.05);
-  border: 1px solid rgba(0, 255, 153, 0.2);
+  background: var(--portal-bg-secondary);
+  border: 1px solid var(--portal-border);
   border-radius: 4px;
   padding: 0.75rem 1rem;
-  font-size: 12px;
-  color: #00FF99;
+  font-size: 13px;
+  color: var(--portal-text-secondary);
+  line-height: 1.4;
 }
 
 .form {
@@ -110,45 +96,39 @@
 }
 
 .label {
-  font-size: 11px;
-  font-weight: 700;
-  color: #00E5FF;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--portal-text-primary);
   text-transform: uppercase;
-  letter-spacing: 1px;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.promptSymbol {
-  color: #00FF99;
 }
 
 .input,
 .select,
 .textarea {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.65rem 0.85rem;
   font-size: 13px;
   font-family: inherit;
-  border: 1px solid rgba(0, 229, 255, 0.25);
-  background-color: #0A0D1E;
-  color: #F8FAFC;
+  border: 1.5px solid var(--portal-border);
+  background-color: var(--portal-bg-secondary);
+  color: var(--portal-text-primary);
   border-radius: 4px;
   transition: all 0.2s ease;
-}
-
-.select option {
-  background-color: #0A0D1E;
-  color: #F8FAFC;
+  outline: none;
 }
 
 .input:focus,
 .select:focus,
 .textarea:focus {
-  outline: none;
-  border-color: #00FF99;
-  box-shadow: 0 0 12px rgba(0, 255, 153, 0.3);
+  border-color: var(--portal-accent);
+  background-color: var(--portal-card);
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.12);
+}
+
+[data-theme="dark"] .input:focus,
+[data-theme="dark"] .select:focus,
+[data-theme="dark"] .textarea:focus {
+  box-shadow: 0 0 10px rgba(0, 255, 153, 0.3);
 }
 
 .grid2 {
@@ -158,61 +138,67 @@
 }
 
 .logsOutput {
-  background: #12172A;
-  border: 1px solid rgba(0, 229, 255, 0.2);
+  background: var(--portal-bg-secondary);
+  border: 1px solid var(--portal-border);
   border-radius: 4px;
   padding: 0.75rem 1rem;
-  font-size: 11px;
-  color: #94A3B8;
+  font-size: 12px;
+  color: var(--portal-text-secondary);
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
 .logOk {
-  color: #00FF99;
-  font-weight: 700;
+  color: var(--status-success);
+  font-weight: 600;
 }
 
 .logErr {
-  color: #FF0055;
-  font-weight: 700;
+  color: var(--status-danger);
+  font-weight: 600;
 }
 
 .errorAlert {
-  background: rgba(255, 0, 85, 0.1);
-  border: 1px solid #FF0055;
-  color: #FF4D4D;
+  background: var(--status-danger-bg);
+  border: 1px solid var(--status-danger);
+  color: var(--status-danger);
   padding: 0.75rem;
-  font-size: 12px;
+  font-size: 13px;
   border-radius: 4px;
 }
 
 .submitBtn {
-  background: linear-gradient(135deg, rgba(0, 255, 153, 0.2), rgba(0, 229, 255, 0.2));
-  color: #00FF99;
-  border: 1px solid #00FF99;
-  padding: 0.85rem;
+  background: var(--portal-accent);
+  color: #ffffff;
+  border: 1px solid var(--portal-accent);
+  padding: 0.75rem;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   font-family: inherit;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 0 15px rgba(0, 255, 153, 0.2);
+  box-shadow: 0 2px 8px rgba(10,22,40,0.18);
+  margin-top: 0.5rem;
 }
 
 .submitBtn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #00FF99, #00E5FF);
+  background: var(--portal-accent-hover);
+  border-color: var(--portal-accent-hover);
+  box-shadow: 0 4px 16px rgba(10,22,40,0.25);
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .submitBtn {
   color: #0A0D1E;
-  box-shadow: 0 0 25px rgba(0, 255, 153, 0.6);
 }
 
 .submitBtn:disabled {
-  opacity: 0.5;
+  opacity: 0.7;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 @media (max-width: 640px) {

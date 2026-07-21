@@ -182,6 +182,25 @@ export default function UsersPage() {
     }
   };
 
+  const handleDeleteUser = async (userId: string, userName: string) => {
+    if (!confirm(`Are you sure you want to permanently delete user ${userName}? This action cannot be undone.`)) {
+      return;
+    }
+    
+    try {
+      const res = await fetch(`/api/users/${userId}`, {
+        method: 'DELETE',
+      });
+      
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to delete user');
+      
+      await fetchData();
+    } catch (err: any) {
+      alert(err.message || 'Error deleting user');
+    }
+  };
+
   const filteredUsers = users.filter((u) => {
     const matchSearch =
       u.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -320,6 +339,13 @@ export default function UsersPage() {
                             title="Reset password"
                           >
                             <i className="fas fa-key" aria-hidden="true"></i> Reset Pass
+                          </button>
+                          <button
+                            onClick={() => handleDeleteUser(user.id, user.name)}
+                            className={styles.deleteBtn}
+                            title="Delete user"
+                          >
+                            <i className="fas fa-trash" aria-hidden="true"></i> Delete
                           </button>
                         </div>
                       )}

@@ -64,20 +64,18 @@ export default function TerminalTaskModal({
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
-          <div className={styles.dots}>
-            <button className={styles.dotRed} onClick={onClose} title="Close window"></button>
-            <button className={styles.dotYellow} onClick={onClose} title="Minimize"></button>
-            <button className={styles.dotGreen} onClick={onClose} title="Zoom"></button>
-          </div>
           <span className={styles.headerTitle}>
-            rynex@sec-ops:~$ cat /var/log/tasks/{shortId}.log
+            Task Details
           </span>
+          <button className={styles.closeBtn} onClick={onClose} title="Close window">
+            <i className="fas fa-times" aria-hidden="true"></i>
+          </button>
         </div>
 
         <div className={styles.body}>
           <div className={styles.cliPrompt}>
-            <span>rynex@sec-ops:~$</span>
-            <span className={styles.cliCommand}>cat /var/log/tasks/{shortId}.log</span>
+            <span>Viewing Task:</span>
+            <span className={styles.cliCommand}>{shortId}</span>
           </div>
 
           <div className={styles.logBox}>
@@ -110,7 +108,7 @@ export default function TerminalTaskModal({
 
             {task.description && (
               <div className={styles.descriptionBox}>
-                <strong>// OBJECTIVE & SCOPE:</strong>
+                <strong>Objective & Scope:</strong>
                 <br />
                 {task.description}
               </div>
@@ -130,7 +128,7 @@ export default function TerminalTaskModal({
           </div>
 
           <div className={styles.statusSection}>
-            <span className={styles.statusLabel}>// EXECUTE STATUS CHANGE:</span>
+            <span className={styles.statusLabel}>Update Status:</span>
             <div className={styles.statusButtons}>
               <button
                 className={`${styles.statusBtn} ${

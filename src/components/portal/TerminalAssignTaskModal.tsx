@@ -91,19 +91,17 @@ export default function TerminalAssignTaskModal({
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
-          <div className={styles.dots}>
-            <button className={styles.dotRed} onClick={onClose} title="Close window"></button>
-            <button className={styles.dotYellow} onClick={onClose} title="Minimize"></button>
-            <button className={styles.dotGreen} onClick={onClose} title="Zoom"></button>
-          </div>
           <span className={styles.headerTitle}>
-            rynex@sec-ops:~$ task --assign --operator
+            Assign New Task
           </span>
+          <button className={styles.closeBtn} onClick={onClose} title="Close window">
+            <i className="fas fa-times" aria-hidden="true"></i>
+          </button>
         </div>
 
         <div className={styles.body}>
           <div className={styles.promptBanner}>
-            <strong>// TERMINAL TASK DISPATCHER:</strong> Fill target operator parameters to assign cybersecurity task telemetry.
+            <strong>Task Assignment:</strong> Fill in the task parameters below to assign a new item.
           </div>
 
           {error && <div className={styles.errorAlert}>[ERROR] {error}</div>}
@@ -111,7 +109,7 @@ export default function TerminalAssignTaskModal({
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.fieldGroup}>
               <label className={styles.label} htmlFor="task-title">
-                <span className={styles.promptSymbol}>rynex@sec-ops:~$</span> --title *
+                Task Title *
               </label>
               <input
                 id="task-title"
@@ -127,7 +125,7 @@ export default function TerminalAssignTaskModal({
 
             <div className={styles.fieldGroup}>
               <label className={styles.label} htmlFor="task-desc">
-                <span className={styles.promptSymbol}>rynex@sec-ops:~$</span> --description
+                Description
               </label>
               <textarea
                 id="task-desc"
@@ -143,7 +141,7 @@ export default function TerminalAssignTaskModal({
             <div className={styles.grid2}>
               <div className={styles.fieldGroup}>
                 <label className={styles.label} htmlFor="task-assignee">
-                  <span className={styles.promptSymbol}>rynex@sec-ops:~$</span> --target-operator
+                  Assign To
                 </label>
                 <select
                   id="task-assignee"
@@ -165,7 +163,7 @@ export default function TerminalAssignTaskModal({
 
               <div className={styles.fieldGroup}>
                 <label className={styles.label} htmlFor="task-project">
-                  <span className={styles.promptSymbol}>rynex@sec-ops:~$</span> --project
+                  Project
                 </label>
                 <select
                   id="task-project"
@@ -187,7 +185,7 @@ export default function TerminalAssignTaskModal({
             <div className={styles.grid2}>
               <div className={styles.fieldGroup}>
                 <label className={styles.label} htmlFor="task-priority">
-                  <span className={styles.promptSymbol}>rynex@sec-ops:~$</span> --priority
+                  Priority
                 </label>
                 <select
                   id="task-priority"
@@ -205,7 +203,7 @@ export default function TerminalAssignTaskModal({
 
               <div className={styles.fieldGroup}>
                 <label className={styles.label} htmlFor="task-due">
-                  <span className={styles.promptSymbol}>rynex@sec-ops:~$</span> --due-date
+                  Due Date
                 </label>
                 <input
                   id="task-due"
@@ -235,7 +233,7 @@ export default function TerminalAssignTaskModal({
             )}
 
             <button type="submit" className={styles.submitBtn} disabled={loading}>
-              {loading ? '>>> DISPATCHING TELEMETRY...' : '>>> EXECUTE TASK DISPATCH'}
+              {loading ? 'Creating Task...' : 'Create Task'}
             </button>
           </form>
         </div>

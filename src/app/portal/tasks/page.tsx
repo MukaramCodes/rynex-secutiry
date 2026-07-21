@@ -145,12 +145,12 @@ export default function TasksPage() {
     >
       <div className="portal-page-header">
         <div>
-          <div className="portal-page-title">// TASK TELEMETRY BOARD</div>
+          <div className="portal-page-title">Tasks Board</div>
           <div className="portal-page-subtitle">{tasks.length} task{tasks.length !== 1 ? 's' : ''} registered</div>
         </div>
         {canCreate && (
           <button id="create-task-btn" className="btn btn-primary" onClick={() => setShowAssignModal(true)}>
-            <i className="fa fa-terminal" /> + ASSIGN TERMINAL TASK
+            <i className="fas fa-plus" /> Assign New Task
           </button>
         )}
       </div>
@@ -192,21 +192,21 @@ export default function TasksPage() {
               }}>
                 <span style={{
                   width: 8, height: 8, borderRadius: '50%',
-                  background: col === 'TODO' ? '#FF9100' :
-                    col === 'IN_PROGRESS' ? '#00E5FF' : '#00FF99',
+                  background: col === 'TODO' ? 'var(--status-warning)' :
+                    col === 'IN_PROGRESS' ? 'var(--status-info)' : 'var(--status-success)',
                 }} />
-                <span style={{ fontWeight: 700, fontSize: 13, color: '#00FF99' }}>
+                <span style={{ fontWeight: 700, fontSize: 13, color: 'var(--portal-text-primary)' }}>
                   [ {col.replace('_', ' ')} ]
                 </span>
                 <span style={{
                   marginLeft: 'auto',
-                  background: 'rgba(0, 229, 255, 0.1)',
-                  color: '#00E5FF',
+                  background: 'var(--portal-bg-secondary)',
+                  color: 'var(--portal-text-primary)',
                   fontSize: 11,
                   fontWeight: 700,
                   padding: '2px 8px',
                   borderRadius: 10,
-                  border: '1px solid rgba(0, 229, 255, 0.2)',
+                  border: '1px solid var(--portal-border)',
                 }}>
                   {grouped[col].length}
                 </span>
@@ -215,7 +215,7 @@ export default function TasksPage() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {grouped[col].length === 0 ? (
                   <div style={{
-                    border: '1px dashed rgba(0, 229, 255, 0.2)',
+                    border: '1px dashed var(--portal-border)',
                     borderRadius: 'var(--portal-radius)',
                     padding: '24px 16px',
                     textAlign: 'center',
@@ -233,7 +233,7 @@ export default function TasksPage() {
                       onClick={() => handleInspectTask(task)}
                     >
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 }}>
-                        <div style={{ fontWeight: 600, fontSize: 13.5, flex: 1, marginRight: 8, color: '#F8FAFC' }}>
+                        <div style={{ fontWeight: 600, fontSize: 13.5, flex: 1, marginRight: 8, color: 'var(--portal-text-primary)' }}>
                           {task.title}
                         </div>
                         <StatusBadge label={task.priority} variant={PRIORITY_BADGE[task.priority] ?? 'neutral'} />
@@ -248,13 +248,13 @@ export default function TasksPage() {
                       <div style={{ fontSize: 11.5, color: 'var(--portal-text-muted)', marginBottom: 10 }}>
                         {task.project && (
                           <div style={{ marginBottom: 3 }}>
-                            <i className="fa fa-folder-open" style={{ marginRight: 5, color: '#00E5FF' }} />
+                            <i className="fa fa-folder-open" style={{ marginRight: 5, color: 'var(--portal-accent)' }} />
                             {task.project.title}
                           </div>
                         )}
                         {task.assignedTo && (
                           <div style={{ marginBottom: 3 }}>
-                            <i className="fa fa-user" style={{ marginRight: 5, color: '#00FF99' }} />
+                            <i className="fa fa-user" style={{ marginRight: 5, color: 'var(--portal-text-primary)' }} />
                             {task.assignedTo.name}
                           </div>
                         )}
@@ -268,9 +268,9 @@ export default function TasksPage() {
                       </div>
 
                       {/* Action trigger */}
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 6, borderTop: '1px solid rgba(255, 255, 255, 0.05)' }}>
-                        <span style={{ fontSize: 10, color: '#00FF99', fontWeight: 700 }}>
-                          $ cat task.log &gt;&gt;
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 6, borderTop: '1px solid var(--portal-border-light)' }}>
+                        <span style={{ fontSize: 11, color: 'var(--portal-accent)', fontWeight: 600 }}>
+                          View Details &rarr;
                         </span>
                         {col !== 'DONE' && (
                           <button

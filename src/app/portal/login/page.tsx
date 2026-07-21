@@ -47,7 +47,7 @@ export default function LoginPage() {
 
   return (
     <div className={styles.container}>
-      {/* SUCCESS LOGIN POPUP WITH RYNEX LOGO */}
+      {/* SUCCESS LOGIN POPUP */}
       {showSuccessPopup && (
         <div className={styles.popupOverlay}>
           <div className={styles.popupCard}>
@@ -56,19 +56,19 @@ export default function LoginPage() {
               <Image
                 src="/images/logo-transparent.png"
                 alt="Rynex Security"
-                width={80}
-                height={80}
+                width={72}
+                height={72}
                 className={styles.popupLogoImg}
                 priority
               />
             </div>
-            <div className={styles.accessGrantedBadge}>[ ACCESS GRANTED ]</div>
-            <h2 className={styles.popupTitle}>AUTHENTICATION SUCCESSFUL</h2>
-            
+            <div className={styles.accessGrantedBadge}>Access Granted</div>
+            <h2 className={styles.popupTitle}>Welcome back!</h2>
+
             {loggedUser && (
               <div className={styles.userInfoBox}>
                 <div className={styles.userName}>{loggedUser.name}</div>
-                <div className={styles.userRoleBadge}>{loggedUser.role} ACCESS</div>
+                <div className={styles.userRoleBadge}>{loggedUser.role} Access</div>
                 <div className={styles.userEmail}>{loggedUser.email}</div>
               </div>
             )}
@@ -76,84 +76,148 @@ export default function LoginPage() {
             <div className={styles.loadingProgressContainer}>
               <div className={styles.loadingProgressBar}></div>
             </div>
-            <div className={styles.popupStatusText}>
-              INITIALIZING ENCRYPTED SEC-OPS TERMINAL...
-            </div>
+            <div className={styles.popupStatusText}>Preparing your workspace...</div>
           </div>
         </div>
       )}
 
-      <div className={styles.loginCard}>
-        <div className={styles.terminalHeader}>
-          <div className={styles.terminalDots}>
-            <button className={styles.dotRed} title="Close"></button>
-            <button className={styles.dotYellow} title="Minimize"></button>
-            <button className={styles.dotGreen} title="Zoom"></button>
-          </div>
-          <span className={styles.terminalTitle}>rynex@sec-ops: ~ /bin/auth</span>
-        </div>
+      {/* LEFT BRANDING PANEL */}
+      <div className={styles.leftPanel}>
+        <div className={styles.panelDecor}></div>
+        <div className={styles.panelGrid}></div>
 
-        <div className={styles.cardBody}>
-          <div className={styles.logoArea}>
+        <div className={styles.brandMark}>
+          <div className={styles.brandLogoWrap}>
             <Image
               src="/images/logo-transparent.png"
               alt="Rynex Security"
-              width={44}
-              height={44}
-              className={styles.logoImg}
+              width={52}
+              height={52}
+              className={styles.brandLogo}
+              priority
             />
-            <span className={styles.logoText}>Rynex Security Hub</span>
+          </div>
+          <h1 className={styles.brandTitle}>Rynex Security</h1>
+          <p className={styles.brandSubtitle}>
+            Enterprise Security Operations Platform for Red Team, Blue Team & GRC professionals.
+          </p>
+        </div>
+
+        <div className={styles.featureList}>
+          <div className={styles.featureItem}>
+            <div className={styles.featureIcon}>
+              <i className="fas fa-shield-halved" aria-hidden="true"></i>
+            </div>
+            <span className={styles.featureText}>Zero-Trust Access Control</span>
+          </div>
+          <div className={styles.featureItem}>
+            <div className={styles.featureIcon}>
+              <i className="fas fa-file-shield" aria-hidden="true"></i>
+            </div>
+            <span className={styles.featureText}>VAPT & SOC Report Management</span>
+          </div>
+          <div className={styles.featureItem}>
+            <div className={styles.featureIcon}>
+              <i className="fas fa-scroll" aria-hidden="true"></i>
+            </div>
+            <span className={styles.featureText}>Full Audit Trail & Logging</span>
+          </div>
+        </div>
+      </div>
+
+      {/* RIGHT LOGIN PANEL */}
+      <div className={styles.rightPanel}>
+        <div className={styles.formWrapper}>
+          {/* Mobile logo */}
+          <div className={styles.mobileLogoRow}>
+            <Image
+              src="/images/logo-transparent.png"
+              alt="Rynex Security"
+              width={36}
+              height={36}
+              className={styles.mobileLogoImg}
+            />
+            <span className={styles.mobileLogoText}>Rynex Security</span>
           </div>
 
-          <div className={styles.bootSequence}>
-            <div><span className={styles.bootOk}>[OK]</span> Initializing Rynex Security Kernel v4.19.0...</div>
-            <div><span className={styles.bootOk}>[OK]</span> Mounting encrypted database partitions...</div>
-            <div><span className={styles.bootOk}>[OK]</span> Enforcing Zero-Trust Access Protocol...</div>
-            <div><span className={styles.bootHighlight}>[SYS]</span> Authentic credentials required.</div>
+          <h2 className={styles.formHeading}>Sign in to your account</h2>
+          <p className={styles.formSubheading}>
+            Enter your credentials to access the Security Operations Portal.
+          </p>
+
+          <div className={styles.statusBar}>
+            <span className={styles.statusDot}></span>
+            All systems operational — Secure connection active
           </div>
 
-          {error && <div className={styles.errorBox}>[ERROR] {error}</div>}
+          {error && (
+            <div className={styles.errorBox}>
+              <i className="fas fa-circle-exclamation" aria-hidden="true"></i>
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputGroup}>
               <label htmlFor="email" className={styles.label}>
-                Email Address
+                Email address
               </label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className={styles.input}
-                placeholder="user@rynexsecurity.com"
-                required
-                disabled={loading}
-              />
+              <div className={styles.inputWrap}>
+                <i className={`fas fa-envelope ${styles.inputIcon}`} aria-hidden="true"></i>
+                <input
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className={styles.input}
+                  placeholder="you@rynexsecurity.com"
+                  required
+                  disabled={loading}
+                  autoComplete="email"
+                />
+              </div>
             </div>
 
             <div className={styles.inputGroup}>
               <label htmlFor="password" className={styles.label}>
                 Password
               </label>
-              <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className={styles.input}
-                placeholder="••••••••••••"
-                required
-                disabled={loading}
-              />
+              <div className={styles.inputWrap}>
+                <i className={`fas fa-lock ${styles.inputIcon}`} aria-hidden="true"></i>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className={styles.input}
+                  placeholder="••••••••••"
+                  required
+                  disabled={loading}
+                  autoComplete="current-password"
+                />
+              </div>
             </div>
 
             <button type="submit" className={styles.submitBtn} disabled={loading}>
-              {loading ? 'Authenticating Session...' : 'Authenticate'}
+              {loading ? (
+                <>
+                  <span className={styles.submitSpinner}></span>
+                  Signing in...
+                </>
+              ) : (
+                <>
+                  <i className="fas fa-arrow-right-to-bracket" aria-hidden="true"></i>
+                  Sign In
+                </>
+              )}
             </button>
           </form>
 
-          <div className={styles.footer}>
-            RESTRICTED ACCESS • IP ADDRESSES ARE LOGGED
+          <div className={styles.formFooter}>
+            <i className="fas fa-lock" aria-hidden="true"></i>
+            Restricted access
+            <span className={styles.footerDivider}></span>
+            IP addresses are logged
           </div>
         </div>
       </div>

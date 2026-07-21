@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
@@ -45,6 +45,33 @@ export default function Sidebar({
   const name = userName || user?.name || 'Security User';
   const role = userRole || user?.role || 'INTERN';
   const email = user?.email || 'user@rynexsecurity.com';
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    // Load theme from localStorage on mount
+    const savedTheme = localStorage.getItem('rynex-theme');
+    if (savedTheme === 'dark') {
+      setIsDarkMode(true);
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => {
+      const newMode = !prev;
+      if (newMode) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('rynex-theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('rynex-theme', 'light');
+      }
+      return newMode;
+    });
+  };
 
   const handleLogout = async () => {
     try {
@@ -169,7 +196,7 @@ export default function Sidebar({
       <nav className={styles.nav}>
         {activeNavGroups.map((group) => (
           <div key={group.label} className={styles.navSection}>
-            <div className={styles.sectionLabel}>// {group.label}</div>
+            <div className={styles.sectionLabel}>{group.label}</div>
             <div className={styles.sectionItems}>
               {group.items.map((item) => {
                 const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
@@ -207,10 +234,20 @@ export default function Sidebar({
           </div>
         </div>
 
-        <button onClick={handleLogout} className={styles.logoutBtn} aria-label="Sign Out">
-          <i className="fas fa-power-off" aria-hidden="true"></i>
-          <span>Sign Out</span>
-        </button>
+        <div className={styles.footerActions}>
+          <button onClick={toggleTheme} className={styles.themeToggleBtn} aria-label="Toggle Theme">
+            {isDarkMode ? (
+              <i className="fas fa-sun" aria-hidden="true"></i>
+            ) : (
+              <i className="fas fa-moon" aria-hidden="true"></i>
+            )}
+          </button>
+          
+          <button onClick={handleLogout} className={styles.logoutBtn} aria-label="Sign Out">
+            <i className="fas fa-power-off" aria-hidden="true"></i>
+            <span>Sign Out</span>
+          </button>
+        </div>
       </div>
     </aside>
   );
