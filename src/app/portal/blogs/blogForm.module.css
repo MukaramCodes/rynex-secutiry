@@ -1,0 +1,176 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.backBtn {
+  background: none;
+  border: 1px solid var(--portal-border);
+  border-radius: var(--portal-radius);
+  color: var(--portal-text-secondary);
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--portal-transition);
+  text-decoration: none;
+}
+
+.backBtn:hover {
+  background: var(--portal-bg);
+  color: var(--portal-text-primary);
+}
+
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--portal-text-primary);
+}
+
+.formCard {
+  background: var(--portal-card);
+  border: 1px solid var(--portal-border);
+  border-radius: var(--portal-radius-lg);
+  box-shadow: var(--portal-shadow);
+  overflow: hidden;
+}
+
+.section {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--portal-border-light);
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.sectionTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--portal-text-primary);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.formGroup {
+  margin-bottom: 1.25rem;
+}
+
+.formGroup:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--portal-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.input, .textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--portal-border);
+  border-radius: var(--portal-radius);
+  background: var(--portal-bg-secondary);
+  color: var(--portal-text-primary);
+  font-family: var(--portal-font, sans-serif);
+  font-size: 0.875rem;
+  transition: all var(--portal-transition);
+}
+
+.input:focus, .textarea:focus {
+  outline: none;
+  border-color: var(--portal-accent);
+  background: var(--portal-bg);
+  box-shadow: 0 0 0 3px var(--portal-accent-light);
+}
+
+.textarea {
+  min-height: 300px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.textarea.small {
+  min-height: 100px;
+}
+
+.hint {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--portal-text-muted);
+  margin-top: 0.25rem;
+}
+
+.actions {
+  padding: 1.5rem;
+  background: var(--portal-bg-secondary);
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.cancelBtn {
+  padding: 0.75rem 1.25rem;
+  background: transparent;
+  border: 1px solid var(--portal-border);
+  border-radius: var(--portal-radius);
+  color: var(--portal-text-secondary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--portal-transition);
+  text-decoration: none;
+}
+
+.cancelBtn:hover {
+  background: var(--portal-bg);
+  color: var(--portal-text-primary);
+}
+
+.submitBtn {
+  padding: 0.75rem 1.5rem;
+  background: var(--portal-accent);
+  border: none;
+  border-radius: var(--portal-radius);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--portal-transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--portal-accent-hover);
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.errorBanner {
+  margin: 1.5rem;
+  background: var(--status-danger-bg);
+  color: var(--status-danger);
+  padding: 1rem;
+  border-radius: var(--portal-radius);
+  border-left: 4px solid var(--status-danger);
+  font-size: 0.875rem;
+  font-weight: 500;
+}

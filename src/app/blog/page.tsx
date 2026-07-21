@@ -9,8 +9,8 @@ export const metadata: Metadata = {
     "Explore practical cybersecurity insights from Rynex Security, including threat trends, penetration testing, malware analysis, SOC operations, and proactive defense.",
 };
 
-export default function BlogPage() {
-  const posts = getAllPosts();
+export default async function BlogPage() {
+  const posts = await getAllPosts();
 
   return (
     <>
@@ -41,6 +41,11 @@ export default function BlogPage() {
                     })}
                   </p>
                   <h2 className={styles.postTitle}>{post.title}</h2>
+                  {post.author && (
+                    <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+                      By <span style={{ color: 'var(--accent)', fontWeight: 600 }}>{post.author.name}</span> • {post.author.role} {post.author.department ? `(${post.author.department})` : ''}
+                    </div>
+                  )}
                   <p className={styles.postExcerpt}>{post.excerpt}</p>
                   <div className={styles.tagRow}>
                     {post.tags.map((tag) => (

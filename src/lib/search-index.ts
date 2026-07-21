@@ -17,7 +17,7 @@ const staticPages: SearchResult[] = [
   { type: "page", title: "Internship Program 2026", description: "Six-week remote cybersecurity internship — Red Team (VAPT) and Blue Team (SOC) tracks.", href: "/internship" },
 ];
 
-export function searchSite(query: string): SearchResult[] {
+export async function searchSite(query: string): Promise<SearchResult[]> {
   const q = query.trim().toLowerCase();
   if (!q) return [];
 
@@ -28,7 +28,8 @@ export function searchSite(query: string): SearchResult[] {
     href: `/services/${s.slug}`,
   }));
 
-  const blogResults: SearchResult[] = getAllPosts().map((p) => ({
+  const posts = await getAllPosts();
+  const blogResults: SearchResult[] = posts.map((p) => ({
     type: "blog",
     title: p.title,
     description: p.excerpt,

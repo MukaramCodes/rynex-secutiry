@@ -119,6 +119,9 @@ export default function Sidebar({
       projectItems.push({ href: '/portal/tasks', icon: 'fas fa-list-check', label: 'Tasks' });
     }
 
+    // Blogs - everyone can submit blogs
+    projectItems.push({ href: '/portal/blogs', icon: 'fas fa-pen-nib', label: 'Blogs' });
+
     if (projectItems.length > 0) {
       groups.push({ label: 'Work', items: projectItems });
     }

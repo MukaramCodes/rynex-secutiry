@@ -62,6 +62,9 @@ function buildNavGroups(role: Role): NavGroup[] {
     projectItems.push({ href: "/portal/tasks", icon: "fa fa-list-check", label: "Tasks" });
   }
 
+  // Blogs - everyone can submit blogs
+  projectItems.push({ href: "/portal/blogs", icon: "fa fa-pen-nib", label: "Blogs" });
+
   if (projectItems.length > 0) {
     groups.push({ label: "Work", items: projectItems });
   }

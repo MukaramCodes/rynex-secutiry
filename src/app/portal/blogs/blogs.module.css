@@ -1,0 +1,195 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--portal-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.pageSubtitle {
+  font-size: 0.875rem;
+  color: var(--portal-text-secondary);
+}
+
+.createBtn {
+  background: var(--portal-accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--portal-radius);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all var(--portal-transition);
+  text-decoration: none;
+}
+
+.createBtn:hover {
+  background: var(--portal-accent-hover);
+}
+
+.errorBanner {
+  background: var(--status-danger-bg);
+  color: var(--status-danger);
+  padding: 1rem;
+  border-radius: var(--portal-radius);
+  border-left: 4px solid var(--status-danger);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.loadingArea {
+  padding: 2rem;
+  text-align: center;
+  color: var(--portal-text-secondary);
+  font-size: 0.875rem;
+}
+
+.tableCard {
+  background: var(--portal-card);
+  border: 1px solid var(--portal-border);
+  border-radius: var(--portal-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--portal-shadow);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.table th {
+  background: var(--portal-bg-secondary);
+  color: var(--portal-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  border-bottom: 1px solid var(--portal-border);
+}
+
+.table tr {
+  border-bottom: 1px solid var(--portal-border-light);
+}
+
+.table tr:last-child {
+  border-bottom: none;
+}
+
+.table td {
+  color: var(--portal-text-primary);
+}
+
+.primaryCell {
+  font-weight: 600;
+}
+
+.monoCell {
+  font-family: var(--portal-font-mono, monospace);
+  font-size: 0.8rem;
+  color: var(--portal-text-secondary);
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.status_pending {
+  background: var(--status-warning-bg);
+  color: var(--status-warning);
+}
+
+.status_approved {
+  background: var(--status-success-bg);
+  color: var(--status-success);
+}
+
+.status_rejected {
+  background: var(--status-danger-bg);
+  color: var(--status-danger);
+}
+
+.dateCell {
+  color: var(--portal-text-secondary);
+  font-size: 0.8rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actionBtn {
+  background: none;
+  border: 1px solid var(--portal-border);
+  border-radius: var(--portal-radius);
+  color: var(--portal-text-secondary);
+  padding: 0.4rem;
+  cursor: pointer;
+  transition: all var(--portal-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  text-decoration: none;
+}
+
+.actionBtn:hover {
+  background: var(--portal-bg);
+  color: var(--portal-text-primary);
+}
+
+.approveBtn:hover {
+  color: var(--status-success);
+  border-color: var(--status-success);
+}
+
+.rejectBtn:hover {
+  color: var(--status-warning);
+  border-color: var(--status-warning);
+}
+
+.deleteBtn:hover {
+  color: var(--status-danger);
+  border-color: var(--status-danger);
+}
+
+.empty {
+  text-align: center;
+  padding: 3rem !important;
+  color: var(--portal-text-muted) !important;
+}
+
+.flexCenter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}

@@ -48,6 +48,12 @@ enum ReportStatus {
   REJECTED
 }
 
+enum BlogStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 enum TaskStatus {
   TODO
   IN_PROGRESS
@@ -103,6 +109,7 @@ model User {
   receivedMessages   Message[]       @relation("MessageReceiver")
   notifications      Notification[]
   auditLogs          AuditLog[]
+  blogPosts          BlogPost[]      @relation("BlogAuthor")
 }
 
 model Team {
@@ -219,4 +226,27 @@ model AuditLog {
   details    String?
   ipAddress  String?
   createdAt  DateTime @default(now())
+}
+
+model BlogPost {
+  id              String      @id @default(uuid())
+  title           String
+  slug            String      @unique
+  excerpt         String?
+  content         String      @db.Text
+  tags            String[]
+  
+  metaDescription String?
+  canonicalUrl    String?
+  focusKeyphrase  String?
+  coverImage      String?
+
+  status          BlogStatus  @default(PENDING)
+  
+  authorId        String
+  author          User        @relation("BlogAuthor", fields: [authorId], references: [id])
+  
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  publishedAt     DateTime?
 }

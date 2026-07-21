@@ -1,8 +1,4 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-
-const POSTS_DIR = path.join(process.cwd(), "content", "blog");
+import { db } from "@/lib/db";
 
 export type PostMeta = {
   slug: string;
@@ -10,50 +6,66 @@ export type PostMeta = {
   date: string;
   excerpt: string;
   tags: string[];
+  author?: {
+    name: string;
+    role: string;
+    department: string | null;
+  };
+  coverImage?: string | null;
 };
 
 export type Post = PostMeta & {
   content: string;
+  metaDescription?: string | null;
+  canonicalUrl?: string | null;
+  focusKeyphrase?: string | null;
 };
 
-export function getAllPosts(): PostMeta[] {
-  if (!fs.existsSync(POSTS_DIR)) return [];
-
-  const files = fs.readdirSync(POSTS_DIR).filter((f) => f.endsWith(".mdx") || f.endsWith(".md"));
-
-  const posts = files.map((filename) => {
-    const slug = filename.replace(/\.mdx?$/, "");
-    const raw = fs.readFileSync(path.join(POSTS_DIR, filename), "utf-8");
-    const { data } = matter(raw);
-
-    return {
-      slug,
-      title: data.title ?? slug,
-      date: data.date ?? "",
-      excerpt: data.excerpt ?? "",
-      tags: data.tags ?? [],
-    };
+export async function getAllPosts(): Promise<PostMeta[]> {
+  const posts = await db.blogPost.findMany({
+    where: { status: 'APPROVED' },
+    orderBy: { publishedAt: 'desc' },
+    include: {
+      author: {
+        select: { name: true, role: true, department: true }
+      }
+    }
   });
 
-  return posts.sort((a, b) => (a.date < b.date ? 1 : -1));
+  return posts.map(post => ({
+    slug: post.slug,
+    title: post.title,
+    date: post.publishedAt ? post.publishedAt.toISOString() : post.createdAt.toISOString(),
+    excerpt: post.excerpt || '',
+    tags: post.tags,
+    author: post.author,
+    coverImage: post.coverImage,
+  }));
 }
 
-export function getPostBySlug(slug: string): Post | null {
-  const mdxPath = path.join(POSTS_DIR, `${slug}.mdx`);
-  const mdPath = path.join(POSTS_DIR, `${slug}.md`);
-  const filePath = fs.existsSync(mdxPath) ? mdxPath : fs.existsSync(mdPath) ? mdPath : null;
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+  const post = await db.blogPost.findUnique({
+    where: { slug },
+    include: {
+      author: {
+        select: { name: true, role: true, department: true }
+      }
+    }
+  });
 
-  if (!filePath) return null;
-
-  const raw = fs.readFileSync(filePath, "utf-8");
-  const { data, content } = matter(raw);
+  if (!post || post.status !== 'APPROVED') return null;
 
   return {
-    slug,
-    title: data.title ?? slug,
-    date: data.date ?? "",
-    excerpt: data.excerpt ?? "",
-    tags: data.tags ?? [],
-    content,
+    slug: post.slug,
+    title: post.title,
+    date: post.publishedAt ? post.publishedAt.toISOString() : post.createdAt.toISOString(),
+    excerpt: post.excerpt || '',
+    tags: post.tags,
+    content: post.content,
+    author: post.author,
+    metaDescription: post.metaDescription,
+    canonicalUrl: post.canonicalUrl,
+    focusKeyphrase: post.focusKeyphrase,
+    coverImage: post.coverImage,
   };
 }
