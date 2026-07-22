@@ -45,11 +45,30 @@ export default function AccessControlClient({ sessionName, sessionRole }: Access
   const [denyNote, setDenyNote] = useState('');
   const [toast, setToast] = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [myIp, setMyIp] = useState<string | null>(null);
+  const [detectingIp, setDetectingIp] = useState(false);
 
   const showToast = (msg: string, type: 'success' | 'error' = 'success') => {
     setToast({ msg, type });
     setTimeout(() => setToast(null), 3500);
   };
+
+  const handleDetectIp = useCallback(async () => {
+    setDetectingIp(true);
+    try {
+      const res = await fetch('/api/portal/my-ip');
+      const data = await res.json();
+      if (data.ip) {
+        setMyIp(data.ip);
+        return data.ip;
+      }
+    } catch {
+      showToast('Failed to detect IP address', 'error');
+    } finally {
+      setDetectingIp(false);
+    }
+    return null;
+  }, []);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -65,7 +84,10 @@ export default function AccessControlClient({ sessionName, sessionRole }: Access
     }
   }, []);
 
-  useEffect(() => { fetchData(); }, [fetchData]);
+  useEffect(() => {
+    fetchData();
+    handleDetectIp();
+  }, [fetchData, handleDetectIp]);
 
   const handleSaveIp = async (userId: string) => {
     setSavingIp(true);
@@ -207,6 +229,32 @@ export default function AccessControlClient({ sessionName, sessionRole }: Access
           <i className={`fas fa-rotate-right ${loading ? styles.spin : ''}`} />
           Refresh
         </button>
+      </div>
+
+      {/* IP Detect Banner */}
+      <div className={styles.ipDetectBanner}>
+        <div className={styles.ipDetectInfo}>
+          <i className="fas fa-location-crosshairs" />
+          <span>
+            Your Detected IP Address:{' '}
+            <code className={styles.detectedIpCode}>{myIp || 'Detecting...'}</code>
+          </span>
+        </div>
+        <div className={styles.ipDetectActions}>
+          <span className={styles.adminNoticeBadge}>
+            <i className="fas fa-shield-check" />
+            Admin & CEO logins are always allowed from any IP
+          </span>
+          <button
+            type="button"
+            className={styles.detectBtn}
+            onClick={handleDetectIp}
+            disabled={detectingIp}
+          >
+            <i className={`fas fa-arrows-rotate ${detectingIp ? styles.spin : ''}`} />
+            Re-detect IP
+          </button>
+        </div>
       </div>
 
       {/* Stats bar */}
@@ -414,18 +462,32 @@ export default function AccessControlClient({ sessionName, sessionRole }: Access
                   </div>
                   <div className={styles.ipCell}>
                     {editingUserId === u.id ? (
-                      <input
-                        type="text"
-                        className={styles.ipInput}
-                        value={editIpValue}
-                        onChange={(e) => setEditIpValue(e.target.value)}
-                        placeholder="e.g. 192.168.1.1"
-                        autoFocus
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter') handleSaveIp(u.id);
-                          if (e.key === 'Escape') setEditingUserId(null);
-                        }}
-                      />
+                      <div style={{ display: 'flex', gap: '6px', alignItems: 'center', width: '100%' }}>
+                        <input
+                          type="text"
+                          className={styles.ipInput}
+                          value={editIpValue}
+                          onChange={(e) => setEditIpValue(e.target.value)}
+                          placeholder="e.g. 192.168.1.1"
+                          autoFocus
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') handleSaveIp(u.id);
+                            if (e.key === 'Escape') setEditingUserId(null);
+                          }}
+                        />
+                        <button
+                          type="button"
+                          className={styles.detectBtn}
+                          style={{ padding: '6px 8px', fontSize: '11px' }}
+                          title="Detect and use my current IP address"
+                          onClick={async () => {
+                            const detected = await handleDetectIp();
+                            if (detected) setEditIpValue(detected);
+                          }}
+                        >
+                          <i className="fas fa-crosshairs" />
+                        </button>
+                      </div>
                     ) : u.allowedIp ? (
                       <code className={styles.ipCodeTable}>{u.allowedIp}</code>
                     ) : (

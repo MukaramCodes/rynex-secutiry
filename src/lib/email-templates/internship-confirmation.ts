@@ -292,18 +292,7 @@ export function buildInternshipConfirmationEmail(name: string) {
                   ${WEBSITE_URL}
                 </a>
 
-                <div
-                  style="
-                    margin-top:16px;
-                    font-size:13px;
-                    color:#9ca3af;
-                    line-height:1.7;
-                  "
-                >
-                  This is an automated email confirming receipt of your
-                  internship application.<br />
-                  Replies are directed to ${CONTACT_EMAIL}.
-                </div>
+
               </td>
             </tr>
           </table>

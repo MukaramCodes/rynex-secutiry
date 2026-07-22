@@ -151,6 +151,75 @@
 }
 .refreshBtn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+/* ── IP Detect Banner & Admin Notice ─────────────────── */
+.ipDetectBanner {
+  background: rgba(0,191,166,0.06);
+  border: 1px solid rgba(0,191,166,0.25);
+  border-radius: 12px;
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.ipDetectInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: var(--portal-text-primary);
+}
+.ipDetectInfo i {
+  font-size: 16px;
+  color: var(--portal-teal);
+}
+.detectedIpCode {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 600;
+  background: rgba(0,191,166,0.12);
+  border: 1px solid rgba(0,191,166,0.3);
+  color: var(--portal-teal);
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+.ipDetectActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.detectBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--portal-teal);
+  border: none;
+  border-radius: 7px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.detectBtn:hover:not(:disabled) { background: #00a894; }
+.detectBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.adminNoticeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(59,130,246,0.12);
+  border: 1px solid rgba(59,130,246,0.3);
+  color: #60A5FA;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
 /* ── Stats Row ───────────────────────────────────────── */
 .statsRow {
   display: grid;

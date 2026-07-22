@@ -37,6 +37,27 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // IP Access Control Check
+    const forwarded = req.headers.get("x-forwarded-for");
+    const clientIp = forwarded ? forwarded.split(",")[0].trim() : "127.0.0.1";
+    const isAdmin = ["ADMIN", "CEO"].includes(user.role);
+
+    if (!isAdmin && user.allowedIp) {
+      const normalizedAllowed = user.allowedIp.trim();
+      const normalizedClient = clientIp.trim();
+
+      if (normalizedAllowed !== normalizedClient) {
+        return NextResponse.json(
+          {
+            error: "IP_NOT_AUTHORIZED",
+            message: "Login from this IP address is not authorized.",
+            requestedIp: normalizedClient,
+          },
+          { status: 403 }
+        );
+      }
+    }
+
     // Update last login
     await prisma.user.update({
       where: { id: user.id },

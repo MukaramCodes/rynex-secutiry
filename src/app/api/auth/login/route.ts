@@ -46,8 +46,10 @@ export async function POST(request: Request) {
 
     // ─── IP Access Control Check ──────────────────────────────────────────
     const clientIp = getClientIp(request);
+    const isAdmin = ['ADMIN', 'CEO'].includes(user.role);
 
-    if (user.allowedIp) {
+    // ADMIN and CEO roles are allowed to log in from any IP address
+    if (!isAdmin && user.allowedIp) {
       const normalizedAllowed = user.allowedIp.trim();
       const normalizedClient = clientIp.trim();
 
