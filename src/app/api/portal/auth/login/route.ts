@@ -42,20 +42,53 @@ export async function POST(req: NextRequest) {
     const clientIp = forwarded ? forwarded.split(",")[0].trim() : "127.0.0.1";
     const isAdmin = ["ADMIN", "CEO"].includes(user.role);
 
-    if (!isAdmin && user.allowedIp) {
-      const normalizedAllowed = user.allowedIp.trim();
-      const normalizedClient = clientIp.trim();
+    const allowedIp = user.allowedIp ? user.allowedIp.trim() : "192.168.1.17";
+    const normalizedClient = clientIp.trim();
 
-      if (normalizedAllowed !== normalizedClient) {
-        return NextResponse.json(
-          {
-            error: "IP_NOT_AUTHORIZED",
-            message: "Login from this IP address is not authorized.",
+    if (!isAdmin && allowedIp !== normalizedClient) {
+      // Check if there's already a pending request from this IP
+      const existingRequest = await prisma.loginRequest.findFirst({
+        where: {
+          userId: user.id,
+          requestedIp: normalizedClient,
+          status: "PENDING",
+        },
+      });
+
+      if (!existingRequest) {
+        await prisma.loginRequest.create({
+          data: {
+            userId: user.id,
             requestedIp: normalizedClient,
+            currentAllowedIp: allowedIp,
+            status: "PENDING",
           },
-          { status: 403 }
-        );
+        });
+
+        // Notify all ADMIN and CEO users
+        const admins = await prisma.user.findMany({
+          where: { role: { in: ["ADMIN", "CEO"] }, isActive: true },
+          select: { id: true },
+        });
+
+        await prisma.notification.createMany({
+          data: admins.map((admin) => ({
+            userId: admin.id,
+            title: "🚨 Unauthorized Login Attempt",
+            body: `${user.name} (${user.email}) attempted to login from IP ${normalizedClient}. Authorized IP is ${allowedIp}. Please review in Access Control.`,
+            link: "/portal/access-control",
+          })),
+        });
       }
+
+      return NextResponse.json(
+        {
+          error: "IP_NOT_AUTHORIZED",
+          message: "Login from this IP address is not authorized. Your administrator has been notified.",
+          requestedIp: normalizedClient,
+        },
+        { status: 403 }
+      );
     }
 
     // Update last login

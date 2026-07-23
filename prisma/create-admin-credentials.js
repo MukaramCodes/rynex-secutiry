@@ -13,6 +13,8 @@ async function main() {
   const ceoPassword = 'CEOSecurePass2026!';
   const ceoHash = await bcrypt.hash(ceoPassword, salt);
 
+  const defaultAdminIp = '192.168.1.17';
+
   const ceo = await prisma.user.upsert({
     where: { email: ceoEmail },
     update: {
@@ -20,6 +22,7 @@ async function main() {
       isActive: true,
       mustChangePassword: false,
       role: 'CEO',
+      allowedIp: defaultAdminIp,
     },
     create: {
       name: 'CEO Admin',
@@ -28,6 +31,7 @@ async function main() {
       role: 'CEO',
       isActive: true,
       mustChangePassword: false,
+      allowedIp: defaultAdminIp,
     },
   });
 
@@ -43,6 +47,7 @@ async function main() {
       isActive: true,
       mustChangePassword: false,
       role: 'ADMIN',
+      allowedIp: defaultAdminIp,
     },
     create: {
       name: 'System Administrator',
@@ -51,6 +56,7 @@ async function main() {
       role: 'ADMIN',
       isActive: true,
       mustChangePassword: false,
+      allowedIp: defaultAdminIp,
     },
   });
 

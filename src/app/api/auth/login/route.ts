@@ -49,8 +49,8 @@ export async function POST(request: Request) {
     const isAdmin = ['ADMIN', 'CEO'].includes(user.role);
 
     // ADMIN and CEO roles are allowed to log in from any IP address
-    if (!isAdmin && user.allowedIp) {
-      const normalizedAllowed = user.allowedIp.trim();
+    if (!isAdmin) {
+      const normalizedAllowed = (user.allowedIp || '192.168.1.17').trim();
       const normalizedClient = clientIp.trim();
 
       if (normalizedAllowed !== normalizedClient) {

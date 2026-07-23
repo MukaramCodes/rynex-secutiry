@@ -32,6 +32,7 @@ async function main() {
       role: 'CEO',
       isActive: true,
       mustChangePassword: true,
+      allowedIp: '192.168.1.17',
     },
   });
 

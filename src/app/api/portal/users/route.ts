@@ -84,7 +84,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
-    const { name, email, role, teamId, tempPassword, originalEmail, joiningDate, probationStart, probationEnd } = await req.json();
+    const { name, email, role, teamId, tempPassword, originalEmail, joiningDate, probationStart, probationEnd, allowedIp } = await req.json();
 
     if (!name || !email || !role) {
       return NextResponse.json(
@@ -128,6 +128,7 @@ export async function POST(req: NextRequest) {
         teamId: teamId || null,
         isActive: true,
         mustChangePassword: true,
+        allowedIp: allowedIp ? allowedIp.trim() : "192.168.1.17",
         createdById: session.userId,
         originalEmail: originalEmail || null,
         joiningDate: joiningDate ? new Date(joiningDate) : null,
