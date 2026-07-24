@@ -66,12 +66,14 @@ export default function Sidebar({
   }, [role]);
 
   useEffect(() => {
-    // Load theme from localStorage on mount
+    // Load theme from localStorage on mount (default to dark for portal)
     const savedTheme = localStorage.getItem('rynex-theme');
-    if (savedTheme === 'dark') {
+    if (!savedTheme || savedTheme === 'dark') {
       setIsDarkMode(true);
       document.documentElement.setAttribute('data-theme', 'dark');
+      if (!savedTheme) localStorage.setItem('rynex-theme', 'dark');
     } else {
+      setIsDarkMode(false);
       document.documentElement.removeAttribute('data-theme');
     }
   }, []);

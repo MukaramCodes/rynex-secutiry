@@ -130,3 +130,37 @@
     min-height: 44px;
   }
 }
+
+/* Dark Mode Overrides */
+:global([data-theme="dark"]) .page {
+  background: #050811 !important;
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .title {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .subtitle {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .formCard {
+  background: #0d1322 !important;
+}
+
+:global([data-theme="dark"]) .label {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .input,
+:global([data-theme="dark"]) .select,
+:global([data-theme="dark"]) .textarea {
+  background: #12192c !important;
+  color: #f8fafc !important;
+  border-bottom-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .bottomLink {
+  color: #f8fafc !important;
+}

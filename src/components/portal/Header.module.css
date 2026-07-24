@@ -41,6 +41,26 @@
   letter-spacing: 0.5px;
 }
 
+.themeToggleBtn {
+  background: none;
+  border: 1px solid var(--gray-30);
+  color: var(--gray-70);
+  width: 34px;
+  height: 34px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all var(--motion);
+}
+
+.themeToggleBtn:hover {
+  background: var(--gray-10);
+  color: var(--gray-100);
+}
+
 .logoutBtn {
   background: none;
   border: 1px solid var(--gray-30);
@@ -80,4 +100,41 @@
   .userInfo {
     display: none;
   }
+}
+
+/* Dark Mode Overrides */
+:global([data-theme="dark"]) .header {
+  background-color: #0a0d1e !important;
+  border-bottom-color: rgba(0, 229, 255, 0.15) !important;
+}
+
+:global([data-theme="dark"]) .portalTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .userEmail {
+  color: #94a3b8 !important;
+}
+
+:global([data-theme="dark"]) .roleLabel {
+  color: #64748B !important;
+}
+
+:global([data-theme="dark"]) .themeToggleBtn {
+  border-color: rgba(0, 229, 255, 0.2) !important;
+  color: #00ff99 !important;
+}
+
+:global([data-theme="dark"]) .themeToggleBtn:hover {
+  background: rgba(0, 255, 153, 0.1) !important;
+}
+
+:global([data-theme="dark"]) .logoutBtn {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #94a3b8 !important;
+}
+
+:global([data-theme="dark"]) .logoutBtn:hover:not(:disabled) {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+  color: #ef4444 !important;
 }

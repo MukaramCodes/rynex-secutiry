@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface PortalHeaderProps {
   title: string;
@@ -15,7 +15,32 @@ export default function PortalHeader({
   onMenuToggle,
   notificationCount = 0,
 }: PortalHeaderProps) {
-  const [showUserMenu, setShowUserMenu] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("rynex-theme");
+    if (savedTheme === "dark") {
+      setIsDarkMode(true);
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.removeAttribute("data-theme");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => {
+      const next = !prev;
+      if (next) {
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("rynex-theme", "dark");
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+        localStorage.setItem("rynex-theme", "light");
+      }
+      return next;
+    });
+  };
 
   return (
     <header className="portal-header">
@@ -37,6 +62,17 @@ export default function PortalHeader({
 
       {/* Actions */}
       <div className="portal-header-actions">
+        {/* Theme Toggle */}
+        <button
+          id="portal-theme-toggle-btn"
+          className="header-icon-btn"
+          aria-label="Toggle Theme"
+          title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          onClick={toggleTheme}
+        >
+          <i className={`fa ${isDarkMode ? "fa-sun" : "fa-moon"}`} />
+        </button>
+
         {/* Notifications */}
         <button
           id="portal-notifications-btn"

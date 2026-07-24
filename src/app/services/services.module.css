@@ -340,3 +340,51 @@
     width: 100%;
   }
 }
+
+/* Dark Mode Overrides */
+:global([data-theme="dark"]) .pageHeader {
+  background: #050811 !important;
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .pageTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .pageDescription {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .section {
+  background: #050811 !important;
+}
+
+:global([data-theme="dark"]) .sectionTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .card {
+  background: #0d1322 !important;
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .cardTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .cardDescription {
+  color: #94a3b8 !important;
+}
+
+:global([data-theme="dark"]) .highlightCard {
+  background: #0d1322 !important;
+}
+
+:global([data-theme="dark"]) .highlightCard h3 {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .secondaryAction {
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
+}

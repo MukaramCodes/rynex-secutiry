@@ -101,3 +101,30 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .overlay {
+  background: rgba(5, 8, 17, 0.85);
+}
+
+[data-theme="dark"] .panel {
+  background: #0d1322;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+  border: 1px solid #1e293b;
+}
+
+[data-theme="dark"] .inputRow {
+  border-bottom-color: #1e293b;
+}
+
+[data-theme="dark"] .input {
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .resultLink {
+  border-bottom-color: #1e293b;
+}
+
+[data-theme="dark"] .resultLink:hover {
+  background: #1e293b;
+}

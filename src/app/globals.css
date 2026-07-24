@@ -161,3 +161,28 @@ body {
     animation: none;
   }
 }
+
+/* Dark / Night Theme Overrides */
+[data-theme="dark"] {
+  --gray-100: #f8fafc;
+  --gray-90: #f1f5f9;
+  --gray-80: #e2e8f0;
+  --gray-70: #cbd5e1;
+  --gray-60: #94a3b8;
+  --gray-30: #334155;
+  --gray-20: #1e293b;
+  --gray-10: #0f172a;
+  --white: #050811;
+  --cyan-text: #00d4ff;
+}
+
+[data-theme="dark"] body {
+  background-color: #050811 !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  color-scheme: dark;
+}

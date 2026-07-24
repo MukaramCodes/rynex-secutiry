@@ -233,3 +233,58 @@
     width: 100%;
   }
 }
+
+/* Dark Mode Overrides */
+:global([data-theme="dark"]) .hero {
+  background: #050811 !important;
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .heroTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .heroSubtitle {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .section {
+  background: #050811 !important;
+}
+
+:global([data-theme="dark"]) .sectionAlt {
+  background: #0d1322 !important;
+}
+
+:global([data-theme="dark"]) .sectionTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .sectionText {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .card {
+  background: #0d1322 !important;
+}
+
+:global([data-theme="dark"]) .cardTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .cardText {
+  color: #94a3b8 !important;
+}
+
+:global([data-theme="dark"]) .ctaSection {
+  background: #050811 !important;
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .ctaTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .ctaText {
+  color: #cbd5e1 !important;
+}

@@ -2,11 +2,12 @@
   --mx: 50%;
   --my: 50%;
   position: relative;
-  background: var(--gray-100);
+  background: #0a0e17;
   overflow: hidden;
   padding: var(--sp-08);
   color: #ffffff;
   isolation: isolate;
+  border: 1px solid rgba(0, 212, 255, 0.2);
 }
 
 .dotGrid {
@@ -34,6 +35,7 @@
   font-size: clamp(2rem, 4.5vw, 2.75rem);
   font-weight: 700;
   margin-bottom: var(--sp-07);
+  color: #ffffff;
 }
 
 .heading .accent {
@@ -68,6 +70,7 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 4px;
+  color: #ffffff;
 }
 
 .feature p {
@@ -77,9 +80,9 @@
 }
 
 .terminal {
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 212, 255, 0.25);
+  border: 1px solid rgba(0, 212, 255, 0.3);
   padding: var(--sp-05);
   font-family: var(--font-mono);
 }

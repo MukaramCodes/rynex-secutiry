@@ -153,3 +153,42 @@
 .article strong {
   color: var(--gray-100);
 }
+
+/* Dark Mode Overrides */
+:global([data-theme="dark"]) .pageHeader {
+  background: #050811 !important;
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .pageTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .pageSubtitle {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .section {
+  background: #050811 !important;
+}
+
+:global([data-theme="dark"]) .postTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .postExcerpt {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .postDetailTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .article {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .article h2,
+:global([data-theme="dark"]) .article strong {
+  color: #f8fafc !important;
+}

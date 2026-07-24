@@ -55,8 +55,34 @@ export default function Header() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("rynex-theme");
+    if (savedTheme === "dark") {
+      setIsDarkMode(true);
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.removeAttribute("data-theme");
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prev) => {
+      const next = !prev;
+      if (next) {
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("rynex-theme", "dark");
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+        localStorage.setItem("rynex-theme", "light");
+      }
+      return next;
+    });
+  };
 
   useEffect(() => {
     setOpenMenu(null);
@@ -345,10 +371,11 @@ export default function Header() {
           <button
             type="button"
             className={styles.iconBtn}
-            aria-label="Search"
-            onClick={() => setSearchOpen(true)}
+            aria-label="Toggle Theme"
+            title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            onClick={toggleTheme}
           >
-            <i className="fas fa-search" aria-hidden="true" />
+            <i className={`fas ${isDarkMode ? "fa-sun" : "fa-moon"}`} aria-hidden="true" />
           </button>
 
           <GoogleTranslate />

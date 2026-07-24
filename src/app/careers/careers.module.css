@@ -165,6 +165,17 @@
   background: var(--ibm-blue-10);
 }
 
+:global([data-theme="dark"]) .processTabActive {
+  border-bottom-color: #00d4ff !important;
+  background: rgba(0, 212, 255, 0.18) !important;
+}
+
+:global([data-theme="dark"]) .processTabActive .processTabTitle,
+:global([data-theme="dark"]) .processTabActive .processTabNumber,
+:global([data-theme="dark"]) .processTabActive .processTabIcon {
+  color: #ffffff !important;
+}
+
 .processTabNumber {
   font-size: 0.7rem;
   font-weight: 700;
@@ -345,8 +356,8 @@
 }
 
 .storyCard {
-  background: var(--gray-90);
-  border: 1px solid var(--gray-80);
+  background: #f4f6fb;
+  border: 1px solid #e5e7eb;
   padding: var(--sp-07);
   position: relative;
   transition: border-color var(--motion), box-shadow var(--motion);
@@ -369,7 +380,7 @@
 
 .storyQuote {
   font-size: 0.95rem;
-  color: var(--gray-30);
+  color: #1e293b;
   line-height: 1.7;
   margin-bottom: var(--sp-06);
 }
@@ -378,7 +389,7 @@
   display: flex;
   align-items: center;
   gap: var(--sp-04);
-  border-top: 1px solid var(--gray-80);
+  border-top: 1px solid #e5e7eb;
   padding-top: var(--sp-05);
 }
 
@@ -392,19 +403,19 @@
   justify-content: center;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--gray-100);
+  color: #ffffff;
   flex-shrink: 0;
 }
 
 .storyName {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--white);
+  color: #0f172a;
 }
 
 .storyRole {
   font-size: 0.78rem;
-  color: var(--gray-60);
+  color: #64748b;
 }
 
 .storiesActions {
@@ -942,4 +953,98 @@
   .nextStepsRight {
     padding: var(--sp-04);
   }
+}
+
+/* Dark Mode Overrides */
+:global([data-theme="dark"]) .hero {
+  background: #050811 !important;
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .heroTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .heroSubtitle {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .eyebrow {
+  color: #94a3b8 !important;
+}
+
+:global([data-theme="dark"]) .section {
+  background: #050811 !important;
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .sectionAlt {
+  background: #0d1322 !important;
+}
+
+:global([data-theme="dark"]) .jobCard {
+  background: #0d1322 !important;
+  border-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .jobTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .nextStepsSection {
+  background: #050811 !important;
+  border-top-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .nextStepsRight {
+  background: #0d1322 !important;
+  border-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .nextStepsSelect {
+  background: #12192c !important;
+  color: #f8fafc !important;
+  border-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .processTab {
+  background: #050811 !important;
+}
+
+:global([data-theme="dark"]) .processTab:hover {
+  background: #0d1322 !important;
+}
+
+:global([data-theme="dark"]) .processTabActive {
+  background: rgba(0, 212, 255, 0.15) !important;
+  border-bottom-color: #00d4ff !important;
+}
+
+:global([data-theme="dark"]) .processTabTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .processTabNumber {
+  color: #94a3b8 !important;
+}
+
+:global([data-theme="dark"]) .processTabIcon {
+  color: #00d4ff !important;
+}
+
+:global([data-theme="dark"]) .storyCard {
+  background: #0d1322 !important;
+  border-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .storyQuote {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .storyName {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .storyRole {
+  color: #94a3b8 !important;
 }

@@ -291,3 +291,58 @@
   white-space: nowrap;
 }
 
+/* Dark Mode Overrides */
+:global([data-theme="dark"]) .header {
+  background: #050811 !important;
+  border-bottom-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .logo {
+  color: #f8fafc !important;
+  border-right-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .navLink {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .navLink:hover,
+:global([data-theme="dark"]) .navItem.open .navLink {
+  background: #0f172a !important;
+}
+
+:global([data-theme="dark"]) .iconBtn {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .iconBtn:hover {
+  background: #0f172a !important;
+}
+
+:global([data-theme="dark"]) .megaMenu {
+  background: #0d1322 !important;
+  border-top-color: #1e293b !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+}
+
+:global([data-theme="dark"]) .megaLinkTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .megaLinkDesc {
+  color: #94a3b8 !important;
+}
+
+:global([data-theme="dark"]) .internshipItemTitle {
+  color: #f8fafc !important;
+}
+
+@media (max-width: 900px) {
+  :global([data-theme="dark"]) .nav {
+    background: #050811 !important;
+  }
+  :global([data-theme="dark"]) .megaMenu {
+    background: #0f172a !important;
+  }
+}
+

@@ -95,14 +95,7 @@ export const stories: Story[] = [
     initial: "M",
     quote:
       "At Rynex, we are not just offering jobs; we are offering careers that matter. Every day, our team works on the front lines of cybersecurity, protecting critical infrastructure and sensitive data across the globe. If you are passionate about making a real impact and want to grow with a team that values innovation, collaboration, and excellence, Rynex is the place for you.",
-  },
-  {
-    name: "Omer Farooq",
-    role: "Managing Director — Rynex Security",
-    initial: "O",
-    quote:
-      "At Rynex, we are not just offering jobs; we are offering careers that matter. Every day, our team works on the front lines of cybersecurity, protecting critical infrastructure and sensitive data across the globe. If you are passionate about making a real impact and want to grow with a team that values innovation, collaboration, and excellence, Rynex is the place for you.",
-  },
+  }
 ];
 
 export const jobs: Job[] = [
