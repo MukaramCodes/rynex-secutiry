@@ -337,10 +337,17 @@
   .pageHeader {
     flex-direction: column;
     align-items: flex-start;
+    gap: 12px;
   }
 
   .createBtn {
     width: 100%;
     justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .teamsGrid {
+    grid-template-columns: 1fr;
   }
 }

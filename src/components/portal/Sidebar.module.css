@@ -314,6 +314,10 @@
   color: #B91C1C;
 }
 
+.backdrop {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .sidebar {
     position: fixed;
@@ -331,5 +335,14 @@
 
   .mobileCloseBtn {
     display: block;
+  }
+
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 22, 40, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1999;
   }
 }

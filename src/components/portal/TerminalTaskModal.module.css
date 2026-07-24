@@ -204,3 +204,13 @@
   border-color: var(--status-success);
   color: var(--status-success);
 }
+
+@media (max-width: 640px) {
+  .overlay {
+    padding: 0.75rem;
+  }
+  .modal {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}

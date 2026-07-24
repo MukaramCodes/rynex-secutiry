@@ -1057,8 +1057,23 @@ select.form-control { cursor: pointer; }
 
 @media (max-width: 600px) {
   .portal-stats-grid { grid-template-columns: 1fr; }
-  .portal-page-header { flex-direction: column; align-items: flex-start; }
+  .portal-page-header { flex-direction: column; align-items: flex-start; gap: 12px; }
   .portal-header { padding: 0 16px; }
+  .portal-content { padding: 16px 12px; }
+  .portal-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+  .portal-table {
+    min-width: 540px;
+  }
+  .portal-modal {
+    width: 95vw !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    padding: 16px !important;
+  }
 }
 
 /* ============================================================

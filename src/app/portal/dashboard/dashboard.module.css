@@ -241,3 +241,14 @@
     justify-content: center;
   }
 }
+
+@media (max-width: 480px) {
+  .welcomeBanner {
+    padding: 1rem;
+  }
+  .feedItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}

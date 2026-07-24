@@ -141,6 +141,12 @@
   background: #ffffff;
 }
 
+@media (max-width: 400px) {
+  .rightPanel {
+    padding: 1.5rem 1rem;
+  }
+}
+
 @media (min-width: 900px) {
   .rightPanel {
     width: 480px;

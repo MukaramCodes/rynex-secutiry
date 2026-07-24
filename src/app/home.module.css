@@ -205,3 +205,31 @@
   display: flex;
   justify-content: center;
 }
+
+@media (max-width: 672px) {
+  .hero {
+    padding: var(--sp-09) 0 var(--sp-07);
+  }
+  .heroInner, .sectionInner {
+    padding: 0 var(--sp-05);
+  }
+  .section {
+    padding: var(--sp-08) 0;
+  }
+  .ctaSection {
+    padding: var(--sp-08) 0;
+  }
+}
+
+@media (max-width: 440px) {
+  .heroInner, .sectionInner {
+    padding: 0 var(--sp-04);
+  }
+  .heroActions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .heroActions > * {
+    width: 100%;
+  }
+}

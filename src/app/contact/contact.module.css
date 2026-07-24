@@ -118,3 +118,15 @@
 .bottomLink:hover {
   color: var(--cyan-text);
 }
+
+@media (max-width: 440px) {
+  .inner {
+    padding: 0 var(--sp-04);
+  }
+  .formCard {
+    padding: var(--sp-04);
+  }
+  .input, .select {
+    min-height: 44px;
+  }
+}

@@ -85,7 +85,7 @@ export const stories: Story[] = [
   {
     name: "Muhammad Talha",
     role: "Director — Defensive Security",
-    initial: "O",
+    initial: "T",
     quote:
       "What sets Rynex apart is the pace. Every week brings a new incident, a new tool, a new challenge. I have learned more here in six months than in two years elsewhere.",
   },
@@ -93,6 +93,13 @@ export const stories: Story[] = [
     name: "Mukaram Moavia ",
     role: "Director — Technical Department",
     initial: "M",
+    quote:
+      "At Rynex, we are not just offering jobs; we are offering careers that matter. Every day, our team works on the front lines of cybersecurity, protecting critical infrastructure and sensitive data across the globe. If you are passionate about making a real impact and want to grow with a team that values innovation, collaboration, and excellence, Rynex is the place for you.",
+  },
+  {
+    name: "Omer Farooq",
+    role: "Managing Director — Rynex Security",
+    initial: "O",
     quote:
       "At Rynex, we are not just offering jobs; we are offering careers that matter. Every day, our team works on the front lines of cybersecurity, protecting critical infrastructure and sensitive data across the globe. If you are passionate about making a real impact and want to grow with a team that values innovation, collaboration, and excellence, Rynex is the place for you.",
   },

@@ -17,11 +17,30 @@
   gap: var(--sp-08);
 }
 
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-07);
+  }
+}
+
 @media (max-width: 672px) {
   .grid {
     grid-template-columns: 1fr;
     padding: var(--sp-08) var(--sp-05) var(--sp-06);
     gap: var(--sp-06);
+  }
+  .copyright {
+    padding: var(--sp-05) var(--sp-05);
+  }
+}
+
+@media (max-width: 400px) {
+  .grid {
+    padding: var(--sp-07) var(--sp-04) var(--sp-05);
+  }
+  .copyright {
+    padding: var(--sp-04) var(--sp-04);
   }
 }
 

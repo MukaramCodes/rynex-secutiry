@@ -115,14 +115,15 @@
   background: var(--white);
   border-top: 1px solid var(--gray-20);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  width: max(560px, 100%);
+  width: min(600px, 90vw);
+  max-width: 90vw;
   padding: var(--sp-07) var(--sp-06);
   animation: dropIn var(--motion) ease-out;
 }
 
 .megaGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: var(--sp-06) var(--sp-07);
 }
 
@@ -198,6 +199,7 @@
     box-shadow: none;
     border-top: none;
     width: 100%;
+    max-width: 100%;
     background: var(--gray-10);
     padding: 0 var(--sp-05) var(--sp-05);
   }
@@ -217,7 +219,20 @@
     color: var(--gray-100);
     font-size: 1.1rem;
   }
- 
+}
+
+@media (max-width: 672px) {
+  .bar {
+    padding: 0 var(--sp-04);
+  }
+}
+
+@media (max-width: 400px) {
+  .logo {
+    font-size: 0.85rem;
+    padding-right: var(--sp-02);
+    border-right: none;
+  }
 }
 
 /* Internship availability states */

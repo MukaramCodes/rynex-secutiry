@@ -16,7 +16,6 @@ declare global {
 
 const LANGUAGES = [
   { code: "en", label: "English" },
-  { code: "ur", label: "Urdu — اردو" },
   { code: "ar", label: "Arabic — العربية" },
   { code: "ru", label: "Russian — Русский" },
   { code: "fr", label: "French — Français" },

@@ -208,7 +208,11 @@ export default function Sidebar({
   }));
 
   return (
-    <aside className={`${styles.sidebar} ${isMobileOpen ? styles.mobileOpen : ''}`}>
+    <>
+      {isMobileOpen && (
+        <div className={styles.backdrop} onClick={onMobileClose} aria-hidden="true" />
+      )}
+      <aside className={`${styles.sidebar} ${isMobileOpen ? styles.mobileOpen : ''}`}>
       <div className={styles.brand}>
         <Image
           src="/images/logo-transparent.png"
@@ -285,5 +289,6 @@ export default function Sidebar({
         </div>
       </div>
     </aside>
+    </>
   );
 }

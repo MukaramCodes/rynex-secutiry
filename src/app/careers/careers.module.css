@@ -937,3 +937,9 @@
   transform: translateY(0);
   pointer-events: auto;
 }
+
+@media (max-width: 440px) {
+  .nextStepsRight {
+    padding: var(--sp-04);
+  }
+}

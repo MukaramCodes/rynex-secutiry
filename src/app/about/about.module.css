@@ -172,3 +172,31 @@
   font-size: 0.875rem;
   color: var(--gray-70);
 }
+
+@media (max-width: 672px) {
+  .pageHeaderInner, .sectionInner {
+    padding: 0 var(--sp-05);
+  }
+  .founderCard {
+    padding: var(--sp-06);
+  }
+  .mvCard {
+    padding: var(--sp-06);
+  }
+  .quote {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 440px) {
+  .pageHeaderInner, .sectionInner {
+    padding: 0 var(--sp-04);
+  }
+  .founderCard {
+    padding: var(--sp-05);
+    border-left-width: 3px;
+  }
+  .mvCard {
+    padding: var(--sp-05);
+  }
+}

@@ -114,6 +114,25 @@ select:focus-visible {
   }
 }
 
+@media (max-width: 400px) {
+  .container {
+    padding: 0 var(--sp-04);
+  }
+}
+
+/* Ensure images, svgs, and media scale fluidly */
+img, video, canvas, svg {
+  max-width: 100%;
+}
+
+/* Responsive Table Wrapper helper */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: var(--sp-05);
+}
+
 /* Google Website Translator: keep our layout intact, hide its default chrome */
 .goog-te-banner-frame,
 .skiptranslate iframe {
