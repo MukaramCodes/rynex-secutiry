@@ -48,12 +48,22 @@ export async function POST(request: Request) {
     const clientIp = getClientIp(request);
     const isAdmin = ['ADMIN', 'CEO'].includes(user.role);
 
-    // ADMIN and CEO roles are allowed to log in from any IP address
-    if (!isAdmin) {
-      const normalizedAllowed = (user.allowedIp || '192.168.1.17').trim();
+    // Auto-detect and save allowed IP if user has no registered IP yet
+    if (!user.allowedIp || user.allowedIp.trim() === '') {
       const normalizedClient = clientIp.trim();
+      await db.user.update({
+        where: { id: user.id },
+        data: { allowedIp: normalizedClient },
+      });
+    }
 
-      if (normalizedAllowed !== normalizedClient) {
+    /* 
+    // IP RESTRICTION CHECK (DISABLED - EVERYBODY ALLOWED TO LOGIN)
+    if (!isAdmin) {
+      const normalizedClient = clientIp.trim();
+      const normalizedAllowed = user.allowedIp?.trim();
+
+      if (normalizedAllowed && normalizedAllowed !== normalizedClient) {
         // Check if there's already a pending request from this IP
         const existingRequest = await db.loginRequest.findFirst({
           where: {
@@ -101,6 +111,7 @@ export async function POST(request: Request) {
         );
       }
     }
+    */
     // ─────────────────────────────────────────────────────────────────────
 
     // Create session token

@@ -42,15 +42,6 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL('/login', request.url));
     }
 
-    // 3. If authenticated but needs password reset -> redirect to change-password
-    if (
-      decodedSession &&
-      decodedSession.mustChangePassword &&
-      !isChangePasswordPage &&
-      !isLoginPage
-    ) {
-      return NextResponse.redirect(new URL('/change-password', request.url));
-    }
 
     // Rewrite requests to map silently into /src/app/portal/* directory
     const url = request.nextUrl.clone();

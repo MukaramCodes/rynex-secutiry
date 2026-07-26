@@ -34,6 +34,7 @@ function buildNavGroups(role: Role): NavGroup[] {
     label: "Overview",
     items: [
       { href: "/portal/dashboard", icon: "fa fa-chart-pie", label: "Dashboard" },
+      { href: "/portal/profile", icon: "fa fa-user-circle", label: "Profile" },
     ],
   });
 

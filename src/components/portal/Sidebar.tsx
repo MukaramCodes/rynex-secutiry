@@ -110,6 +110,7 @@ export default function Sidebar({
       label: 'Overview',
       items: [
         { href: '/portal/dashboard', icon: 'fas fa-terminal', label: 'Dashboard' },
+        { href: '/portal/profile', icon: 'fas fa-user-circle', label: 'Profile' },
       ],
     });
 

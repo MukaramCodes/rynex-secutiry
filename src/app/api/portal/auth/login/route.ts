@@ -41,55 +41,67 @@ export async function POST(req: NextRequest) {
     const forwarded = req.headers.get("x-forwarded-for");
     const clientIp = forwarded ? forwarded.split(",")[0].trim() : "127.0.0.1";
     const isAdmin = ["ADMIN", "CEO"].includes(user.role);
-
-    const allowedIp = user.allowedIp ? user.allowedIp.trim() : "192.168.1.17";
     const normalizedClient = clientIp.trim();
 
-    if (!isAdmin && allowedIp !== normalizedClient) {
-      // Check if there's already a pending request from this IP
-      const existingRequest = await prisma.loginRequest.findFirst({
-        where: {
-          userId: user.id,
-          requestedIp: normalizedClient,
-          status: "PENDING",
-        },
+    // Auto-detect and save allowed IP if user has no registered IP yet
+    if (!user.allowedIp || user.allowedIp.trim() === "") {
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { allowedIp: normalizedClient },
       });
+    }
 
-      if (!existingRequest) {
-        await prisma.loginRequest.create({
-          data: {
+    /*
+    // IP RESTRICTION CHECK (DISABLED - EVERYBODY ALLOWED TO LOGIN)
+    if (!isAdmin) {
+      const allowedIp = user.allowedIp?.trim();
+      if (allowedIp && allowedIp !== normalizedClient) {
+        // Check if there's already a pending request from this IP
+        const existingRequest = await prisma.loginRequest.findFirst({
+          where: {
             userId: user.id,
             requestedIp: normalizedClient,
-            currentAllowedIp: allowedIp,
             status: "PENDING",
           },
         });
 
-        // Notify all ADMIN and CEO users
-        const admins = await prisma.user.findMany({
-          where: { role: { in: ["ADMIN", "CEO"] }, isActive: true },
-          select: { id: true },
-        });
+        if (!existingRequest) {
+          await prisma.loginRequest.create({
+            data: {
+              userId: user.id,
+              requestedIp: normalizedClient,
+              currentAllowedIp: allowedIp,
+              status: "PENDING",
+            },
+          });
 
-        await prisma.notification.createMany({
-          data: admins.map((admin) => ({
-            userId: admin.id,
-            title: "🚨 Unauthorized Login Attempt",
-            body: `${user.name} (${user.email}) attempted to login from IP ${normalizedClient}. Authorized IP is ${allowedIp}. Please review in Access Control.`,
-            link: "/portal/access-control",
-          })),
-        });
+          // Notify all ADMIN and CEO users
+          const admins = await prisma.user.findMany({
+            where: { role: { in: ["ADMIN", "CEO"] }, isActive: true },
+            select: { id: true },
+          });
+
+          await prisma.notification.createMany({
+            data: admins.map((admin) => ({
+              userId: admin.id,
+              title: "🚨 Unauthorized Login Attempt",
+              body: `${user.name} (${user.email}) attempted to login from IP ${normalizedClient}. Authorized IP is ${allowedIp}. Please review in Access Control.`,
+              link: "/portal/access-control",
+            })),
+          });
+        }
+
+        return NextResponse.json(
+          {
+            error: "IP_NOT_AUTHORIZED",
+            message: "Login from this IP address is not authorized. Your administrator has been notified.",
+            requestedIp: normalizedClient,
+          },
+          { status: 403 }
+        );
       }
-
-      return NextResponse.json(
-        {
-          error: "IP_NOT_AUTHORIZED",
-          message: "Login from this IP address is not authorized. Your administrator has been notified.",
-          requestedIp: normalizedClient,
-        },
-        { status: 403 }
-      );
     }
+    */
 
     // Update last login
     await prisma.user.update({
