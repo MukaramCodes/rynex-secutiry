@@ -109,7 +109,7 @@ export const jobs: Job[] = [
     description:
       "Lead end-to-end penetration testing engagements across web applications, internal networks, and cloud environments. Produce detailed reports and mentor junior analysts.",
     tags: ["VAPT", "Burp Suite", "Metasploit", "Python"],
-    isOpen: false,
+    isOpen: true,
   },
   {
     id: "vapt-junior",
@@ -121,7 +121,7 @@ export const jobs: Job[] = [
     description:
       "Support senior penetration testers across web, network, and API engagements. Contribute to vulnerability discovery, exploitation, and technical report writing.",
     tags: ["VAPT", "OWASP", "Linux", "Networking"],
-    isOpen: false,
+    isOpen: true,
   },
   {
     id: "soc-analyst-mid",
@@ -133,7 +133,7 @@ export const jobs: Job[] = [
     description:
       "Investigate escalated security alerts, correlate threat intelligence, and coordinate incident response activities. Work closely with clients to reduce dwell time.",
     tags: ["SIEM", "Splunk", "Threat Intelligence", "IR"],
-    isOpen: false,
+    isOpen: true,
   },
   {
     id: "soc-analyst-junior",
@@ -145,7 +145,7 @@ export const jobs: Job[] = [
     description:
       "Monitor security dashboards, triage incoming alerts, and escalate confirmed incidents to Tier II analysts. Maintain shift logs and document findings accurately.",
     tags: ["SIEM", "Log Analysis", "Endpoint Security"],
-    isOpen: false,
+    isOpen: true,
   },
   {
     id: "grc-consultant",
@@ -157,7 +157,7 @@ export const jobs: Job[] = [
     description:
       "Assist clients with compliance gap assessments, risk registers, and policy development aligned to ISO 27001, NIST CSF, and regional regulatory requirements.",
     tags: ["ISO 27001", "NIST", "Risk Management", "Policy"],
-    isOpen: false,
+    isOpen: true,
   },
   {
     id: "cloud-security-eng",
@@ -169,7 +169,7 @@ export const jobs: Job[] = [
     description:
       "Design and implement security controls across AWS, Azure, and GCP environments. Conduct cloud configuration reviews and drive cloud hardening initiatives for clients.",
     tags: ["AWS", "Azure", "GCP", "Terraform", "IAM"],
-    isOpen: false,
+    isOpen: true,
   },
   {
     id: "threat-hunter",
@@ -181,7 +181,7 @@ export const jobs: Job[] = [
     description:
       "Proactively hunt for advanced persistent threats across client environments using behavioral analysis, custom detection rules, and threat-intelligence feeds.",
     tags: ["Threat Hunting", "KQL", "YARA", "EDR"],
-    isOpen: false,
+    isOpen: true,
   },
   {
     id: "malware-analyst",
@@ -193,7 +193,7 @@ export const jobs: Job[] = [
     description:
       "Perform static and dynamic analysis of malware samples submitted by clients. Produce actionable indicators of compromise and technical analysis reports.",
     tags: ["Malware Analysis", "Ghidra", "IDA Pro", "Sandbox"],
-    isOpen: false,
+    isOpen: true,
   },
   {
     id: "ops-coordinator",
@@ -205,7 +205,7 @@ export const jobs: Job[] = [
     description:
       "Support day-to-day operational activities including client onboarding, project scheduling, and internal communications. Coordinate across technical and non-technical teams.",
     tags: ["Project Management", "Communication", "Admin"],
-    isOpen: false,
+    isOpen: true,
   },
 ];
 export const featuredJobs = jobs.filter((job) => job.isOpen).slice(0, 3);

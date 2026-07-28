@@ -992,29 +992,16 @@
   background: #0d1322 !important;
 }
 
-:global([data-theme="dark"]) .jobCard {
-  background: #0d1322 !important;
-  border-color: #1e293b !important;
-}
-
-:global([data-theme="dark"]) .jobTitle {
+:global([data-theme="dark"]) .sectionTitle {
   color: #f8fafc !important;
 }
 
-:global([data-theme="dark"]) .nextStepsSection {
-  background: #050811 !important;
-  border-top-color: #1e293b !important;
+:global([data-theme="dark"]) .sectionText {
+  color: #cbd5e1 !important;
 }
 
-:global([data-theme="dark"]) .nextStepsRight {
-  background: #0d1322 !important;
-  border-color: #1e293b !important;
-}
-
-:global([data-theme="dark"]) .nextStepsSelect {
-  background: #12192c !important;
-  color: #f8fafc !important;
-  border-color: #1e293b !important;
+:global([data-theme="dark"]) .processNav {
+  border-bottom-color: #1e293b !important;
 }
 
 :global([data-theme="dark"]) .processTab {
@@ -1042,6 +1029,39 @@
   color: #00d4ff !important;
 }
 
+:global([data-theme="dark"]) .processStepTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .processStepDesc {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .processStepIllustration {
+  background: #0d1322 !important;
+  border-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .cardGrid {
+  background: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .card {
+  background: #0d1322 !important;
+}
+
+:global([data-theme="dark"]) .card:hover {
+  background: #12192c !important;
+}
+
+:global([data-theme="dark"]) .cardTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .cardText {
+  color: #cbd5e1 !important;
+}
+
 :global([data-theme="dark"]) .storyCard {
   background: #0d1322 !important;
   border-color: #1e293b !important;
@@ -1058,3 +1078,151 @@
 :global([data-theme="dark"]) .storyRole {
   color: #94a3b8 !important;
 }
+
+:global([data-theme="dark"]) .jobPreviewCard {
+  background: #0d1322 !important;
+  border-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .jobPreviewCard:hover {
+  border-color: #00d4ff !important;
+}
+
+:global([data-theme="dark"]) .jobTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .jobDesc {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .jobLocation {
+  color: #94a3b8 !important;
+}
+
+:global([data-theme="dark"]) .jobTagType {
+  background: #1e293b !important;
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .jobsHero {
+  background: #050811 !important;
+  color: #f8fafc !important;
+  border-bottom-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .jobsHeroTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .jobsHeroSubtitle {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .searchBar {
+  background: #0d1322 !important;
+  border-bottom-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .searchInput {
+  background: #12192c !important;
+  color: #f8fafc !important;
+  border-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .filterSelect {
+  background: #12192c !important;
+  color: #f8fafc !important;
+  border-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .filterSelect option {
+  background: #12192c !important;
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .resultsCount {
+  color: #94a3b8 !important;
+}
+
+:global([data-theme="dark"]) .jobsSection {
+  background: #050811 !important;
+}
+
+:global([data-theme="dark"]) .jobsList {
+  background: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .jobCard {
+  background: #0d1322 !important;
+  border-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .jobCard:hover {
+  background: #12192c !important;
+}
+
+:global([data-theme="dark"]) .jobCardTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .jobCardDesc {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .skillTag {
+  background: #12192c !important;
+  color: #cbd5e1 !important;
+  border-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .noResultsTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .noResultsText {
+  color: #94a3b8 !important;
+}
+
+:global([data-theme="dark"]) .ctaBanner {
+  background: #0d1322 !important;
+  color: #f8fafc !important;
+  border-top-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .ctaTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .ctaText {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .nextStepsSection {
+  background: #050811 !important;
+  border-top-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .nextStepsTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .nextStepsText {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .stepLabel {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .nextStepsRight {
+  background: #0d1322 !important;
+  border-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .nextStepsSelect {
+  background: #12192c !important;
+  color: #f8fafc !important;
+  border-color: #1e293b !important;
+}
+

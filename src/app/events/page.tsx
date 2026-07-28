@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import NetworkBackground from "@/components/NetworkBackground";
 import styles from "./events.module.css";
 
 // Target Audience Categories
@@ -42,7 +43,7 @@ const targetAudience = [
     description:
       "Independent researchers and bug bounty hunters drawn to the gamified, challenge-based format of Jeopardy CTF play, motivated by recognition in Pakistan's ethical hacking community.",
     benefits: [
-      "Solve advanced reverse engineering & cryptography challenges",
+      "Solve advanced reverse engineering & web security challenges",
       "Climb the nationwide live Jeopardy scoreboard",
       "Earn exclusive cash rewards & bounty honors",
       "Showcase zero-day analysis & exploit techniques",
@@ -71,12 +72,6 @@ const ctfTracks = [
     title: "Web Exploitation",
     desc: "Uncover logic bugs, SQL injections, XSS, JWT flaws, and SSRF in real-world web targets.",
     tags: ["OWASP Top 10", "API Hacking", "XSS", "SQLi"],
-  },
-  {
-    icon: "fa-key",
-    title: "Cryptography",
-    desc: "Crack modern & classical ciphers, break weak RSA implementations, and analyze hash collisions.",
-    tags: ["RSA", "ECC", "Ciphers", "Hashes"],
   },
   {
     icon: "fa-magnifying-glass",
@@ -221,9 +216,12 @@ export default function EventsPage() {
   // CTF Terminal Simulator State
   const [terminalHistory, setTerminalHistory] = useState<Array<{ cmd: string; output: string }>>([
     { cmd: "init_ctf --target rynex_eclipse_2026", output: "SYSTEM INITIALIZED: Welcome to Rynex Eclipse 2026 CTF Gateway." },
-    { cmd: "cat challenge_preview.txt", output: "[+] CTF Flag format: RYNEX{...}\n[+] Available tracks: Web, Crypto, Forensics, Reverse Eng, Network.\n[+] Type 'help' or test flag 'RYNEX{3cl1ps3_2026_c4ptur3d}'" },
+    { cmd: "cat challenge_preview.txt", output: "[+] CTF Flag format: RYNEX{...}\n[+] Available tracks: Web, Forensics, Reverse Eng, Network.\n[+] Type 'help' or click quick command buttons below." },
   ]);
   const [terminalInput, setTerminalInput] = useState("");
+  const [cmdHistory, setCmdHistory] = useState<string[]>([]);
+  const [cmdHistoryIdx, setCmdHistoryIdx] = useState<number>(-1);
+  const terminalInputRef = useRef<HTMLInputElement>(null);
   const terminalEndRef = useRef<HTMLDivElement>(null);
   const isInitialMount = useRef(true);
 
@@ -235,34 +233,110 @@ export default function EventsPage() {
     terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [terminalHistory]);
 
-  const handleTerminalSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!terminalInput.trim()) return;
+  const runTerminalCommand = (rawCmd: string) => {
+    const cmd = rawCmd.trim();
+    if (!cmd) return;
 
-    const cmd = terminalInput.trim();
     let output = "";
-
     const lowerCmd = cmd.toLowerCase();
+
     if (lowerCmd === "help") {
-      output = "Available Commands:\n - help: Display this help message\n - status: Check event status & location\n - tracks: List CTF challenge categories\n - submit <flag>: Test flag submission (e.g. RYNEX{3cl1ps3_2026_c4ptur3d})\n - clear: Clear terminal output";
+      output = `⚡ Available Rynex CTF Terminal Commands:
+ - help         : Show available terminal commands
+ - status       : View event date, venue, fee & registration status
+ - tracks       : List CTF challenge categories (Web, Forensics, Reversing, Network)
+ - rules        : CTF competition guidelines & flag submission format
+ - prizes       : View prize pool, cash awards & trophy details
+ - register     : Open competitor pre-registration form directly
+ - sponsor      : Open sponsorship inquiry modal directly
+ - submit <flag>: Submit CTF flag (Try flag: RYNEX{3cl1ps3_2026_c4ptur3d})
+ - whoami       : Show current visitor session info
+ - clear        : Clear terminal screen`;
     } else if (lowerCmd === "status") {
-      output = "[STATUS]: Active Pre-Registration\n[DATE]: 2026\n[LOCATION]: Rahim Yar Khan, Pakistan\n[FEE]: PKR 500 per participant";
-    } else if (lowerCmd === "tracks") {
-      output = "1. Web Exploitation (OWASP, API, Injection)\n2. Cryptography (RSA, AES, Hash analysis)\n3. Digital Forensics (PCAP, Memory Dumps)\n4. Reverse Engineering (Assembly, Ghidra)\n5. Network Security (Wireshark, Protocols)";
-    } else if (lowerCmd === "clear") {
+      output = `[+] EVENT: Rynex Eclipse 2026 (Jeopardy CTF)
+[+] STATUS: Pre-Registration Active
+[+] VENUE: Rahim Yar Khan, Pakistan
+[+] FEE: PKR 500 per participant
+[+] ELIGIBILITY: Open to Students, Pros, Ethical Hackers & Developers`;
+    } else if (lowerCmd === "tracks" || lowerCmd === "categories") {
+      output = `[+] 1. WEB EXPLOITATION   (OWASP Top 10, API Hacking, XSS, SQLi, JWT)
+[+] 2. DIGITAL FORENSICS  (Network PCAP, RAM Dumps, Metadata Analysis)
+[+] 3. REVERSE ENG        (Assembly, Ghidra, Decompilation, Anti-Debug)
+[+] 4. NETWORK SECURITY   (Wireshark, Encrypted Channels, Pivoting)`;
+    } else if (lowerCmd === "rules") {
+      output = `📋 RYNEX ECLIPSE CTF RULES:
+ 1. Flag format: RYNEX{some_secret_text}
+ 2. Do not attack event infrastructure or host servers outside challenge targets.
+ 3. Sharing flags or solution code between competing teams is strictly prohibited.
+ 4. First Blood bonus: +50 PTS awarded to the first solver of each challenge.`;
+    } else if (lowerCmd === "prizes" || lowerCmd === "rewards") {
+      output = `🏆 PRIZE POOL & HONORS:
+ - Cash Rewards & Winner Trophies for Top Teams
+ - Verified Official Certificates of Excellence for Top Performers
+ - Direct Recruitment & Talent Pipeline to Partner Security Sponsors`;
+    } else if (lowerCmd === "register" || lowerCmd === "signup") {
+      output = "🚀 Opening Competitor Pre-Registration Form...";
+      setTimeout(() => {
+        setRegSuccess(null);
+        setRegisterModalOpen(true);
+      }, 250);
+    } else if (lowerCmd === "sponsor" || lowerCmd === "partner") {
+      output = "🤝 Opening Sponsorship Inquiry Modal...";
+      setTimeout(() => {
+        setSponsorSuccess(false);
+        setSponsorModalOpen(true);
+      }, 250);
+    } else if (lowerCmd === "whoami") {
+      output = "USER: Guest Hacker | ROLE: Event Visitor | PERMISSION: Pre-Registration Eligible";
+    } else if (lowerCmd === "clear" || lowerCmd === "cls") {
       setTerminalHistory([]);
       setTerminalInput("");
       return;
     } else if (lowerCmd.includes("rynex{3cl1ps3_2026_c4ptur3d}")) {
-      output = "🎉 SUCCESS! FLAG ACCEPTED: RYNEX{3cl1ps3_2026_c4ptur3d}\n[+] Points Added: +500 PTS\n[+] Congratulations! You have proven your skills. Register now below to join the main competition!";
+      output = `🎉 FLAG ACCEPTED! [RYNEX{3cl1ps3_2026_c4ptur3d}]
+[+] Result: CORRECT ANSWER
+[+] Score: +500 PTS (First Blood Bonus Included)
+[+] Next Step: Click 'Pre-Register' to reserve your spot in the live championship!`;
+    } else if (lowerCmd.includes("rynex{w3b_3xp1o1t_pwn3d}")) {
+      output = `🎉 FLAG ACCEPTED! [RYNEX{w3b_3xp1o1t_pwn3d}]
+[+] Category: Web Exploitation
+[+] Score: +300 PTS`;
     } else if (lowerCmd.startsWith("submit")) {
-      output = "❌ INVALID FLAG FORMAT OR WRONG FLAG. Keep digging hacker! Hint: try RYNEX{3cl1ps3_2026_c4ptur3d}";
+      output = "❌ INVALID FLAG FORMAT OR WRONG FLAG.\nHint: Try testing 'RYNEX{3cl1ps3_2026_c4ptur3d}' or type 'help'.";
     } else {
-      output = `Command not recognized: '${cmd}'. Type 'help' for available commands.`;
+      output = `Command '${cmd}' not recognized. Type 'help' for available commands.`;
     }
 
     setTerminalHistory((prev) => [...prev, { cmd, output }]);
+    setCmdHistory((prev) => [...prev, cmd]);
+    setCmdHistoryIdx(-1);
     setTerminalInput("");
+  };
+
+  const handleTerminalSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    runTerminalCommand(terminalInput);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (cmdHistory.length === 0) return;
+      const nextIdx = cmdHistoryIdx === -1 ? cmdHistory.length - 1 : Math.max(0, cmdHistoryIdx - 1);
+      setCmdHistoryIdx(nextIdx);
+      setTerminalInput(cmdHistory[nextIdx] || "");
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (cmdHistoryIdx === -1) return;
+      const nextIdx = cmdHistoryIdx + 1;
+      if (nextIdx >= cmdHistory.length) {
+        setCmdHistoryIdx(-1);
+        setTerminalInput("");
+      } else {
+        setCmdHistoryIdx(nextIdx);
+        setTerminalInput(cmdHistory[nextIdx] || "");
+      }
+    }
   };
 
   // Competitor Submit
@@ -317,13 +391,11 @@ export default function EventsPage() {
 
   return (
     <div className={styles.eventsContainer}>
-      <div className={styles.cyberBackground}>
-        <div className={styles.gridOverlay} />
-      </div>
-
       {/* HERO SECTION */}
       <section className={styles.heroSection}>
-        <div className={styles.badgeRow}>
+        <NetworkBackground />
+        <div className={styles.heroInner}>
+          <div className={styles.badgeRow}>
           <span className={styles.cyberBadge}>
             <span className={styles.pulsingDot} /> FLAGSHIP COMPETITION 2026
           </span>
@@ -339,8 +411,8 @@ export default function EventsPage() {
         <div className={styles.tagline}>Think . Capture . Compete</div>
 
         <p className={styles.heroDescription}>
-          Pakistan’s premier Capture The Flag (CTF) competition organized by Rynex Security. 
-          Gathering over 200+ top university students, ethical hackers, SOC analysts, and technology 
+          Pakistan’s premier Capture The Flag (CTF) competition organized by Rynex Security.
+          Gathering over 200+ top university students, ethical hackers, SOC analysts, and technology
           enthusiasts to solve real-world cybersecurity challenges under competitive pressure.
         </p>
 
@@ -392,7 +464,7 @@ export default function EventsPage() {
         </div>
 
         {/* CTF TERMINAL SIMULATOR */}
-        <div className={styles.terminalContainer}>
+        <div className={styles.terminalContainer} onClick={() => terminalInputRef.current?.focus()}>
           <div className={styles.terminalHeader}>
             <div className={styles.terminalDots}>
               <span className={`${styles.terminalDot} ${styles.dotRed}`} />
@@ -400,11 +472,24 @@ export default function EventsPage() {
               <span className={`${styles.terminalDot} ${styles.dotGreen}`} />
             </div>
             <div className={styles.terminalTitle}>
-              <i className="fas fa-terminal" /> rynex-eclipse-ctf@gateway:~#
+              <i className="fas fa-terminal" aria-hidden="true" /> rynex-eclipse-ctf@gateway:~#
             </div>
           </div>
 
           <div className={styles.terminalBody}>
+            {/* Quick Command Shortcuts */}
+            <div className={styles.terminalQuickRow} onClick={(e) => e.stopPropagation()}>
+              <span className={styles.quickLabel}>Quick Run:</span>
+              <button type="button" onClick={() => runTerminalCommand("help")} className={styles.quickCmdBtn}>help</button>
+              <button type="button" onClick={() => runTerminalCommand("status")} className={styles.quickCmdBtn}>status</button>
+              <button type="button" onClick={() => runTerminalCommand("tracks")} className={styles.quickCmdBtn}>tracks</button>
+              <button type="button" onClick={() => runTerminalCommand("rules")} className={styles.quickCmdBtn}>rules</button>
+              <button type="button" onClick={() => runTerminalCommand("prizes")} className={styles.quickCmdBtn}>prizes</button>
+              <button type="button" onClick={() => runTerminalCommand("register")} className={styles.quickCmdBtn}>register</button>
+              <button type="button" onClick={() => runTerminalCommand("submit RYNEX{3cl1ps3_2026_c4ptur3d}")} className={styles.quickCmdBtn}>test flag</button>
+              <button type="button" onClick={() => runTerminalCommand("clear")} className={styles.quickCmdBtn}>clear</button>
+            </div>
+
             {terminalHistory.map((item, idx) => (
               <div key={idx} className={styles.terminalLine}>
                 <div>
@@ -417,19 +502,23 @@ export default function EventsPage() {
             ))}
             <div ref={terminalEndRef} />
 
-            <form onSubmit={handleTerminalSubmit} className={styles.terminalInputRow}>
+            <form onSubmit={handleTerminalSubmit} className={styles.terminalInputRow} onClick={(e) => e.stopPropagation()}>
               <span className={styles.terminalPrompt}>rynex-ctf&gt;</span>
               <input
+                ref={terminalInputRef}
                 type="text"
                 className={styles.terminalInput}
-                placeholder="Type command or test flag (e.g. RYNEX{3cl1ps3_2026_c4ptur3d})..."
+                placeholder="Type command or test flag (e.g. RYNEX{3cl1ps3_2026_c4ptur3d}). Use ↑/↓ for history."
                 value={terminalInput}
                 onChange={(e) => setTerminalInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                aria-label="CTF Terminal Input"
               />
             </form>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* CTF CATEGORIES / TRACKS SECTION */}
       <section className={styles.sectionWrapper}>
@@ -437,7 +526,7 @@ export default function EventsPage() {
           <div className={styles.sectionSubtitle}>01 — CHALLENGE CATEGORIES</div>
           <h2 className={styles.sectionTitle}>Real-World Cybersecurity Scenarios</h2>
           <p className={styles.sectionDesc}>
-            Rynex Eclipse 2026 features Jeopardy-style CTF challenges designed by offensive security 
+            Rynex Eclipse 2026 features Jeopardy-style CTF challenges designed by offensive security
             specialists to test practical, industry-relevant exploitation and defensive skills.
           </p>
         </div>
@@ -468,7 +557,7 @@ export default function EventsPage() {
           <div className={styles.sectionSubtitle}>02 — TARGET AUDIENCE</div>
           <h2 className={styles.sectionTitle}>Who Should Participate?</h2>
           <p className={styles.sectionDesc}>
-            Designed to bring together Pakistan's full tech spectrum, from high-potential students 
+            Designed to bring together Pakistan's full tech spectrum, from high-potential students
             to seasoned cyber security professionals and independent security researchers.
           </p>
         </div>
@@ -479,9 +568,8 @@ export default function EventsPage() {
               <button
                 key={item.id}
                 type="button"
-                className={`${styles.audienceTabBtn} ${
-                  activeAudience === item.id ? styles.audienceTabActive : ""
-                }`}
+                className={`${styles.audienceTabBtn} ${activeAudience === item.id ? styles.audienceTabActive : ""
+                  }`}
                 onClick={() => setActiveAudience(item.id)}
               >
                 <i className={`fas ${item.icon}`} style={{ marginRight: "8px" }} />
@@ -517,8 +605,8 @@ export default function EventsPage() {
                   Elevate Your Career Path
                 </h4>
                 <p style={{ color: "#94a3b8", fontSize: "0.9rem", lineHeight: "1.6" }}>
-                  Every participant receives an official verified certificate of participation, 
-                  with winners receiving cash prizes, trophies, and direct recruitment access to leading 
+                  Every participant receives an official verified certificate of participation,
+                  with winners receiving cash prizes, trophies, and direct recruitment access to leading
                   cybersecurity sponsors.
                 </p>
               </div>
@@ -583,7 +671,7 @@ export default function EventsPage() {
           <div className={styles.sectionSubtitle}>04 — SPONSORSHIP OPPORTUNITIES</div>
           <h2 className={styles.sectionTitle}>Partner With Rynex Eclipse 2026</h2>
           <p className={styles.sectionDesc}>
-            Position your organization prominently in front of Pakistan's cybersecurity ecosystem. 
+            Position your organization prominently in front of Pakistan's cybersecurity ecosystem.
             Engage with top-tier technical talent, showcase your brand, and fulfill CSR objectives.
           </p>
         </div>
@@ -593,9 +681,8 @@ export default function EventsPage() {
           {sponsorTiers.map((tier, idx) => (
             <div
               key={idx}
-              className={`${styles.sponsorTierCard} ${
-                tier.featured ? styles.sponsorTierCardFeatured : ""
-              }`}
+              className={`${styles.sponsorTierCard} ${tier.featured ? styles.sponsorTierCardFeatured : ""
+                }`}
             >
               {tier.badge && <span className={styles.tierRibbon}>{tier.badge}</span>}
               <h3 className={styles.tierName}>{tier.name}</h3>
@@ -664,7 +751,7 @@ export default function EventsPage() {
         <div className={styles.ctaBanner}>
           <h2 className={styles.ctaBannerTitle}>Ready to Think, Capture, and Compete?</h2>
           <p className={styles.ctaBannerText}>
-            Join Pakistan's flagship Capture The Flag competition. Limited competitor slots and 
+            Join Pakistan's flagship Capture The Flag competition. Limited competitor slots and
             sponsorship allocations available on a first-confirmed basis.
           </p>
 
@@ -692,25 +779,7 @@ export default function EventsPage() {
           </div>
         </div>
 
-        {/* ORGANIZER & CONTACT BOX */}
-        <div className={styles.organizerBox}>
-          <div className={styles.organizerInfo}>
-            <h4>Rynex Security — Organizing Body</h4>
-            <p>Founder & CEO: Muhammad Hamza Zahid | Location: Rahim Yar Khan, Pakistan</p>
-          </div>
 
-          <div className={styles.organizerContacts}>
-            <a href="mailto:info@rynexsecurity.com" className={styles.contactItem}>
-              <i className="fas fa-envelope" /> info@rynexsecurity.com
-            </a>
-            <a href="tel:+923272873812" className={styles.contactItem}>
-              <i className="fas fa-phone" /> +92 327 287 3812
-            </a>
-            <a href="https://www.rynexsecurity.com" target="_blank" rel="noreferrer" className={styles.contactItem}>
-              <i className="fas fa-globe" /> rynexsecurity.com
-            </a>
-          </div>
-        </div>
       </section>
 
       {/* COMPETITOR REGISTRATION MODAL */}
