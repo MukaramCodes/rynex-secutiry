@@ -36,6 +36,7 @@ export default function WhoWeAreVisual() {
       className={styles.panel}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      suppressHydrationWarning
     >
       <div className={styles.dotGrid} aria-hidden="true" />
       <div className={styles.glow} aria-hidden="true" />

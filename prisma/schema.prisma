@@ -274,3 +274,20 @@ model BlogPost {
   updatedAt       DateTime    @updatedAt
   publishedAt     DateTime?
 }
+
+model EventSubmission {
+  id           String   @id @default(uuid())
+  type         String   // "COMPETITOR" or "SPONSOR"
+  eventName    String   @default("Rynex Eclipse 2026")
+  ticketToken  String?  // e.g. "RYNEX-ECLIPSE-2026-982341"
+  name         String
+  email        String
+  phone        String
+  groupName    String?  // Organization / Team / University Name
+  category     String?  // Participant category or industry role
+  tier         String?  // Sponsorship tier if SPONSOR
+  experience   String?  // Skill level or team size
+  message      String?  @db.Text
+  status       String   @default("PENDING") // PENDING, CONTACTED, CONFIRMED, CANCELLED
+  createdAt    DateTime @default(now())
+}

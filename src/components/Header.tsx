@@ -55,18 +55,20 @@ export default function Header() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    setMounted(true);
     const savedTheme = localStorage.getItem("rynex-theme");
-    if (savedTheme === "dark") {
-      setIsDarkMode(true);
-      document.documentElement.setAttribute("data-theme", "dark");
-    } else {
+    if (savedTheme === "light") {
       setIsDarkMode(false);
       document.documentElement.removeAttribute("data-theme");
+    } else {
+      setIsDarkMode(true);
+      document.documentElement.setAttribute("data-theme", "dark");
     }
   }, []);
 
@@ -130,9 +132,11 @@ export default function Header() {
     setMobileOpen(false);
   }
 
+  const effectiveDark = mounted ? isDarkMode : true;
+
   return (
-    <header ref={headerRef} className={styles.header}>
-      <div className={styles.bar}>
+    <header ref={headerRef} className={styles.header} suppressHydrationWarning>
+      <div className={styles.bar} suppressHydrationWarning>
         <Link href="/" className={styles.logo}>
           <NavLogo />
           Rynex Security
@@ -155,8 +159,9 @@ export default function Header() {
           className={`${styles.nav} ${
             mobileOpen ? styles.navOpen : ""
           }`}
+          suppressHydrationWarning
         >
-          <div className={styles.navItem}>
+          <div className={styles.navItem} suppressHydrationWarning>
             <Link
               href="/"
               className={`${styles.navLink} ${
@@ -289,82 +294,18 @@ export default function Header() {
             </Link>
           </div>
 
-          <div
-            className={`${styles.navItem} ${
-              openMenu === "internship" ? styles.open : ""
-            }`}
-          >
-            <button
-              type="button"
-              className={`${styles.navLink} ${
-                isActive("/internship") ? styles.active : ""
-              }`}
-              aria-expanded={openMenu === "internship"}
-              onClick={(event) => {
-                event.stopPropagation();
-
-                setOpenMenu((current) =>
-                  current === "internship" ? null : "internship",
-                );
-              }}
+          {/* 
+          INTERNSHIP NAV ITEM (Temporarily disabled - uncomment to re-enable in header):
+          <div className={styles.navItem}>
+            <Link
+              href="/internship"
+              className={`${styles.navLink} ${isActive("/internship") ? styles.active : ""}`}
+              onClick={closeNavigation}
             >
-              Internship{" "}
-              <i
-                className={`fas fa-chevron-down ${styles.chevron}`}
-                aria-hidden="true"
-              />
-            </button>
-
-            {openMenu === "internship" && (
-              <div className={styles.megaMenu}>
-                <div className={styles.megaGrid}>
-                  {internshipLinks.map((item) => {
-                    if (!item.enabled) {
-                      return (
-                        <div
-                          key={item.href}
-                          className={`${styles.megaLink} ${styles.disabledInternshipLink}`}
-                          aria-disabled="true"
-                          title="This section is currently unavailable"
-                        >
-                          <div className={styles.internshipTitleBlock}>
-                            <span className={styles.internshipItemTitle}>
-                              {item.title}
-                            </span>
-
-                            <span className={styles.comingSoon}>
-                              Coming soon
-                            </span>
-                          </div>
-
-                          <div className={styles.megaLinkDesc}>
-                            {item.desc}
-                          </div>
-                        </div>
-                      );
-                    }
-
-                    return (
-                      <Link
-                        key={item.href}
-                        href={item.href}
-                        className={`${styles.megaLink} ${styles.enabledInternshipLink}`}
-                        onClick={closeNavigation}
-                      >
-                        <div className={styles.megaLinkTitle}>
-                          {item.title}
-                        </div>
-
-                        <div className={styles.megaLinkDesc}>
-                          {item.desc}
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
+              Internship
+            </Link>
           </div>
+          */}
 
           <div className={styles.navItem}>
             <Link
@@ -379,15 +320,16 @@ export default function Header() {
           </div>
         </nav>
 
-        <div className={styles.utilities}>
+        <div className={styles.utilities} suppressHydrationWarning>
           <button
             type="button"
             className={styles.iconBtn}
             aria-label="Toggle Theme"
-            title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            title={effectiveDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
             onClick={toggleTheme}
+            suppressHydrationWarning
           >
-            <i className={`fas ${isDarkMode ? "fa-sun" : "fa-moon"}`} aria-hidden="true" />
+            <i className={`fas ${effectiveDark ? "fa-sun" : "fa-moon"}`} aria-hidden="true" />
           </button>
 
           <GoogleTranslate />

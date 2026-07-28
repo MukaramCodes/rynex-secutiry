@@ -12,6 +12,11 @@
   padding: var(--sp-11) 0 var(--sp-10);
 }
 
+:global([data-theme="dark"]) .hero {
+  background: #050811 !important;
+  color: #f8fafc !important;
+}
+
 .heroInner {
   position: relative;
   z-index: 1;
@@ -66,6 +71,11 @@
 .sectionDark {
   background: var(--gray-100);
   color: var(--white);
+}
+
+:global([data-theme="dark"]) .sectionDark {
+  background: #050811 !important;
+  color: #f8fafc !important;
 }
 
 .sectionInner {

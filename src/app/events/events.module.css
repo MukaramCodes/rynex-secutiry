@@ -1,12 +1,13 @@
-/* RYNEX ECLIPSE 2026 - Ultra Cyberpunk Security Theme */
+/* RYNEX ECLIPSE 2026 - Modern Cyber Theme (Supports Light & Dark Modes) */
 
 .eventsContainer {
   min-height: 100vh;
-  background-color: #030712;
-  color: #f3f4f6;
+  background-color: var(--white);
+  color: var(--gray-100);
   position: relative;
   overflow: hidden;
   font-family: var(--font-sans);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Background Cyber Grid & Glows */
@@ -19,10 +20,9 @@
   pointer-events: none;
   z-index: 0;
   background: 
-    radial-gradient(circle at 50% 0%, rgba(0, 212, 255, 0.15) 0%, transparent 60%),
-    radial-gradient(circle at 90% 40%, rgba(0, 122, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 10% 80%, rgba(0, 255, 170, 0.08) 0%, transparent 50%),
-    linear-gradient(to bottom, rgba(3, 7, 18, 0.4), #030712);
+    radial-gradient(circle at 50% 0%, rgba(0, 212, 255, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 90% 40%, rgba(0, 122, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 10% 80%, rgba(0, 255, 170, 0.06) 0%, transparent 50%);
 }
 
 .gridOverlay {
@@ -32,8 +32,8 @@
   width: 100%;
   height: 100%;
   background-image: 
-    linear-gradient(rgba(0, 212, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 212, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
@@ -41,7 +41,7 @@
 .heroSection {
   position: relative;
   z-index: 1;
-  padding: 140px 24px 80px;
+  padding: 130px 24px 70px;
   max-width: 1280px;
   margin: 0 auto;
   text-align: center;
@@ -59,7 +59,7 @@
 .cyberBadge {
   background: rgba(0, 212, 255, 0.08);
   border: 1px solid rgba(0, 212, 255, 0.3);
-  color: #00d4ff;
+  color: var(--cyan-text);
   font-family: var(--font-mono);
   font-size: 0.825rem;
   letter-spacing: 1.5px;
@@ -69,7 +69,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  box-shadow: 0 0 15px rgba(0, 212, 255, 0.15);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.12);
 }
 
 .pulsingDot {
@@ -92,16 +92,17 @@
   line-height: 1.1;
   letter-spacing: -1px;
   margin-bottom: 16px;
-  background: linear-gradient(135deg, #ffffff 0%, #a5f3fc 50%, #00d4ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+  color: var(--gray-100);
+}
+
+.mainTitleHighlight {
+  color: var(--cyan-text);
 }
 
 .tagline {
   font-family: var(--font-mono);
-  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-  color: #00d4ff;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  color: var(--cyan-text);
   letter-spacing: 4px;
   text-transform: uppercase;
   margin-bottom: 20px;
@@ -110,7 +111,7 @@
 
 .heroDescription {
   font-size: 1.15rem;
-  color: #94a3b8;
+  color: var(--gray-70);
   max-width: 800px;
   margin: 0 auto 36px;
   line-height: 1.7;
@@ -125,9 +126,9 @@
 }
 
 .statCard {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-left: 3px solid #00d4ff;
+  background: var(--gray-10);
+  border: 1px solid var(--gray-20);
+  border-left: 3px solid var(--cyan-text);
   padding: 20px 16px;
   border-radius: 8px;
   backdrop-filter: blur(12px);
@@ -137,20 +138,20 @@
 
 .statCard:hover {
   transform: translateY(-4px);
-  border-color: rgba(0, 212, 255, 0.4);
+  border-color: var(--cyan-text);
   box-shadow: 0 8px 24px rgba(0, 212, 255, 0.15);
 }
 
 .statValue {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--gray-100);
   font-family: var(--font-mono);
 }
 
 .statLabel {
   font-size: 0.85rem;
-  color: #94a3b8;
+  color: var(--gray-60);
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-top: 4px;
@@ -178,46 +179,44 @@
   align-items: center;
   gap: 10px;
   transition: all 0.3s ease;
-  box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
+  box-shadow: 0 0 25px rgba(0, 212, 255, 0.35);
 }
 
 .primaryCtaBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 35px rgba(0, 212, 255, 0.7);
-  background: linear-gradient(135deg, #38edf6 0%, #0099ff 100%);
+  box-shadow: 0 0 35px rgba(0, 212, 255, 0.6);
 }
 
 .secondaryCtaBtn {
-  background: rgba(15, 23, 42, 0.8);
-  color: #ffffff;
+  background: var(--gray-10);
+  color: var(--gray-100);
   font-weight: 600;
   font-size: 1.05rem;
   padding: 16px 32px;
   border-radius: 6px;
-  border: 1px solid rgba(0, 212, 255, 0.4);
+  border: 1px solid var(--gray-20);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
 }
 
 .secondaryCtaBtn:hover {
-  background: rgba(0, 212, 255, 0.15);
-  border-color: #00d4ff;
-  color: #00d4ff;
+  background: rgba(0, 212, 255, 0.1);
+  border-color: var(--cyan-text);
+  color: var(--cyan-text);
 }
 
-/* Interactive CTF Terminal Widget */
+/* Interactive CTF Terminal Widget (Always Dark Cyber Hacker Aesthetics) */
 .terminalContainer {
   max-width: 900px;
   margin: 0 auto;
   background: #090d16;
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  border: 1px solid rgba(0, 212, 255, 0.4);
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 212, 255, 0.15);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 212, 255, 0.15);
   text-align: left;
 }
 
@@ -293,7 +292,7 @@
   outline: none;
 }
 
-/* Sections Wrapper */
+/* Section Wrapper */
 .sectionWrapper {
   position: relative;
   z-index: 1;
@@ -311,7 +310,7 @@
 .sectionSubtitle {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  color: #00d4ff;
+  color: var(--cyan-text);
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 8px;
@@ -321,18 +320,18 @@
 .sectionTitle {
   font-size: clamp(1.8rem, 3.5vw, 2.75rem);
   font-weight: 700;
-  color: #ffffff;
+  color: var(--gray-100);
   letter-spacing: -0.5px;
   margin-bottom: 16px;
 }
 
 .sectionDesc {
   font-size: 1.05rem;
-  color: #94a3b8;
+  color: var(--gray-70);
   line-height: 1.6;
 }
 
-/* CTF Tracks / Categories Grid */
+/* CTF Tracks Grid */
 .tracksGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -340,8 +339,8 @@
 }
 
 .trackCard {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--gray-10);
+  border: 1px solid var(--gray-20);
   border-radius: 12px;
   padding: 28px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -363,9 +362,8 @@
 
 .trackCard:hover {
   transform: translateY(-6px);
-  background: rgba(15, 23, 42, 0.85);
-  border-color: rgba(0, 212, 255, 0.4);
-  box-shadow: 0 12px 30px rgba(0, 212, 255, 0.12);
+  border-color: var(--cyan-text);
+  box-shadow: 0 12px 30px rgba(0, 212, 255, 0.15);
 }
 
 .trackCard:hover::before {
@@ -382,20 +380,20 @@
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  color: #00d4ff;
+  color: var(--cyan-text);
   margin-bottom: 20px;
 }
 
 .trackTitle {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--gray-100);
   margin-bottom: 10px;
 }
 
 .trackDesc {
   font-size: 0.95rem;
-  color: #94a3b8;
+  color: var(--gray-70);
   line-height: 1.6;
   margin-bottom: 16px;
 }
@@ -409,17 +407,17 @@
 .trackTag {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
-  color: #a5f3fc;
+  background: var(--gray-20);
+  color: var(--cyan-text);
   padding: 4px 10px;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--gray-30);
 }
 
-/* Target Audience Filter Component */
+/* Audience Component */
 .audienceContainer {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--gray-10);
+  border: 1px solid var(--gray-20);
   border-radius: 12px;
   padding: 36px;
 }
@@ -430,13 +428,13 @@
   overflow-x: auto;
   padding-bottom: 12px;
   margin-bottom: 24px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--gray-20);
 }
 
 .audienceTabBtn {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #94a3b8;
+  border: 1px solid var(--gray-20);
+  color: var(--gray-60);
   font-size: 0.9rem;
   font-weight: 600;
   padding: 10px 20px;
@@ -447,14 +445,14 @@
 }
 
 .audienceTabBtn:hover {
-  color: #ffffff;
-  border-color: rgba(0, 212, 255, 0.3);
+  color: var(--gray-100);
+  border-color: var(--cyan-text);
 }
 
 .audienceTabActive {
-  background: rgba(0, 212, 255, 0.15);
-  border-color: #00d4ff;
-  color: #00d4ff;
+  background: rgba(0, 212, 255, 0.12);
+  border-color: var(--cyan-text);
+  color: var(--cyan-text);
 }
 
 .audienceContent {
@@ -473,13 +471,13 @@
 .audienceText h3 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--gray-100);
   margin-bottom: 12px;
 }
 
 .audienceText p {
   font-size: 1rem;
-  color: #94a3b8;
+  color: var(--gray-70);
   line-height: 1.7;
   margin-bottom: 20px;
 }
@@ -493,16 +491,16 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #e2e8f0;
+  color: var(--gray-90);
   font-size: 0.95rem;
   margin-bottom: 10px;
 }
 
 .audienceList li i {
-  color: #00d4ff;
+  color: var(--cyan-text);
 }
 
-/* Event Highlights / Perks */
+/* Perks Grid */
 .perksGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -510,8 +508,8 @@
 }
 
 .perkCard {
-  background: rgba(15, 23, 42, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--gray-10);
+  border: 1px solid var(--gray-20);
   border-radius: 10px;
   padding: 24px;
   display: flex;
@@ -520,13 +518,13 @@
 }
 
 .perkCard:hover {
-  background: rgba(15, 23, 42, 0.8);
-  border-color: rgba(0, 212, 255, 0.3);
+  border-color: var(--cyan-text);
+  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.1);
 }
 
 .perkIcon {
   font-size: 1.5rem;
-  color: #00d4ff;
+  color: var(--cyan-text);
   flex-shrink: 0;
   margin-top: 4px;
 }
@@ -534,17 +532,17 @@
 .perkTitle {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--gray-100);
   margin-bottom: 6px;
 }
 
 .perkDesc {
   font-size: 0.9rem;
-  color: #94a3b8;
+  color: var(--gray-70);
   line-height: 1.5;
 }
 
-/* Sponsorship Packages / Investment Section */
+/* Sponsorship Tiers */
 .sponsorshipTiersGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -553,8 +551,8 @@
 }
 
 .sponsorTierCard {
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--gray-10);
+  border: 1px solid var(--gray-20);
   border-radius: 12px;
   padding: 28px 20px;
   display: flex;
@@ -564,16 +562,15 @@
 }
 
 .sponsorTierCardFeatured {
-  border-color: #00d4ff;
-  box-shadow: 0 0 25px rgba(0, 212, 255, 0.25);
-  background: rgba(15, 23, 42, 0.9);
+  border-color: var(--cyan-text);
+  box-shadow: 0 0 25px rgba(0, 212, 255, 0.2);
 }
 
 .tierRibbon {
   position: absolute;
   top: 14px;
   right: 14px;
-  background: #00d4ff;
+  background: var(--cyan-text);
   color: #030712;
   font-size: 0.7rem;
   font-weight: 800;
@@ -586,21 +583,21 @@
 .tierName {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--gray-100);
   margin-bottom: 8px;
 }
 
 .tierPrice {
   font-size: 1.8rem;
   font-weight: 800;
-  color: #00d4ff;
+  color: var(--cyan-text);
   font-family: var(--font-mono);
   margin-bottom: 16px;
 }
 
 .tierPriceSub {
   font-size: 0.85rem;
-  color: #94a3b8;
+  color: var(--gray-60);
   font-weight: 400;
 }
 
@@ -613,7 +610,7 @@
 
 .tierFeatureList li {
   font-size: 0.875rem;
-  color: #cbd5e1;
+  color: var(--gray-80);
   margin-bottom: 10px;
   display: flex;
   align-items: flex-start;
@@ -621,7 +618,7 @@
 }
 
 .tierFeatureList li i {
-  color: #00d4ff;
+  color: var(--cyan-text);
   margin-top: 3px;
   font-size: 0.8rem;
 }
@@ -630,9 +627,9 @@
   width: 100%;
   padding: 12px;
   border-radius: 6px;
-  border: 1px solid #00d4ff;
+  border: 1px solid var(--cyan-text);
   background: rgba(0, 212, 255, 0.1);
-  color: #00d4ff;
+  color: var(--cyan-text);
   font-weight: 700;
   font-size: 0.95rem;
   cursor: pointer;
@@ -640,16 +637,16 @@
 }
 
 .sponsorActionBtn:hover {
-  background: #00d4ff;
+  background: var(--cyan-text);
   color: #030712;
 }
 
-/* Detailed Sponsorship Benefits Table */
+/* Benefits Table */
 .benefitsTableWrapper {
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--gray-10);
+  border: 1px solid var(--gray-20);
   border-radius: 12px;
-  overflow: hidden;
+  overflow-x: auto;
   margin-top: 40px;
 }
 
@@ -663,12 +660,12 @@
 .benefitsTable th,
 .benefitsTable td {
   padding: 14px 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid var(--gray-20);
 }
 
 .benefitsTable th {
-  background: rgba(30, 41, 59, 0.8);
-  color: #ffffff;
+  background: var(--gray-20);
+  color: var(--gray-100);
   font-weight: 700;
   font-family: var(--font-mono);
   font-size: 0.85rem;
@@ -676,29 +673,15 @@
   letter-spacing: 0.5px;
 }
 
-.benefitsTable tr:hover td {
-  background: rgba(0, 212, 255, 0.04);
-}
-
 .featureCol {
-  color: #f8fafc;
+  color: var(--gray-100);
   font-weight: 600;
   width: 25%;
 }
 
-.checkIcon {
-  color: #00ffaa;
-  font-size: 1rem;
-}
-
-.crossIcon {
-  color: #475569;
-  font-size: 0.9rem;
-}
-
-/* Call to Action Banner */
+/* CTA Banner */
 .ctaBanner {
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 119, 255, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.12) 0%, rgba(0, 119, 255, 0.08) 100%);
   border: 1px solid rgba(0, 212, 255, 0.3);
   border-radius: 16px;
   padding: 60px 32px;
@@ -710,19 +693,19 @@
 .ctaBannerTitle {
   font-size: clamp(1.8rem, 3vw, 2.5rem);
   font-weight: 800;
-  color: #ffffff;
+  color: var(--gray-100);
   margin-bottom: 16px;
 }
 
 .ctaBannerText {
   font-size: 1.1rem;
-  color: #cbd5e1;
+  color: var(--gray-70);
   max-width: 700px;
   margin: 0 auto 32px;
   line-height: 1.6;
 }
 
-/* Modal Overlay & Dialog */
+/* Modal Overlay & Content */
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -739,14 +722,15 @@
 }
 
 .modalContent {
-  background: #0f172a;
-  border: 1px solid rgba(0, 212, 255, 0.4);
+  background: var(--gray-10);
+  border: 1px solid var(--cyan-text);
   border-radius: 12px;
   max-width: 580px;
   width: 100%;
   padding: 32px;
   position: relative;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 212, 255, 0.2);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  color: var(--gray-100);
 }
 
 .modalCloseBtn {
@@ -755,26 +739,26 @@
   right: 16px;
   background: transparent;
   border: none;
-  color: #94a3b8;
+  color: var(--gray-60);
   font-size: 1.2rem;
   cursor: pointer;
   transition: color 0.2s ease;
 }
 
 .modalCloseBtn:hover {
-  color: #ffffff;
+  color: var(--gray-100);
 }
 
 .modalTitle {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--gray-100);
   margin-bottom: 6px;
 }
 
 .modalSub {
   font-size: 0.9rem;
-  color: #94a3b8;
+  color: var(--gray-60);
   margin-bottom: 24px;
 }
 
@@ -786,7 +770,7 @@
   display: block;
   font-size: 0.85rem;
   font-weight: 600;
-  color: #cbd5e1;
+  color: var(--gray-80);
   margin-bottom: 6px;
 }
 
@@ -794,9 +778,9 @@
 .formSelect,
 .formTextarea {
   width: 100%;
-  background: #030712;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #ffffff;
+  background: var(--white);
+  border: 1px solid var(--gray-30);
+  color: var(--gray-100);
   padding: 12px 14px;
   border-radius: 6px;
   font-size: 0.95rem;
@@ -807,7 +791,7 @@
 .formInput:focus,
 .formSelect:focus,
 .formTextarea:focus {
-  border-color: #00d4ff;
+  border-color: var(--cyan-text);
   box-shadow: 0 0 10px rgba(0, 212, 255, 0.25);
 }
 
@@ -842,9 +826,9 @@
 }
 
 .tokenBadge {
-  background: #030712;
-  border: 1px dashed #00d4ff;
-  color: #00d4ff;
+  background: var(--white);
+  border: 1px dashed var(--cyan-text);
+  color: var(--cyan-text);
   font-family: var(--font-mono);
   padding: 10px 16px;
   border-radius: 6px;
@@ -853,10 +837,10 @@
   display: inline-block;
 }
 
-/* Contact Footer Box */
+/* Organizer Box */
 .organizerBox {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--gray-10);
+  border: 1px solid var(--gray-20);
   border-radius: 12px;
   padding: 32px;
   display: flex;
@@ -870,13 +854,13 @@
 .organizerInfo h4 {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--gray-100);
   margin-bottom: 4px;
 }
 
 .organizerInfo p {
   font-size: 0.9rem;
-  color: #94a3b8;
+  color: var(--gray-70);
 }
 
 .organizerContacts {
@@ -889,7 +873,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #00d4ff;
+  color: var(--cyan-text);
   font-size: 0.95rem;
   font-weight: 500;
 }

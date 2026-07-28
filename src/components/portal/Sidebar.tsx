@@ -170,6 +170,7 @@ export default function Sidebar({
 
     if (['CEO', 'ADMIN', 'DIRECTOR', 'HEAD'].includes(role)) {
       mgmtItems.push({ href: '/portal/teams', icon: 'fas fa-people-group', label: 'Teams' });
+      mgmtItems.push({ href: '/portal/events', icon: 'fas fa-calendar-star', label: 'Event Submissions' });
     }
 
     if (['CEO', 'ADMIN', 'DIRECTOR'].includes(role)) {

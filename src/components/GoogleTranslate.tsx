@@ -158,8 +158,8 @@ export default function GoogleTranslate() {
   const currentCode = current.split("-")[0].toUpperCase();
 
   return (
-    <div className={`${styles.wrapper} notranslate`} ref={wrapperRef} translate="no">
-      <div id="google_translate_element" style={{ display: "none" }} />
+    <div className={`${styles.wrapper} notranslate`} ref={wrapperRef} translate="no" suppressHydrationWarning>
+      <div id="google_translate_element" style={{ display: "none" }} suppressHydrationWarning />
       <button
         type="button"
         className={styles.iconBtn}

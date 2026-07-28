@@ -10,6 +10,8 @@ import {
   buildInternshipConfirmationEmail as buildInternshipTemplate,
 } from "./email-templates/internship-confirmation";
 
+import { buildEventTicketEmail } from "./email-templates/event-ticket";
+
 const NOTIFY_TO =
   process.env.CONTACT_NOTIFY_EMAIL ??
   "info@rynexsecurity.com";
@@ -148,6 +150,32 @@ export async function sendInternshipConfirmationEmail(
 
   return sendEmail({
     to,
+    subject: template.subject,
+    html: template.html,
+    text: template.text,
+    replyTo: NOTIFY_TO,
+  });
+}
+
+/**
+ * Sends the branded event ticket confirmation email.
+ */
+export async function sendEventRegistrationEmail(data: {
+  to: string;
+  name: string;
+  ticketToken: string;
+  groupName?: string;
+  category?: string;
+}) {
+  const template = buildEventTicketEmail({
+    name: data.name,
+    ticketToken: data.ticketToken,
+    groupName: data.groupName,
+    category: data.category,
+  });
+
+  return sendEmail({
+    to: data.to,
     subject: template.subject,
     html: template.html,
     text: template.text,

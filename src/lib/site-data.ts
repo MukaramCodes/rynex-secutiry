@@ -243,5 +243,5 @@ export const contactInfo = {
   discord: "https://discord.gg/6xJdYsJ6uF",
   discordFooter: "https://discord.gg/V8CYUKCSKJ",
   linkedin: "https://www.linkedin.com/company/rynex-security",
-  instagram: "https://www.instagram.com/rynex.security",
+  instagram: "https://www.instagram.com/rynex.sec",
 };

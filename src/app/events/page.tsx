@@ -225,8 +225,13 @@ export default function EventsPage() {
   ]);
   const [terminalInput, setTerminalInput] = useState("");
   const terminalEndRef = useRef<HTMLDivElement>(null);
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
     terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [terminalHistory]);
 
@@ -261,24 +266,51 @@ export default function EventsPage() {
   };
 
   // Competitor Submit
-  const handleRegSubmit = (e: React.FormEvent) => {
+  const handleRegSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      const regId = `RYNEX-ECLIPSE-2026-${Math.floor(100000 + Math.random() * 900000)}`;
-      setRegSuccess(regId);
+    try {
+      const res = await fetch("/api/events/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(regForm),
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        setRegSuccess(data.ticketToken);
+      } else {
+        alert(data.error || "Failed to submit registration. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Network error. Please check your connection and try again.");
+    } finally {
       setIsSubmitting(false);
-    }, 800);
+    }
   };
 
   // Sponsor Submit
-  const handleSponsorSubmit = (e: React.FormEvent) => {
+  const handleSponsorSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      setSponsorSuccess(true);
+    try {
+      const res = await fetch("/api/events/sponsor", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(sponsorForm),
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        setSponsorSuccess(true);
+      } else {
+        alert(data.error || "Failed to submit sponsorship inquiry. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Network error. Please check your connection and try again.");
+    } finally {
       setIsSubmitting(false);
-    }, 800);
+    }
   };
 
   const selectedAudienceData = targetAudience.find((a) => a.id === activeAudience) || targetAudience[0];
