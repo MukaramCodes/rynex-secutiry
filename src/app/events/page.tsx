@@ -228,6 +228,7 @@ export default function EventsPage() {
   const [cmdHistoryIdx, setCmdHistoryIdx] = useState<number>(-1);
   const terminalInputRef = useRef<HTMLInputElement>(null);
   const terminalEndRef = useRef<HTMLDivElement>(null);
+  const terminalBodyRef = useRef<HTMLDivElement>(null);
   const isInitialMount = useRef(true);
 
   useEffect(() => {
@@ -235,7 +236,13 @@ export default function EventsPage() {
       isInitialMount.current = false;
       return;
     }
-    terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Scroll only the terminal body, not the whole page
+    if (terminalBodyRef.current) {
+      terminalBodyRef.current.scrollTo({
+        top: terminalBodyRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
   }, [terminalHistory]);
 
   // ── Carousel: compute slide width on mount + resize
@@ -514,7 +521,7 @@ export default function EventsPage() {
             </div>
           </div>
 
-          <div className={styles.terminalBody}>
+          <div className={styles.terminalBody} ref={terminalBodyRef}>
             {/* Quick Command Shortcuts */}
             <div className={styles.terminalQuickRow} onClick={(e) => e.stopPropagation()}>
               <span className={styles.quickLabel}>Quick Run:</span>
