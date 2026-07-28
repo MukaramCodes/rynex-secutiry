@@ -189,6 +189,11 @@ export default function EventsPage() {
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
   const [sponsorModalOpen, setSponsorModalOpen] = useState(false);
   const [selectedTier, setSelectedTier] = useState("Title Sponsor");
+  const [carouselOffset, setCarouselOffset] = useState(0);
+  const [carouselAnimate, setCarouselAnimate] = useState(true);
+  const [slideWidth, setSlideWidth] = useState(0);
+  const stageRef = useRef<HTMLDivElement>(null);
+  const autoScrollRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Registration Form State
   const [regForm, setRegForm] = useState({
@@ -233,6 +238,67 @@ export default function EventsPage() {
     terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [terminalHistory]);
 
+  // ── Carousel: compute slide width on mount + resize
+  useEffect(() => {
+    const computeSlide = () => {
+      if (stageRef.current) {
+        const gap = 24;
+        setSlideWidth((stageRef.current.offsetWidth - gap) / 2 + gap);
+      }
+    };
+    computeSlide();
+    window.addEventListener("resize", computeSlide);
+    return () => window.removeEventListener("resize", computeSlide);
+  }, []);
+
+  // ── Carousel: auto-scroll helper
+  const startAutoScroll = () => {
+    if (autoScrollRef.current) clearInterval(autoScrollRef.current);
+    autoScrollRef.current = setInterval(() => {
+      setCarouselOffset((prev) => prev + 1);
+    }, 3200);
+  };
+
+  useEffect(() => {
+    startAutoScroll();
+    return () => { if (autoScrollRef.current) clearInterval(autoScrollRef.current); };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // ── Carousel: snap back to 0 when cloned section reached
+  useEffect(() => {
+    if (carouselOffset >= sponsorTiers.length) {
+      const t = setTimeout(() => {
+        setCarouselAnimate(false);
+        setCarouselOffset(0);
+        setTimeout(() => setCarouselAnimate(true), 30);
+      }, 460);
+      return () => clearTimeout(t);
+    }
+  }, [carouselOffset]);
+
+  const goCarouselNext = () => {
+    startAutoScroll();
+    setCarouselOffset((prev) => prev + 1);
+  };
+
+  const goCarouselPrev = () => {
+    startAutoScroll();
+    if (carouselOffset === 0) {
+      setCarouselAnimate(false);
+      setCarouselOffset(sponsorTiers.length);
+      setTimeout(() => {
+        setCarouselAnimate(true);
+        setCarouselOffset(sponsorTiers.length - 1);
+      }, 30);
+    } else {
+      setCarouselOffset((prev) => prev - 1);
+    }
+  };
+
+  const carouselItems = [...sponsorTiers, ...sponsorTiers];
+  const activeDotIdx = carouselOffset % sponsorTiers.length;
+
   const runTerminalCommand = (rawCmd: string) => {
     const cmd = rawCmd.trim();
     if (!cmd) return;
@@ -241,47 +307,23 @@ export default function EventsPage() {
     const lowerCmd = cmd.toLowerCase();
 
     if (lowerCmd === "help") {
-      output = `⚡ Available Rynex CTF Terminal Commands:
- - help         : Show available terminal commands
- - status       : View event date, venue, fee & registration status
- - tracks       : List CTF challenge categories (Web, Forensics, Reversing, Network)
- - rules        : CTF competition guidelines & flag submission format
- - prizes       : View prize pool, cash awards & trophy details
- - register     : Open competitor pre-registration form directly
- - sponsor      : Open sponsorship inquiry modal directly
- - submit <flag>: Submit CTF flag (Try flag: RYNEX{3cl1ps3_2026_c4ptur3d})
- - whoami       : Show current visitor session info
- - clear        : Clear terminal screen`;
+      output = `[*] Available Rynex CTF Terminal Commands:\n - help         : Show available terminal commands\n - status       : View event date, venue, fee & registration status\n - tracks       : List CTF challenge categories (Web, Forensics, Reversing, Network)\n - rules        : CTF competition guidelines & flag submission format\n - prizes       : View prize pool, cash awards & trophy details\n - register     : Open competitor pre-registration form directly\n - sponsor      : Open sponsorship inquiry modal directly\n - submit <flag>: Submit CTF flag (Try flag: RYNEX{3cl1ps3_2026_c4ptur3d})\n - whoami       : Show current visitor session info\n - clear        : Clear terminal screen`;
     } else if (lowerCmd === "status") {
-      output = `[+] EVENT: Rynex Eclipse 2026 (Jeopardy CTF)
-[+] STATUS: Pre-Registration Active
-[+] VENUE: Rahim Yar Khan, Pakistan
-[+] FEE: PKR 500 per participant
-[+] ELIGIBILITY: Open to Students, Pros, Ethical Hackers & Developers`;
+      output = `[+] EVENT: Rynex Eclipse 2026 (Jeopardy CTF)\n[+] STATUS: Pre-Registration Active\n[+] VENUE: Rahim Yar Khan, Pakistan\n[+] FEE: PKR 500 per participant\n[+] ELIGIBILITY: Open to Students, Pros, Ethical Hackers & Developers`;
     } else if (lowerCmd === "tracks" || lowerCmd === "categories") {
-      output = `[+] 1. WEB EXPLOITATION   (OWASP Top 10, API Hacking, XSS, SQLi, JWT)
-[+] 2. DIGITAL FORENSICS  (Network PCAP, RAM Dumps, Metadata Analysis)
-[+] 3. REVERSE ENG        (Assembly, Ghidra, Decompilation, Anti-Debug)
-[+] 4. NETWORK SECURITY   (Wireshark, Encrypted Channels, Pivoting)`;
+      output = `[+] 1. WEB EXPLOITATION   (OWASP Top 10, API Hacking, XSS, SQLi, JWT)\n[+] 2. DIGITAL FORENSICS  (Network PCAP, RAM Dumps, Metadata Analysis)\n[+] 3. REVERSE ENG        (Assembly, Ghidra, Decompilation, Anti-Debug)\n[+] 4. NETWORK SECURITY   (Wireshark, Encrypted Channels, Pivoting)`;
     } else if (lowerCmd === "rules") {
-      output = `📋 RYNEX ECLIPSE CTF RULES:
- 1. Flag format: RYNEX{some_secret_text}
- 2. Do not attack event infrastructure or host servers outside challenge targets.
- 3. Sharing flags or solution code between competing teams is strictly prohibited.
- 4. First Blood bonus: +50 PTS awarded to the first solver of each challenge.`;
+      output = `[*] RYNEX ECLIPSE CTF RULES:\n 1. Flag format: RYNEX{some_secret_text}\n 2. Do not attack event infrastructure or host servers outside challenge targets.\n 3. Sharing flags or solution code between competing teams is strictly prohibited.\n 4. First Blood bonus: +50 PTS awarded to the first solver of each challenge.`;
     } else if (lowerCmd === "prizes" || lowerCmd === "rewards") {
-      output = `🏆 PRIZE POOL & HONORS:
- - Cash Rewards & Winner Trophies for Top Teams
- - Verified Official Certificates of Excellence for Top Performers
- - Direct Recruitment & Talent Pipeline to Partner Security Sponsors`;
+      output = `[+] PRIZE POOL & HONORS:\n - Cash Rewards & Winner Trophies for Top Teams\n - Verified Official Certificates of Excellence for Top Performers\n - Direct Recruitment & Talent Pipeline to Partner Security Sponsors`;
     } else if (lowerCmd === "register" || lowerCmd === "signup") {
-      output = "🚀 Opening Competitor Pre-Registration Form...";
+      output = "[>] Opening Competitor Pre-Registration Form...";
       setTimeout(() => {
         setRegSuccess(null);
         setRegisterModalOpen(true);
       }, 250);
     } else if (lowerCmd === "sponsor" || lowerCmd === "partner") {
-      output = "🤝 Opening Sponsorship Inquiry Modal...";
+      output = "[>] Opening Sponsorship Inquiry Modal...";
       setTimeout(() => {
         setSponsorSuccess(false);
         setSponsorModalOpen(true);
@@ -293,16 +335,12 @@ export default function EventsPage() {
       setTerminalInput("");
       return;
     } else if (lowerCmd.includes("rynex{3cl1ps3_2026_c4ptur3d}")) {
-      output = `🎉 FLAG ACCEPTED! [RYNEX{3cl1ps3_2026_c4ptur3d}]
-[+] Result: CORRECT ANSWER
-[+] Score: +500 PTS (First Blood Bonus Included)
-[+] Next Step: Click 'Pre-Register' to reserve your spot in the live championship!`;
+      output = `[+] FLAG ACCEPTED! [RYNEX{3cl1ps3_2026_c4ptur3d}]\n[+] Result: CORRECT ANSWER\n[+] Score: +500 PTS (First Blood Bonus Included)\n[+] Next Step: Click 'Pre-Register' to reserve your spot in the live championship!`;
     } else if (lowerCmd.includes("rynex{w3b_3xp1o1t_pwn3d}")) {
-      output = `🎉 FLAG ACCEPTED! [RYNEX{w3b_3xp1o1t_pwn3d}]
-[+] Category: Web Exploitation
-[+] Score: +300 PTS`;
+      output = `[+] FLAG ACCEPTED! [RYNEX{w3b_3xp1o1t_pwn3d}]\n[+] Category: Web Exploitation\n[+] Score: +300 PTS`;
     } else if (lowerCmd.startsWith("submit")) {
-      output = "❌ INVALID FLAG FORMAT OR WRONG FLAG.\nHint: Try testing 'RYNEX{3cl1ps3_2026_c4ptur3d}' or type 'help'.";
+      output = "[-] INVALID FLAG FORMAT OR WRONG FLAG.\nHint: Try testing 'RYNEX{3cl1ps3_2026_c4ptur3d}' or type 'help'.";
+
     } else {
       output = `Command '${cmd}' not recognized. Type 'help' for available commands.`;
     }
@@ -676,39 +714,95 @@ export default function EventsPage() {
           </p>
         </div>
 
-        {/* Sponsor Tier Cards */}
-        <div className={styles.sponsorshipTiersGrid}>
-          {sponsorTiers.map((tier, idx) => (
+        {/* Sponsor Tier Carousel — 2 cards visible, auto-scroll infinite loop */}
+        <div
+          className={styles.sponsorCarouselOuter}
+          onMouseEnter={() => { if (autoScrollRef.current) clearInterval(autoScrollRef.current); }}
+          onMouseLeave={startAutoScroll}
+        >
+          {/* Arrow — Prev */}
+          <button type="button" className={styles.carouselArrow} onClick={goCarouselPrev} aria-label="Previous sponsor tier">
+            <i className="fas fa-chevron-left" />
+          </button>
+
+          {/* Sliding track stage */}
+          <div className={styles.sponsorCarouselStage} ref={stageRef}>
             <div
-              key={idx}
-              className={`${styles.sponsorTierCard} ${tier.featured ? styles.sponsorTierCardFeatured : ""
-                }`}
+              className={styles.sponsorCarouselTrack}
+              style={{
+                transform: `translateX(-${carouselOffset * slideWidth}px)`,
+                transition: carouselAnimate ? "transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)" : "none",
+              }}
             >
-              {tier.badge && <span className={styles.tierRibbon}>{tier.badge}</span>}
-              <h3 className={styles.tierName}>{tier.name}</h3>
-              <div className={styles.tierPrice}>
-                {tier.price} <span className={styles.tierPriceSub}>/ event</span>
-              </div>
-              <ul className={styles.tierFeatureList}>
-                {tier.features.map((f, fid) => (
-                  <li key={fid}>
-                    <i className="fas fa-check" /> {f}
-                  </li>
-                ))}
-              </ul>
-              <button
-                type="button"
-                className={styles.sponsorActionBtn}
-                onClick={() => {
-                  setSelectedTier(tier.name);
-                  setSponsorForm((prev) => ({ ...prev, tier: tier.name }));
-                  setSponsorSuccess(false);
-                  setSponsorModalOpen(true);
-                }}
-              >
-                Inquire {tier.name}
-              </button>
+              {carouselItems.map((tier, idx) => {
+                const tierIconIdx = idx % sponsorTiers.length;
+                return (
+                  <div
+                    key={idx}
+                    className={`${styles.sponsorCarouselCard} ${tier.featured ? styles.sponsorTierCardFeatured : ""}`}
+                  >
+                    {tier.badge && <span className={styles.tierRibbon}>{tier.badge}</span>}
+
+                    <div className={styles.carouselTierIcon}>
+                      {tierIconIdx === 0 && <i className="fas fa-crown" />}
+                      {tierIconIdx === 1 && <i className="fas fa-gem" />}
+                      {tierIconIdx === 2 && <i className="fas fa-medal" />}
+                      {tierIconIdx === 3 && <i className="fas fa-shield-halved" />}
+                      {tierIconIdx === 4 && <i className="fas fa-hands-holding-circle" />}
+                    </div>
+
+                    <div className={styles.carouselTierLabel}>{tier.tier}</div>
+                    <h3 className={styles.carouselTierName}>{tier.name}</h3>
+                    <div className={styles.carouselTierPrice}>
+                      {tier.price}
+                      <span className={styles.tierPriceSub}> / event</span>
+                    </div>
+
+                    <div className={styles.carouselDivider} />
+
+                    <ul className={styles.carouselFeatureList}>
+                      {tier.features.map((f, fid) => (
+                        <li key={fid}>
+                          <span className={styles.carouselCheckIcon}><i className="fas fa-check" /></span>
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <button
+                      type="button"
+                      className={`${styles.sponsorActionBtn} ${tier.featured ? styles.sponsorActionBtnFeatured : ""}`}
+                      onClick={() => {
+                        setSelectedTier(tier.name);
+                        setSponsorForm((prev) => ({ ...prev, tier: tier.name }));
+                        setSponsorSuccess(false);
+                        setSponsorModalOpen(true);
+                      }}
+                    >
+                      <i className="fas fa-handshake" /> Inquire {tier.name}
+                    </button>
+                  </div>
+                );
+              })}
             </div>
+          </div>
+
+          {/* Arrow — Next */}
+          <button type="button" className={styles.carouselArrow} onClick={goCarouselNext} aria-label="Next sponsor tier">
+            <i className="fas fa-chevron-right" />
+          </button>
+        </div>
+
+        {/* Dot Indicators */}
+        <div className={styles.carouselDots}>
+          {sponsorTiers.map((tier, idx) => (
+            <button
+              key={idx}
+              type="button"
+              className={`${styles.carouselDot} ${idx === activeDotIdx ? styles.carouselDotActive : ""}`}
+              onClick={() => { startAutoScroll(); setCarouselOffset(idx); }}
+              aria-label={`Go to ${tier.name}`}
+            />
           ))}
         </div>
 

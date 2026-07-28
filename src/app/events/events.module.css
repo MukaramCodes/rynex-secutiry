@@ -164,51 +164,66 @@
 }
 
 .primaryCtaBtn {
-  background: linear-gradient(135deg, #00d4ff 0%, #0077ff 100%);
+  background: var(--ibm-blue-60);
   color: #030712;
-  font-weight: 700;
-  font-size: 1.05rem;
-  padding: 16px 36px;
-  border-radius: 6px;
-  border: none;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 14px 20px;
+  border-radius: 0;
+  border: 1px solid transparent;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 25px rgba(0, 212, 255, 0.35);
+  justify-content: space-between;
+  gap: var(--sp-05);
+  min-height: 48px;
+  transition: background-color var(--motion), color var(--motion);
+  white-space: nowrap;
+}
+
+.primaryCtaBtn i {
+  flex-shrink: 0;
+  transition: transform var(--motion);
 }
 
 .primaryCtaBtn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 35px rgba(0, 212, 255, 0.6);
+  background: var(--ibm-blue-70);
+}
+
+.primaryCtaBtn:hover i {
+  transform: translateX(3px);
 }
 
 .secondaryCtaBtn {
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
   color: #f8fafc;
-  font-weight: 600;
-  font-size: 1.05rem;
-  padding: 16px 32px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 14px 20px;
+  border-radius: 0;
+  border: 1px solid #f8fafc;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  transition: all 0.3s ease;
+  justify-content: space-between;
+  gap: var(--sp-05);
+  min-height: 48px;
+  transition: background-color var(--motion), color var(--motion), border-color var(--motion);
+  white-space: nowrap;
 }
 
-:global([data-theme="dark"]) .secondaryCtaBtn {
-  background: #0d1322 !important;
-  color: #f8fafc !important;
-  border-color: #1e293b !important;
+.secondaryCtaBtn i {
+  flex-shrink: 0;
+  transition: transform var(--motion);
 }
 
 .secondaryCtaBtn:hover {
-  background: rgba(0, 212, 255, 0.1);
-  border-color: var(--cyan-text);
-  color: var(--cyan-text);
+  background: #f8fafc;
+  color: #030712;
+}
+
+.secondaryCtaBtn:hover i {
+  transform: translateX(3px);
 }
 
 /* Interactive CTF Terminal Widget */
@@ -320,7 +335,8 @@
   color: #00ffaa;
   font-family: var(--font-mono);
   font-size: 0.9rem;
-  outline: none;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* ── Generic Sections Backgrounds ────────────────────── */
@@ -619,116 +635,265 @@
   color: #cbd5e1 !important;
 }
 
-/* Sponsorship Tiers */
-.sponsorshipTiersGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+/* ── Sponsor Carousel ───────────────────────────────── */
+.sponsorCarouselOuter {
+  display: flex;
+  align-items: center;
   gap: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
+  position: relative;
 }
 
-.sponsorTierCard {
-  background: var(--white);
-  border: 1px solid var(--gray-20);
-  border-radius: 12px;
-  padding: 28px 20px;
+/* Stage: clips overflow so only 2 cards show */
+.sponsorCarouselStage {
+  flex: 1;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* Flex track — all cards in a row, translate to scroll */
+.sponsorCarouselTrack {
+  display: flex;
+  gap: 24px;
+  will-change: transform;
+}
+
+/* Each card: exactly half stage width minus half gap = 2 visible */
+.sponsorCarouselCard {
+  flex: 0 0 calc(50% - 12px);
+  background: linear-gradient(155deg, #0d1322 0%, #111827 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 36px 32px;
   display: flex;
   flex-direction: column;
   position: relative;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  min-height: 540px;
 }
 
-:global([data-theme="dark"]) .sponsorTierCard {
-  background: #0d1322 !important;
-  border-color: #1e293b !important;
+.sponsorCarouselCard:hover {
+  border-color: rgba(0, 212, 255, 0.35);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 212, 255, 0.12);
+  transform: translateY(-4px);
 }
 
+/* Featured (Title Sponsor) gets extra glow border */
 .sponsorTierCardFeatured {
-  border-color: var(--cyan-text);
-  box-shadow: 0 0 25px rgba(0, 212, 255, 0.2);
+  border-color: rgba(0, 212, 255, 0.5) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 212, 255, 0.18) !important;
 }
 
+/* Ribbon badge */
 .tierRibbon {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  background: var(--cyan-text);
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #00d4ff, #0077ff);
   color: #030712;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 800;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
 }
 
-.tierName {
-  font-size: 1.3rem;
+/* Tier icon circle */
+.carouselTierIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(0, 119, 255, 0.1));
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: #00d4ff;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+}
+
+.carouselTierLabel {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #00d4ff;
   font-weight: 700;
-  color: var(--gray-100);
   margin-bottom: 6px;
 }
 
-:global([data-theme="dark"]) .tierName {
-  color: #f8fafc !important;
+.carouselTierName {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #f8fafc;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
 }
 
-.tierPrice {
-  font-size: 1.8rem;
+.carouselTierPrice {
+  font-size: 1.9rem;
   font-weight: 800;
-  color: var(--cyan-text);
+  color: #00d4ff;
   font-family: var(--font-mono);
   margin-bottom: 20px;
 }
 
 .tierPriceSub {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 400;
-  color: var(--gray-60);
+  color: #64748b;
+  font-family: var(--font-sans);
 }
 
-.tierFeatureList {
+.carouselDivider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+  margin-bottom: 20px;
+}
+
+.carouselFeatureList {
   list-style: none;
   padding: 0;
-  margin-bottom: 28px;
+  margin: 0 0 28px;
   flex: 1;
 }
 
-.tierFeatureList li {
+.carouselFeatureList li {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  font-size: 0.875rem;
-  color: var(--gray-70);
-  margin-bottom: 10px;
+  gap: 12px;
+  font-size: 0.92rem;
+  color: #cbd5e1;
+  margin-bottom: 12px;
+  line-height: 1.5;
 }
 
-:global([data-theme="dark"]) .tierFeatureList li {
-  color: #cbd5e1 !important;
-}
-
-.tierFeatureList li i {
-  color: var(--cyan-text);
-  margin-top: 3px;
-}
-
-.sponsorActionBtn {
-  background: rgba(0, 212, 255, 0.1);
+.carouselCheckIcon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0, 212, 255, 0.12);
   border: 1px solid rgba(0, 212, 255, 0.3);
-  color: var(--cyan-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  color: #00d4ff;
+  margin-top: 2px;
+}
+
+/* CTA button inside card */
+.sponsorActionBtn {
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  color: #00d4ff;
   font-weight: 700;
-  font-size: 0.9rem;
-  padding: 12px;
-  border-radius: 6px;
+  font-size: 0.95rem;
+  padding: 14px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  letter-spacing: 0.3px;
 }
 
 .sponsorActionBtn:hover {
-  background: var(--cyan-text);
+  background: linear-gradient(135deg, #00d4ff, #0077ff);
   color: #030712;
+  border-color: transparent;
+  box-shadow: 0 0 24px rgba(0, 212, 255, 0.4);
+  transform: translateY(-2px);
 }
+
+.sponsorActionBtnFeatured {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 119, 255, 0.15));
+  border-color: rgba(0, 212, 255, 0.6);
+}
+
+/* Arrow Buttons */
+.carouselArrow {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  color: #00d4ff;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.carouselArrow:hover {
+  background: rgba(0, 212, 255, 0.2);
+  border-color: #00d4ff;
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.35);
+  transform: scale(1.08);
+}
+
+/* Dot Indicators */
+.carouselDots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 48px;
+}
+
+.carouselDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding: 0;
+}
+
+.carouselDot:hover {
+  background: rgba(0, 212, 255, 0.4);
+}
+
+.carouselDotActive {
+  background: #00d4ff;
+  border-color: #00d4ff;
+  width: 28px;
+  border-radius: 5px;
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+}
+
+/* Responsive — 1 card on mobile */
+@media (max-width: 640px) {
+  .sponsorCarouselOuter {
+    gap: 10px;
+  }
+  .sponsorCarouselCard {
+    flex: 0 0 100%;
+    padding: 28px 22px;
+    min-height: 480px;
+  }
+  .carouselTierName {
+    font-size: 1.5rem;
+  }
+  .carouselArrow {
+    width: 40px;
+    height: 40px;
+    font-size: 0.85rem;
+  }
+}
+
 
 /* Benefits Table */
 .benefitsTableWrapper {
@@ -974,16 +1139,32 @@
 }
 
 .submitBtn {
-  background: linear-gradient(135deg, #00d4ff 0%, #0077ff 100%);
+  background: var(--ibm-blue-60);
   color: #030712;
-  font-weight: 700;
-  font-size: 1rem;
-  padding: 14px;
-  border-radius: 6px;
-  border: none;
+  font-weight: 500;
+  font-size: 0.875rem;
+  padding: 14px 20px;
+  border-radius: 0;
+  border: 1px solid transparent;
   cursor: pointer;
   width: 100%;
   margin-top: 10px;
+  min-height: 48px;
+  transition: background-color var(--motion), color var(--motion);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-05);
+}
+
+.submitBtn:hover {
+  background: var(--ibm-blue-70);
+}
+
+.submitBtn:disabled {
+  background: var(--gray-20);
+  color: var(--gray-60);
+  cursor: not-allowed;
 }
 
 .successCard {
