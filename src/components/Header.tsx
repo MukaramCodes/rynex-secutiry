@@ -277,6 +277,18 @@ export default function Header() {
             </Link>
           </div>
 
+          <div className={styles.navItem}>
+            <Link
+              href="/events"
+              className={`${styles.navLink} ${
+                isActive("/events") ? styles.active : ""
+              }`}
+              onClick={closeNavigation}
+            >
+              Events
+            </Link>
+          </div>
+
           <div
             className={`${styles.navItem} ${
               openMenu === "internship" ? styles.open : ""
