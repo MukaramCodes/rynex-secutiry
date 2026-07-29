@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import SiteLayoutWrapper from "@/components/SiteLayoutWrapper";
 import { headers } from "next/headers";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const plexSans = IBM_Plex_Sans({
@@ -56,6 +57,7 @@ export default async function RootLayout({
         <SiteLayoutWrapper isPortalHost={isPortalHost}>
           {children}
         </SiteLayoutWrapper>
+        <SpeedInsights />
       </body>
     </html>
   );
