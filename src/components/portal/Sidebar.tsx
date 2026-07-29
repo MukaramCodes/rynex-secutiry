@@ -48,6 +48,7 @@ export default function Sidebar({
 
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [pendingIpRequests, setPendingIpRequests] = useState(0);
+  const [trashCount, setTrashCount] = useState(0);
 
   useEffect(() => {
     // Fetch pending IP requests count for admin badge
@@ -60,6 +61,15 @@ export default function Sidebar({
               data.requests.filter((r: any) => r.status === 'PENDING').length
             );
           }
+        })
+        .catch(() => {});
+    }
+    // Fetch trash count for admin badge
+    if (['ADMIN', 'CEO', 'DIRECTOR'].includes(role)) {
+      fetch('/api/blogs/trash')
+        .then((r) => r.json())
+        .then((data) => {
+          if (Array.isArray(data.blogs)) setTrashCount(data.blogs.length);
         })
         .catch(() => {});
     }
@@ -141,6 +151,10 @@ export default function Sidebar({
 
     // Blogs - everyone can submit blogs
     projectItems.push({ href: '/portal/blogs', icon: 'fas fa-pen-nib', label: 'Blogs' });
+    // Trash — admin only
+    if (['CEO', 'ADMIN', 'DIRECTOR'].includes(role)) {
+      projectItems.push({ href: '/portal/blogs/trash', icon: 'fas fa-trash-can', label: 'Trash' });
+    }
 
     if (projectItems.length > 0) {
       groups.push({ label: 'Work', items: projectItems });
@@ -201,14 +215,14 @@ export default function Sidebar({
 
   const rawNavGroups = navGroups || buildDefaultNavGroups(role);
 
-  // Inject live pending badge into Access Control item
+  // Inject live pending badge into Access Control item, and trash count into Trash item
   const activeNavGroups = rawNavGroups.map((group) => ({
     ...group,
-    items: group.items.map((item) =>
-      item.href === '/portal/access-control'
-        ? { ...item, badge: pendingIpRequests }
-        : item
-    ),
+    items: group.items.map((item) => {
+      if (item.href === '/portal/access-control') return { ...item, badge: pendingIpRequests };
+      if (item.href === '/portal/blogs/trash') return { ...item, badge: trashCount };
+      return item;
+    }),
   }));
 
   return (

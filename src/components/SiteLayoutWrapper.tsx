@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import EventPopup from "@/components/EventPopup";
 
 export default function SiteLayoutWrapper({
   children,
@@ -36,6 +37,8 @@ export default function SiteLayoutWrapper({
       {!isPortal && <Header />}
       {children}
       {!isPortal && <Footer />}
+      {/* Event popup — public pages only, not on the events page itself */}
+      {!isPortal && pathname !== "/events" && <EventPopup />}
     </>
   );
 }

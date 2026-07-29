@@ -89,9 +89,13 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
     
     const { id } = await params;
 
-    await db.blogPost.delete({ where: { id } });
+    // Soft-delete: move to trash by setting deletedAt
+    await db.blogPost.update({
+      where: { id },
+      data: { deletedAt: new Date() },
+    });
 
-    return NextResponse.json({ success: true, message: 'Blog deleted successfully' });
+    return NextResponse.json({ success: true, message: 'Blog moved to trash' });
   } catch (error: any) {
     console.error('Error deleting blog:', error);
     return NextResponse.json({ error: 'An error occurred while deleting the blog' }, { status: 500 });

@@ -67,7 +67,7 @@ export default function BlogsPage() {
   };
 
   const handleDelete = async (blogId: string, blogTitle: string) => {
-    if (!confirm(`Are you sure you want to permanently delete "${blogTitle}"?`)) {
+    if (!confirm(`Move "${blogTitle}" to Trash?`)) {
       return;
     }
     
@@ -77,11 +77,11 @@ export default function BlogsPage() {
       });
       
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed to delete blog');
+      if (!res.ok) throw new Error(data.error || 'Failed to move to trash');
       
       await fetchData();
     } catch (err: any) {
-      alert(err.message || 'Error deleting blog');
+      alert(err.message || 'Error moving blog to trash');
     }
   };
 
@@ -98,10 +98,18 @@ export default function BlogsPage() {
               : 'Submit and manage your blog posts.'}
           </p>
         </div>
-        <Link href="/portal/blogs/new" className={styles.createBtn}>
-          <i className="fas fa-plus" aria-hidden="true"></i>
-          <span>Write Blog</span>
-        </Link>
+        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+          {isAdmin && (
+            <Link href="/portal/blogs/trash" className={styles.createBtn} style={{ background: 'var(--status-danger-bg)', color: 'var(--status-danger)', border: '1px solid var(--status-danger)' }}>
+              <i className="fas fa-trash-can" aria-hidden="true"></i>
+              <span>Trash</span>
+            </Link>
+          )}
+          <Link href="/portal/blogs/new" className={styles.createBtn}>
+            <i className="fas fa-plus" aria-hidden="true"></i>
+            <span>Write Blog</span>
+          </Link>
+        </div>
       </div>
 
       {error && <div className={styles.errorBanner}>{error}</div>}
@@ -173,7 +181,7 @@ export default function BlogsPage() {
                           <button
                             onClick={() => handleDelete(blog.id, blog.title)}
                             className={`${styles.actionBtn} ${styles.deleteBtn}`}
-                            title="Delete"
+                            title="Move to Trash"
                           >
                             <i className="fas fa-trash" aria-hidden="true"></i>
                           </button>

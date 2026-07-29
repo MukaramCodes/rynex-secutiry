@@ -154,6 +154,18 @@
   color: var(--gray-100);
 }
 
+/* Magazine-style drop cap — applied via <span class="drop-cap">L</span>etter */
+.article :global(.drop-cap) {
+  float: left;
+  font-size: 4.25em;
+  line-height: 0.78;
+  font-weight: 700;
+  padding-right: 0.12em;
+  padding-top: 0.05em;
+  color: var(--gray-100);
+  font-family: var(--font-sans);
+}
+
 /* Dark Mode Overrides */
 :global([data-theme="dark"]) .pageHeader {
   background: #050811 !important;
@@ -190,5 +202,9 @@
 
 :global([data-theme="dark"]) .article h2,
 :global([data-theme="dark"]) .article strong {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .article :global(.drop-cap) {
   color: #f8fafc !important;
 }

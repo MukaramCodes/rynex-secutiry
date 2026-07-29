@@ -105,6 +105,23 @@
   line-height: 1.6;
 }
 
+/* When textarea follows the markdown toolbar, square the top corners */
+.formGroup :global(.markdownToolbarPresent) + .textarea {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Target the textarea that directly follows the toolbar wrapper */
+.editorWrapper .textarea {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.editorWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .textarea.small {
   min-height: 100px;
 }

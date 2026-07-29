@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import styles from '../blogForm.module.css';
+import ImageInsertBar from '@/components/portal/ImageInsertBar';
 
 export default function NewBlogPage() {
   const router = useRouter();
@@ -12,6 +13,7 @@ export default function NewBlogPage() {
   const [slug, setSlug] = useState('');
   const [excerpt, setExcerpt] = useState('');
   const [content, setContent] = useState('');
+  const contentRef = useRef<HTMLTextAreaElement>(null);
   const [tags, setTags] = useState('');
   
   const [metaDescription, setMetaDescription] = useState('');
@@ -126,13 +128,21 @@ export default function NewBlogPage() {
 
           <div className={styles.formGroup}>
             <label className={styles.label}>Content (Markdown) *</label>
-            <textarea
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              className={styles.textarea}
-              placeholder="Write your blog content here. Markdown is supported."
-              required
-            />
+            <div className={styles.editorWrapper}>
+              <ImageInsertBar
+                textareaRef={contentRef}
+                onContentChange={setContent}
+              />
+              <textarea
+                ref={contentRef}
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                className={styles.textarea}
+                placeholder="Write your blog content here. Markdown is supported."
+                required
+                style={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
+              />
+            </div>
           </div>
 
           <div className={styles.formGroup}>

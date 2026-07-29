@@ -18,6 +18,7 @@ export async function GET() {
 
     if (role === 'CEO' || role === 'ADMIN' || role === 'DIRECTOR') {
       blogs = await db.blogPost.findMany({
+        where: { deletedAt: null },
         include: {
           author: {
             select: { name: true, role: true, department: true }
@@ -27,7 +28,7 @@ export async function GET() {
       });
     } else {
       blogs = await db.blogPost.findMany({
-        where: { authorId: userId },
+        where: { authorId: userId, deletedAt: null },
         include: {
           author: {
             select: { name: true, role: true, department: true }
