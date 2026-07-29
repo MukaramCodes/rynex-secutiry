@@ -176,6 +176,10 @@
     align-items: stretch;
     height: auto;
     overflow-y: auto;
+    /* Prevent the panel's scroll from chaining to the page body */
+    overscroll-behavior: contain;
+    /* Restrict touch gestures to vertical pan inside the panel only */
+    touch-action: pan-y;
     transform: translateX(-100%);
     transition: transform var(--motion);
     z-index: 7000;

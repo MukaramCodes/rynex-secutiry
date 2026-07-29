@@ -92,13 +92,18 @@ export default function Header() {
   }, [pathname]);
 
   useEffect(() => {
-    if (mobileOpen) {
+    const shouldLock = mobileOpen;
+    if (shouldLock) {
+      // Lock body scroll and prevent scroll-chaining on iOS / Android
       document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
     } else {
       document.body.style.overflow = "";
+      document.body.style.touchAction = "";
     }
     return () => {
       document.body.style.overflow = "";
+      document.body.style.touchAction = "";
     };
   }, [mobileOpen]);
 
