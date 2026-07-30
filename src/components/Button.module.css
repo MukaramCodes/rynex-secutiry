@@ -71,6 +71,16 @@
   color: var(--gray-100);
 }
 
+/* Dark mode: --white becomes near-black, so override with real white */
+:global([data-theme="dark"]) .onDark {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+:global([data-theme="dark"]) .onDark:hover {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+
 .disabled,
 .disabled:hover {
   background: var(--gray-20);
