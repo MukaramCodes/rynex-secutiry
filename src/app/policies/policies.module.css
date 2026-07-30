@@ -1,0 +1,533 @@
+/* ─── Page Header ─── */
+.pageHeader {
+  background: var(--gray-100);
+  color: var(--white);
+  padding: var(--sp-09) 0;
+}
+
+.pageHeaderInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-06);
+}
+
+.pageTitle {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  margin-bottom: var(--sp-04);
+}
+
+.pageSubtitle {
+  font-size: 1.1rem;
+  color: var(--gray-30);
+  max-width: 64ch;
+}
+
+.pageMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-05);
+  margin-top: var(--sp-05);
+  font-size: 0.8rem;
+  color: var(--gray-60);
+  font-family: var(--font-mono);
+}
+
+.pageMeta span {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-02);
+}
+
+.pageMeta i {
+  color: var(--ibm-blue-60);
+  font-size: 0.7rem;
+}
+
+/* ─── Table of Contents ─── */
+.tocSection {
+  background: var(--gray-10);
+  padding: var(--sp-08) 0;
+  border-bottom: 1px solid var(--gray-20);
+}
+
+.tocInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-06);
+}
+
+.tocTitle {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--cyan-text);
+  margin-bottom: var(--sp-05);
+}
+
+.tocGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-03) var(--sp-07);
+}
+
+.tocLink {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-03);
+  font-size: 0.875rem;
+  color: var(--gray-70);
+  padding: var(--sp-02) 0;
+  transition: color var(--motion);
+}
+
+.tocLink:hover {
+  color: var(--cyan-text);
+}
+
+.tocNumber {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ibm-blue-60);
+  font-weight: 600;
+  min-width: 1.5ch;
+}
+
+/* ─── Content Sections ─── */
+.section {
+  padding: var(--sp-10) 0;
+  border-bottom: 1px solid var(--gray-20);
+}
+
+.section:last-of-type {
+  border-bottom: none;
+}
+
+.sectionInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-06);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-04);
+  margin-bottom: var(--sp-06);
+}
+
+.sectionNumber {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ibm-blue-60);
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  padding: var(--sp-02) var(--sp-03);
+  border-radius: 2px;
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+.sectionTitle {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  color: var(--gray-100);
+}
+
+.bodyText {
+  font-size: 1rem;
+  color: var(--gray-70);
+  line-height: 1.7;
+  margin-bottom: var(--sp-05);
+  max-width: 80ch;
+}
+
+/* ─── Sub-headings ─── */
+.subHeading {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gray-100);
+  margin-top: var(--sp-07);
+  margin-bottom: var(--sp-04);
+  padding-left: var(--sp-04);
+  border-left: 3px solid var(--ibm-blue-60);
+}
+
+/* ─── Lists ─── */
+.valuesList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-03);
+  margin-bottom: var(--sp-05);
+}
+
+.valuesList li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-03);
+  font-size: 0.95rem;
+  color: var(--gray-70);
+  line-height: 1.6;
+}
+
+.valuesList li::before {
+  content: "";
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  margin-top: 9px;
+  background: var(--ibm-blue-60);
+}
+
+/* Numbered lists */
+.numberedList {
+  list-style: none;
+  counter-reset: policy-counter;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-03);
+  margin-bottom: var(--sp-05);
+}
+
+.numberedList li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-03);
+  font-size: 0.95rem;
+  color: var(--gray-70);
+  line-height: 1.6;
+  counter-increment: policy-counter;
+}
+
+.numberedList li::before {
+  content: counter(policy-counter) ".";
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ibm-blue-60);
+  min-width: 1.5rem;
+  margin-top: 2px;
+}
+
+/* ─── Highlight Card ─── */
+.highlightCard {
+  background: var(--gray-10);
+  border-left: 4px solid var(--ibm-blue-60);
+  padding: var(--sp-06);
+  margin-top: var(--sp-05);
+  margin-bottom: var(--sp-05);
+}
+
+.highlightCard p {
+  font-size: 0.95rem;
+  color: var(--gray-70);
+  line-height: 1.6;
+}
+
+/* ─── Info Grid (for data retention, internship details etc.) ─── */
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1px;
+  background: var(--gray-20);
+  margin-top: var(--sp-05);
+  margin-bottom: var(--sp-05);
+}
+
+.infoCard {
+  background: var(--white);
+  padding: var(--sp-06);
+  position: relative;
+  overflow: hidden;
+  transition: background-color var(--motion);
+}
+
+.infoCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: var(--ibm-blue-60);
+  transition: width 150ms ease-out;
+}
+
+.infoCard:hover {
+  background: var(--gray-10);
+}
+
+.infoCard:hover::before {
+  width: 100%;
+}
+
+.infoLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--cyan-text);
+  margin-bottom: var(--sp-03);
+}
+
+.infoValue {
+  font-size: 0.95rem;
+  color: var(--gray-100);
+  line-height: 1.5;
+}
+
+/* ─── Compliance Badges ─── */
+.complianceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--sp-05);
+  margin-top: var(--sp-05);
+  margin-bottom: var(--sp-05);
+}
+
+.complianceBadge {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-04);
+  padding: var(--sp-05);
+  background: var(--gray-10);
+  border: 1px solid var(--gray-20);
+  transition: border-color var(--motion), background-color var(--motion);
+}
+
+.complianceBadge:hover {
+  border-color: var(--ibm-blue-60);
+  background: rgba(0, 212, 255, 0.03);
+}
+
+.complianceBadge i {
+  font-size: 1.25rem;
+  color: var(--cyan-text);
+}
+
+.complianceBadgeText {
+  display: flex;
+  flex-direction: column;
+}
+
+.complianceName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gray-100);
+}
+
+.complianceDesc {
+  font-size: 0.8rem;
+  color: var(--gray-70);
+}
+
+/* ─── Contact Bar at the bottom ─── */
+.contactBar {
+  background: var(--gray-100);
+  padding: var(--sp-09) 0;
+}
+
+.contactBarInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-05);
+}
+
+.contactBarTitle {
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--white);
+}
+
+.contactBarLinks {
+  display: flex;
+  gap: var(--sp-06);
+}
+
+.contactLink {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-03);
+  font-size: 0.9rem;
+  color: var(--gray-30);
+  transition: color var(--motion);
+}
+
+.contactLink:hover {
+  color: var(--ibm-blue-60);
+}
+
+.contactLink i {
+  color: var(--ibm-blue-60);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .tocGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .contactBarInner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 672px) {
+  .pageHeaderInner,
+  .sectionInner,
+  .tocInner,
+  .contactBarInner {
+    padding: 0 var(--sp-05);
+  }
+  .tocGrid {
+    grid-template-columns: 1fr;
+  }
+  .highlightCard {
+    padding: var(--sp-05);
+  }
+  .infoCard {
+    padding: var(--sp-05);
+  }
+  .contactBarLinks {
+    flex-direction: column;
+    gap: var(--sp-04);
+  }
+}
+
+@media (max-width: 440px) {
+  .pageHeaderInner,
+  .sectionInner,
+  .tocInner,
+  .contactBarInner {
+    padding: 0 var(--sp-04);
+  }
+  .highlightCard {
+    padding: var(--sp-04);
+    border-left-width: 3px;
+  }
+}
+
+/* ─── Dark Mode Overrides ─── */
+:global([data-theme="dark"]) .pageHeader {
+  background: #050811 !important;
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .pageTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .pageSubtitle {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .tocSection {
+  background: #0a0f1a !important;
+  border-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .tocLink {
+  color: #94a3b8 !important;
+}
+
+:global([data-theme="dark"]) .tocLink:hover {
+  color: #00d4ff !important;
+}
+
+:global([data-theme="dark"]) .section {
+  background: #050811 !important;
+  border-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .sectionTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .subHeading {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .bodyText {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .valuesList li,
+:global([data-theme="dark"]) .numberedList li {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .highlightCard {
+  background: #0d1322 !important;
+}
+
+:global([data-theme="dark"]) .highlightCard p {
+  color: #cbd5e1 !important;
+}
+
+:global([data-theme="dark"]) .infoGrid {
+  background: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .infoCard {
+  background: #0d1322 !important;
+}
+
+:global([data-theme="dark"]) .infoCard:hover {
+  background: #111827 !important;
+}
+
+:global([data-theme="dark"]) .infoValue {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .complianceBadge {
+  background: #0d1322 !important;
+  border-color: #1e293b !important;
+}
+
+:global([data-theme="dark"]) .complianceBadge:hover {
+  border-color: #00d4ff !important;
+  background: rgba(0, 212, 255, 0.06) !important;
+}
+
+:global([data-theme="dark"]) .complianceName {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .complianceDesc {
+  color: #94a3b8 !important;
+}
+
+:global([data-theme="dark"]) .contactBar {
+  background: #03050a !important;
+}
+
+:global([data-theme="dark"]) .contactBarTitle {
+  color: #f8fafc !important;
+}
+
+:global([data-theme="dark"]) .contactLink {
+  color: #94a3b8 !important;
+}
+
+:global([data-theme="dark"]) .contactLink:hover {
+  color: #00d4ff !important;
+}
+
+:global([data-theme="dark"]) .sectionNumber {
+  background: rgba(0, 212, 255, 0.1) !important;
+  border-color: rgba(0, 212, 255, 0.25) !important;
+}
+
+:global([data-theme="dark"]) .pageMeta {
+  color: #64748b !important;
+}

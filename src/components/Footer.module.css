@@ -147,3 +147,23 @@
   font-size: 0.75rem;
   color: var(--gray-60);
 }
+
+.policyLink {
+  color: var(--gray-60);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--motion);
+}
+
+.policyLink:hover {
+  color: var(--ibm-blue-60);
+}
+
+:global([data-theme="dark"]) .policyLink {
+  color: #64748b;
+}
+
+:global([data-theme="dark"]) .policyLink:hover {
+  color: #00d4ff;
+}
+
