@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import styles from "./policies.module.css";
 
 export const metadata: Metadata = {
-  title: "Policies & Governance | Rynex Security",
+  title: "Privacy Policy | Rynex Security",
   description:
-    "Rynex Security's policies and governance charter — ethical hacking standards, data protection, compliance frameworks, responsible disclosure, and corporate ethics.",
+    "Rynex Security's privacy policy and governance charter — ethical hacking standards, data protection, compliance frameworks, responsible disclosure, and corporate ethics.",
 };
 
 const tocItems = [

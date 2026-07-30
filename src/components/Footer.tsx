@@ -51,7 +51,7 @@ export default function Footer() {
             <li><Link href="/careers">Careers</Link></li>
             <li><Link href="/contact">Contact Us</Link></li>
             <li><Link href="/internship">Internship</Link></li>
-            <li><Link href="/policies">Policies & Governance</Link></li>
+            <li><Link href="/policies">Privacy Policy</Link></li>
           </ul>
         </div>
 
@@ -71,7 +71,7 @@ export default function Footer() {
         <p className={styles.copyright}>
           &copy; 2026 Rynex Security. All Rights Reserved. | Designed for Excellence. |{" "}
           <Link href="/policies" className={styles.policyLink}>
-            Policies & Governance
+            Privacy Policy
           </Link>
         </p>
       </div>
